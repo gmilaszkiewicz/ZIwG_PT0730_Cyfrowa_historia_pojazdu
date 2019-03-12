@@ -1,2 +1,13 @@
-# ZIwG_PT0730_Cyfrowa_historia_pojazdu
+# ZIwG
 ZIwG - Cyfrowa historia pojazdu
+
+### Temat: Cyfrowa historia pojazdu
+
+
+## Autorzy
+
+* **Grzegorz Milaszkiewicz** 
+* **Mateusz Ożóg** 
+* **Igor Kurek** 
+* **Piotr Wodzyński** 
+* **Maciej Kucia** 
