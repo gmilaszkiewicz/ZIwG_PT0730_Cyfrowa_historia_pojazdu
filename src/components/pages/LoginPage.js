@@ -3,9 +3,13 @@ import LoginForm from '../login/LoginForm'
 
 export default class LoginPage extends Component{
 
+
+
     render(){
         return(
-            <LoginForm />
+            <div>
+                <LoginForm />
+            </div>
         );
     }
 }

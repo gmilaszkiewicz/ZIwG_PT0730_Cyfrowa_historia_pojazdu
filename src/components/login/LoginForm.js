@@ -3,6 +3,7 @@ import {Paper, TextField, Grid, Button, Typography, Divider} from '@material-ui/
 import styled from 'styled-components';
 import { Formik, Field, Form } from 'formik';
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
+import RegisterForm from '../login/RegisterForm';
 
 const StyledPaper = styled(Paper)`
   position: fixed;
@@ -50,6 +51,21 @@ const ToggleButtons = () =>  (
 
 export default class LoginForm extends Component{
 
+    constructor(){
+        super()
+        this.state = {
+            registerFormIsOpened: false
+        }
+    }
+
+    handleOpenRegisterFrom = (event) => {
+        event.preventDefault()
+        this.setState((prevState) => ({
+                ...prevState,
+                registerFormIsOpened: true
+        }))
+    }
+
     render(){
         return(
         <StyledPaper elevation={1}>
@@ -63,54 +79,53 @@ export default class LoginForm extends Component{
                 }}
                 render={props => (
                     <Form onSubmit={props.handleSubmit}>
-                            <Field 
-                                component={ToggleButtons} name="roles" 
-                            />
-                            <Grid container direction="column" spacing={16} justify="center">
-                                <Grid item>
-                                    <Field
-                                        name="email" 
-                                        component={StyledTextField}
-                                        id="outlined-email-input"
-                                        label="Email"
-                                        type="email"
-                                        autoComplete="email"
-                                        margin="normal"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <Field
-                                        name="password"
-                                        component={StyledTextField}
-                                        id="outlined-password-input"
-                                        label="Password"
-                                        type="password"
-                                        autoComplete="current-password"
-                                        margin="normal"
-                                        variant="outlined"
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <StyledButton variant="contained" color="primary">
-                                        Log In
-                                    </StyledButton>
-                                </Grid>
-                                <Grid item>
-                                    <Divider variant="middle"/>
-                                </Grid>
-                                <Grid>   
-                                    <Typography align="center">
-                                        You don't have an account?
-                                    </Typography>
-                                </Grid>
-                                <Grid item>
-                                    <StyledButton variant="contained" color="secondary">
-                                        Register account
-                                    </StyledButton>
-                                </Grid>
-                        </Grid>
-                    </Form>
+                        <Field component={ToggleButtons} name="roles" />
+                        <Grid container direction="column" spacing={16} justify="center">
+                            <Grid item>
+                                <Field
+                                    name="email" 
+                                    component={StyledTextField}
+                                    id="outlined-email-input"
+                                    label="Email"
+                                    type="email"
+                                    autoComplete="email"
+                                    margin="normal"
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item>
+                                <Field
+                                    name="password"
+                                    component={StyledTextField}
+                                    id="outlined-password-input"
+                                    label="Password"
+                                    type="password"
+                                    autoComplete="current-password"
+                                    margin="normal"
+                                    variant="outlined"
+                                />
+                            </Grid>
+                            <Grid item>
+                                <StyledButton variant="contained" color="primary">
+                                    Log In
+                                </StyledButton>
+                            </Grid>
+                            <Grid item>
+                                <Divider variant="middle"/>
+                            </Grid>
+                            <Grid>   
+                                <Typography align="center">
+                                    You don't have an account?
+                                </Typography>
+                            </Grid>
+                            <Grid item>
+                                <StyledButton variant="contained" color="secondary" onClick={this.handleOpenRegisterFrom}>
+                                    Register account
+                                </StyledButton>
+                            </Grid>
+                    </Grid>
+                    {this.state.registerFormIsOpened && <RegisterForm isOpened={this.state.registerFormIsOpened} /> }
+                </Form>
                 )}
             />
         </StyledPaper>
