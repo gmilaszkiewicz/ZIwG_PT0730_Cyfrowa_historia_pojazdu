@@ -4,7 +4,7 @@ export default class HomePage extends Component{
 
     render(){
         return(
-            <p1>Login page</p1>
+            <p1>Home page</p1>
         );
     }
 }

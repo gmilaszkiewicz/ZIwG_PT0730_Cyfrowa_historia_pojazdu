@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import {Paper, TextField, Grid, Button, Typography, Divider, Tab, Tabs} from '@material-ui/core'
-import styled from 'styled-components';
-import { Formik, Field, Form } from 'formik';
-import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
+import {TextField, Grid, Button} from '@material-ui/core'
+import { Field } from 'formik';
 
 export default class OwnerForm extends Component{
 
@@ -10,60 +8,68 @@ export default class OwnerForm extends Component{
         return(
             <div>
             <Grid container direction="column" spacing={8} justify="center">
-                <Grid item>
-                    <Field
-                        name="name" 
-                        component={TextField}
-                        id="standard-required"
-                        label="Name"
-                        margin="normal"
-                    /><br></br>
-                    <Field
-                        name="surname"
-                        component={TextField}
-                        id="standard-required"
-                        label="Surname"
-                        margin="normal"
-                    />
+                <Grid container spacing={16}>
+                    <Grid item xs={6}>
+                        <Field
+                            name="name" 
+                            required
+                            component={TextField}
+                            id="standard-required"
+                            label="Name"
+                            margin="normal"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Field
+                            name="surname"
+                            component={TextField}
+                            id="standard-required"
+                            label="Surname"
+                            margin="normal"
+                        />
+                    </Grid>
                 </Grid>
                 <Grid item>
                     <Field
                         name="email"
+                        required
                         component={TextField}
                         id="standard-required"
                         type="email"
                         autoComplete="email"
                         label="Email"
                         margin="normal"
+                        fullWidth
                     />
                 </Grid>
                 <Grid item>
                     <Field
                         name="password"
+                        required
                         component={TextField}
                         id="outlined-password-input"
                         label="Password"
                         type="password"
                         autoComplete="current-password"
                         margin="normal"
+                        fullWidth
                     />
                 </Grid>
                 <Grid item>
                     <Field
                         name="password"
+                        required
                         component={TextField}
                         id="outlined-password-input"
                         label="Repeat password"
                         type="password"
                         autoComplete="current-password"
                         margin="normal"
+                        fullWidth
                     />
                 </Grid>
-                <Grid item>
-                     <Divider variant="middle"/> 
-                 </Grid>
                  <Grid item>
-                    <Button variant="contained" color="primary" onClick={this.handleOpenRegisterFrom}>
+                    <Button variant="contained" color="primary"  fullWidth onClick={this.handleOpenRegisterFrom}>
                         Register
                     </Button>
                  </Grid>

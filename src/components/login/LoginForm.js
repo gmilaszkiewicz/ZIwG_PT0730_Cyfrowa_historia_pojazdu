@@ -17,54 +17,63 @@ const StyledTextField = styled(TextField)`
     width: 300px;
 `
 
-const ToggleButtonsStyled = styled(ToggleButtonGroup)`
-    width: 100%;
-    justify-content: 'space-between';
-`;
-
 const StyledButton = styled(Button)`
     width:100%;
     padding:10px;
 `
 
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)`
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+`;
+
 const StyledToggleButton = styled(ToggleButton)`
-   
+   width: 50%;
 `
-
-
-const ToggleButtons = () =>  (
-    <ToggleButtonsStyled exclusive>
-        <Grid container direction="row" spacing={0} justify="space-between">
-            <Grid item sm={6}>
-                <StyledToggleButton value="owner">
-                    Owner
-                </StyledToggleButton>
-            </Grid>
-            <Grid>
-                <StyledToggleButton value="service" sm={6}>
-                    Car Service
-                </StyledToggleButton>
-            </Grid>
-        </Grid>
-    </ToggleButtonsStyled>
-);
 
 export default class LoginForm extends Component{
 
     constructor(){
         super()
         this.state = {
-            registerFormIsOpened: false
+            registerFormIsOpened: false,
+            role: "owner"
         }
     }
 
-    handleOpenRegisterFrom = (event) => {
+    handleCloseRegisterForm = (event) => {
+        event.preventDefault()
+        this.setState((prevState) => ({
+                ...prevState,
+                registerFormIsOpened: false
+        }))
+    }
+
+    handleOpenRegisterForm = (event) => {
         event.preventDefault()
         this.setState((prevState) => ({
                 ...prevState,
                 registerFormIsOpened: true
         }))
     }
+
+    handleRole = (event, role) =>{
+        this.setState({
+            role
+        })
+    }
+
+    ToggleButtons = () =>  (
+        <StyledToggleButtonGroup exclusive value={this.state.role} onChange={this.handleRole}>
+            <StyledToggleButton value="owner" id="owner">
+                Owner
+            </StyledToggleButton>
+            <StyledToggleButton value="service">
+                Car Service
+            </StyledToggleButton>
+        </StyledToggleButtonGroup>
+    );
 
     render(){
         return(
@@ -79,7 +88,7 @@ export default class LoginForm extends Component{
                 }}
                 render={props => (
                     <Form onSubmit={props.handleSubmit}>
-                        <Field component={ToggleButtons} name="roles" />
+                        <Field component={this.ToggleButtons} name="roles" />
                         <Grid container direction="column" spacing={16} justify="center">
                             <Grid item>
                                 <Field
@@ -119,12 +128,12 @@ export default class LoginForm extends Component{
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <StyledButton variant="contained" color="secondary" onClick={this.handleOpenRegisterFrom}>
+                                <StyledButton variant="contained" color="secondary" onClick={this.handleOpenRegisterForm}>
                                     Register account
                                 </StyledButton>
                             </Grid>
                     </Grid>
-                    {this.state.registerFormIsOpened && <RegisterForm isOpened={this.state.registerFormIsOpened} /> }
+                    {this.state.registerFormIsOpened && <RegisterForm isOpened={this.state.registerFormIsOpened} handleOnClose={this.handleCloseRegisterForm} /> }
                 </Form>
                 )}
             />
