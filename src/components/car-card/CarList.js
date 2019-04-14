@@ -1,15 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { StyledCarCard as CarCard } from "./CarCard";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import GridListTileBar from "@material-ui/core/GridListTileBar";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import IconButton from "@material-ui/core/IconButton";
-import InfoIcon from "@material-ui/icons/Info";
 import { initialValues } from "./../../InitialValues";
 
-export class CarList extends React.Component {
+export class CarList extends Component {
   componentDidMount() {
     this.carList = initialValues.cars;
   }

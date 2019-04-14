@@ -5,7 +5,7 @@ import { Formik, Field, Form } from 'formik';
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
 import RegisterForm from '../login/RegisterForm';
 import { compose } from 'recompose';
-import { withFirebase } from '../../config/context';
+import { withFirebase } from '../../config/firebase/context';
 
 const StyledPaper = styled(Paper)`
   position: fixed;
@@ -76,14 +76,13 @@ class LoginForm extends Component{
             </StyledToggleButton>
         </StyledToggleButtonGroup>
     );
-    // alert(JSON.stringify(values, null, 2));
-    // actions.setSubmitting(false);
-    
+
     render(){
         return(
         <StyledPaper elevation={1}>
             <Formik
-                initialValues={{ name: 'jared' }}
+                enableReinitialize
+                initialValues={{ email: '', password: '' }}
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
                     console.log(this.props.firebase)
@@ -91,7 +90,8 @@ class LoginForm extends Component{
                     .doSignInWithEmailAndPassword(values.email, values.password)
                     .then(() => {
                         // this.setState({ ...INITIAL_STATE });
-                        this.props.history.push("localhost:3000/home");
+                        // this.props.history.push("localhost:3000/home");
+                        console.log("success logged")
                     })}, 1000);
 
                 }}
@@ -103,24 +103,27 @@ class LoginForm extends Component{
                                 <Field
                                     name="email" 
                                     component={StyledTextField}
-                                    id="outlined-email-input"
+                                    id="email"
                                     label="Email"
                                     type="email"
                                     autoComplete="email"
                                     margin="normal"
                                     variant="outlined"
+                                    onChange={props.handleChange}
+                                    value={props.values.email}
                                 />
                             </Grid>
                             <Grid item>
                                 <Field
                                     name="password"
                                     component={StyledTextField}
-                                    id="outlined-password-input"
+                                    id="password"
                                     label="Password"
                                     type="password"
                                     autoComplete="current-password"
                                     margin="normal"
                                     variant="outlined"
+                                    onChange={props.handleChange}
                                 />
                             </Grid>
                             <Grid item>
