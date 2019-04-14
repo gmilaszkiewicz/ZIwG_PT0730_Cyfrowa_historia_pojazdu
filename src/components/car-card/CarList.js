@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 import { StyledCarCard as CarCard } from "./CarCard";
 import GridList from "@material-ui/core/GridList";
@@ -18,21 +18,15 @@ export class CarList extends React.Component {
   carList = initialValues.cars;
 
   render() {
-    console.log(this.carList);
     return (
       <div className={this.props.className}>
-        <div>
-          <GridList cellHeight={180} className="grid-list">
-            <GridListTile key="Subheader" cols={2}>
-              <ListSubheader component="div">December</ListSubheader>
+        <GridList cellHeight={200} className="grid-list" cols={3} spacing={10} padding={1}>
+          {this.carList.map((car, index) => (
+            <GridListTile key={index}>
+              <CarCard vin={car.vin} name={car.name} />
             </GridListTile>
-            {this.carList.map((car, index) => (
-              <GridListTile key={index}>
-                <CarCard vin={car.vin} name={car.name} />
-              </GridListTile>
-            ))}
-          </GridList>
-        </div>
+          ))}
+        </GridList>
       </div>
     );
   }
@@ -45,8 +39,6 @@ export const StyledCarList = styled(CarList)`
   overflow: "hidden";
 
   .grid-list {
-    width: 500px;
-    height: 450px;
   }
   .icon {
     color: "rgba(255, 255, 255, 0.54)";

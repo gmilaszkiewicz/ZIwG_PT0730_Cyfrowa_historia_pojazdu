@@ -7,34 +7,42 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 export const CarCard = ({ className, name, vin }) => {
   return (
     <div className={className}>
-      <Card>
+      <Card className="card">
         <CardActionArea>
+          {/* <CardMedia
+            component="img"
+            alt="Contemplative Reptile"
+            className="media"
+            height="140"
+            image="C:\Users\mkucia\Desktop\Gospodoarka\ZIwG_PT0730_Cyfrowa_historia_pojazdu\src\assets\car.jpg"
+            title="Contemplative Reptile"
+          /> */}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {name}
             </Typography>
-            <Typography component="p">
-            {vin}
-            </Typography>
+            <Typography component="p">{vin}</Typography>
           </CardContent>
         </CardActionArea>
-        {/* <CardActions>
+        <CardActions>
           <Button size="small" color="primary">
-            Share
+            Dodaj Naprawę
           </Button>
           <Button size="small" color="primary">
-            Learn More
+            Dodaj Ulepszenie
           </Button>
-        </CardActions> */}
+        </CardActions>
       </Card>
     </div>
   );
 };
 
 export const StyledCarCard = styled(CarCard)`
-  max-width: 300px;
+
+  .media {
+    height:145px;
+  }
 `;
