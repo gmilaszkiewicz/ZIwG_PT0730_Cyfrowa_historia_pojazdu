@@ -7,7 +7,7 @@ export default class HomePage extends Component{
     render(){
         return(
             <div>
-                <TopBar />
+                {/* <TopBar /> */}
                 <DrawerBar />
             </div>
         );

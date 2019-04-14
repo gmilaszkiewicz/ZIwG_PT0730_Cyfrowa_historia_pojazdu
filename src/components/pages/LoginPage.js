@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoginForm from '../login/LoginForm'
+import { SignInForm } from '../login/LoginForm'
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -16,7 +16,7 @@ export default class LoginPage extends Component{
     render(){
         return(
             <StyledDiv>
-                <LoginForm />
+                <SignInForm />
             </StyledDiv>
         );
     }

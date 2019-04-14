@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider } from '@material-ui/core';
 import {darkBaseTheme} from '@material-ui/core/styles';
 import {createMuiTheme} from '@material-ui/core/styles';
+import Firebase, { FirebaseContext } from './config/index';
 
 const muiTheme = createMuiTheme({
     palette:{
@@ -16,9 +17,11 @@ const muiTheme = createMuiTheme({
 
 ReactDOM.render(
     <BrowserRouter>
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <App />
-        </MuiThemeProvider>
+        <FirebaseContext.Provider value={new Firebase()}>
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <App />
+            </MuiThemeProvider>
+        </FirebaseContext.Provider>
     </BrowserRouter>,
      document.getElementById('root')
 );

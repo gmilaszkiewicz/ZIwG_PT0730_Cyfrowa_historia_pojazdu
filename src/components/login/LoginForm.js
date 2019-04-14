@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { Formik, Field, Form } from 'formik';
 import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
 import RegisterForm from '../login/RegisterForm';
+import { compose } from 'recompose';
+import { withFirebase } from '../../config/context';
 
 const StyledPaper = styled(Paper)`
   position: fixed;
@@ -32,7 +34,7 @@ const StyledToggleButton = styled(ToggleButton)`
    width: 50%;
 `
 
-export default class LoginForm extends Component{
+class LoginForm extends Component{
 
     constructor(){
         super()
@@ -74,7 +76,9 @@ export default class LoginForm extends Component{
             </StyledToggleButton>
         </StyledToggleButtonGroup>
     );
-
+    // alert(JSON.stringify(values, null, 2));
+    // actions.setSubmitting(false);
+    
     render(){
         return(
         <StyledPaper elevation={1}>
@@ -82,9 +86,14 @@ export default class LoginForm extends Component{
                 initialValues={{ name: 'jared' }}
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
-                    actions.setSubmitting(false);
-                    }, 1000);
+                    console.log(this.props.firebase)
+                    this.props.firebase
+                    .doSignInWithEmailAndPassword(values.email, values.password)
+                    .then(() => {
+                        // this.setState({ ...INITIAL_STATE });
+                        this.props.history.push("localhost:3000/home");
+                    })}, 1000);
+
                 }}
                 render={props => (
                     <Form onSubmit={props.handleSubmit}>
@@ -141,3 +150,9 @@ export default class LoginForm extends Component{
         )
     }
 }
+
+const SignInForm = compose(
+    withFirebase,
+  )(LoginForm);
+
+  export {SignInForm}
