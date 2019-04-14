@@ -60,7 +60,7 @@ dr inż. Marek Woda
 \section{Temat projektu}
 Uzasadnienie biznesowe (skąd pomysł / dlaczego / czy jest innowacyjny i w jakim zakresie)\\
 
-Tematem projektu jest system umożliwiający dokumentowanie historii pojazdów. Obecnie rynek samochodów używanych jest kojarzony z tak zwanym "kręceniem liczników", czyli zmniejszaniem faktycznego przebiegu pojazdu w celu podwyższenia jego wartości. Usługa korekty licznika jest stosunkowo tania i trudno wykrywalna. Najbardziej na tego typu zabiegach cierpią uczciwi posiadacze samochodów, którzy mają trudność w sprzedarzy pojazdów z oryginalnym przebiegiem. System do dokumentowania historii pojazdów umożliwiłby uczciwym sprzedawcom na podniesienie wartości swoich pojazdów. Pomysł dokumentowania historii pojazdu nie jest pomysłem innowacyjnym. Na rynku jest wiele aplikacji umożliwiających zapisywanie historii pojazdów jednakże żadna z nich nie weryfikuje wprowadzanych danych. System\textit{ Cyfrowej historii pojazdu} będzie posiadał podobne funkcjonalności co inne aplikacje dostępne na rynku, lecz dodaktowko wymaga wprowadzenia przebiegu pojazdu przy każdym wpisie do bazy danych. Kolejną funkcjonalnością potwierdzającą dodanie wpisu będzie możliwość dodania zdjęcia (na przykład zdjęcia licznika pojazdu).
+Tematem projektu jest system umożliwiający dokumentowanie historii pojazdów. Obecnie rynek samochodów używanych jest kojarzony z tak zwanym "kręceniem liczników", czyli zmniejszaniem faktycznego przebiegu pojazdu w celu podwyższenia jego wartości. Usługa korekty licznika jest stosunkowo tania i trudno wykrywalna. Najbardziej na tego typu zabiegach cierpią uczciwi posiadacze samochodów, którzy mają trudność w sprzedarzy pojazdów z oryginalnym przebiegiem. System do dokumentowania historii pojazdów umożliwiłby uczciwym sprzedawcom na podniesienie wartości swoich pojazdów. Pomysł dokumentowania historii pojazdu nie jest pomysłem innowacyjnym. Na rynku jest wiele aplikacji umożliwiających zapisywanie historii pojazdów jednakże żadna z nich nie weryfikuje wprowadzanych danych. System\textit{ Cyfrowa historia pojazdu} będzie posiadał podobne funkcjonalności co inne aplikacje dostępne na rynku, lecz dodaktowko wymaga wprowadzenia przebiegu pojazdu przy każdym wpisie do bazy danych. Kolejną funkcjonalnością potwierdzającą dodanie wpisu będzie możliwość dodania zdjęcia (na przykład zdjęcia licznika pojazdu).
 
 
 
@@ -73,14 +73,20 @@ Tematem projektu jest system umożliwiający dokumentowanie historii pojazdów. 
 \subsection{Cele}
 Celem projektu jest stworzenie systemu umożliwiającego dokumentowanie histroii pojazdów. Głównym zadaniem jest napisanie aplikacji mobilnej i webowej, która będzie przyjazna dla użytkownika. Aplikacja będzie przeznaczona dla właścicieli pojazdów oraz dla serwisów samochodowych. 
 \subsection{Ryzyka}
-Projektując taki system należy liczyć się z nieuniknionym ryzykiem. Głównym niebezpieczeństwem projektowanego systemu jest niskie lub całkowity brak zainteresowania ze strony użytkowników. Jest to dość realne zagrożenie z uwagi na mnogość tego typu aplikacji, które pomimo braku weryfikacji wprowadzanych informacji są o wiele bardziej wypromowane. \\
+Projektując taki system należy liczyć się z nieuniknionym ryzykiem. Głównym niebezpieczeństwem projektowanego systemu jest niskie lub całkowity brak zainteresowania ze strony użytkowników. Jest to dość realne zagrożenie z uwagi na mnogość tego typu aplikacji, które pomimo braku weryfikacji wprowadzanych informacji są o wiele bardziej wypromowane. 
 
 Kolejnym ryzykiem jest opóźnienie w wykonywaniu pracy. Jest to istotne niebezpieczeństwo, które może wyniknąć ze zbyt dużej ilości funkcjonalności oraz z niedostatecznej wiedzy programistycznej w wybranych technologiach. 
+
+Następnym ryzykiem jest zmiana założonych na początku funkcjonalności podstawowych systemu. Każda nieprzewidziana zmiana niesie za sobą spore konsekwencje. Nawet niewielka modyfikacja założeń projetkowych może spowodować opóźnienia w planowanym ukończeniu projektu.
+
 \subsection{Funkcjonalności podstawowe i rozszerzone}
 
+W tabeli 1-X zostały przedstawione podstawowe funkcjonalności systemu.
 
+%----------------------REJESTRACJA------------------------------------
 \begin{table}[H]
 \begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Rejestracja konta}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
 	Id wymagania 	& 1 				\\ \hline
@@ -96,11 +102,342 @@ formularza rejestracyjnego\\ \hline
 	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy, Osoba zewnętrzna) \\ \hline
 	Przeznaczenie & Każdy nowy użytkownik \\ \hline
 	\end{tabular}
-\captionof{table}{Karta wymagań dla funkcjonalności \textit{Rejestracja konta}} 
+
+\end{center}
+\end{table}
+
+%----------------------LOGOWANIE------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Logowanie}} 
+\end{center}
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 2 				\\ \hline
+	Nazwa			& Logowanie \\ \hline
+	Opis & Aplikacja powinna zalogować użytkownika do systemu po
+podaniu poprawnych danych do logowania
+\\ \hline
+	Przesłanka & Jednoznaczne zidentyfikowanie użytkownika  \\ \hline
+	Ograniczenia i~warunki & Weryfikacja użytkownika powinna zapewnić poufność i bezpieczeństwo procesu  \\ \hline
+	Dane wejściowe & Dane niezbędne do identyfikacji i weryfikacji użytkownika
+w systemie - login (adres e-mail) i hasło użytkownika
+  \\ \hline
+	Wynik & Zalogowanie do systemu \\ \hline
+	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy, Osoba zewnętrzna) \\ \hline
+	Przeznaczenie & Każdy zarejestrowany użytkownik \\ \hline
+	\end{tabular}
+
+\end{table}
+
+%----------------------REJESTRACJA POJAZDU------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Rejestracja pojazdu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 3 				\\ \hline
+	Nazwa			& Rejestracja pojazdu \\ \hline
+	Opis & Aplikacja powinna umożliwić zarejestrowanie pojazdu w systemie. Zarejestrowanie pojazdu odbywać się będzie poprzez podanie kluczowych danych, które umożliwią pobranie dodatkowych informacji ze strony historiapojazdu.gov.pl
+\\ \hline
+	Przesłanka & Możliwość dodawania pojazdów do bazy danych  \\ \hline
+	Ograniczenia i~warunki & Pojazd można dodać tylko po poprawnym wprowadzeniu danych. Weryfikacja danych odbywa się poprzez stronę historiapojazdu.gov.pl  \\ \hline
+	Dane wejściowe &
+Dane niezbędne do identyfikacji pojazdu - numer rejestracyjny, numer nadwozia, data pierwszej rejestracji w kraju
+(Opcjonalne: zdjęcie pojazdu)  \\ \hline
+	Wynik & Dodanie pojazdu do systemu \\ \hline
+	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu) \\ \hline
+	Przeznaczenie & Właściciel pojazdu \\ \hline
+	\end{tabular}
+
+\end{center}
+\end{table}
+
+%----------------------DODAWANIE NAPRAW------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie napraw pojazdu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 4 				\\ \hline
+	Nazwa			& Dodawanie napraw pojazdu \\ \hline
+	Opis & Aplikacja powinna umożliwić dodanie informacji o naprawie pojazdu
+\\ \hline
+	Przesłanka & 
+Możliwość dodawania informacji o historii pojazdu
+  \\ \hline
+	Ograniczenia i~warunki & 
+Każda naprawa musi zawierać informację o przebiegu pojazdu w chwili dokonania naprawy oraz opis co zostało naprawione (minimum 10 znaków)
+ \\ \hline
+	Dane wejściowe &
+
+Przebieg pojazdu, opis naprawy, skrócona nazwa naprawy
+(Opcjonalne: zdjęcia, kwota naprawy)
+ \\ \hline
+	Wynik & Dodanie informacji o naprawie pojazdu wraz z informacją kto dodał naprawę\\ \hline
+	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy)\\ \hline
+	Przeznaczenie & Właściciel pojazdu, Serwis samochodowy\\ \hline
+	\end{tabular}
+
+\end{center}
+\end{table}
+
+%----------------------DODAWANIE EKSPLOATACJI------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie eksploatacji pojazdu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 5 				\\ \hline
+	Nazwa			& Dodawanie eksploatacji pojazdu \\ \hline
+	Opis &
+	
+	 Aplikacja powinna umożliwić dodanie informacji o wymianach eksploatacyjnych pojazdu (np. wymiana oleju)
+	 
+\\ \hline
+	Przesłanka & 
+
+Możliwość dodawania informacji o historii pojazdu
+
+  \\ \hline
+	Ograniczenia i~warunki & 
+
+Każda wymiana eksploatacyjna musi zawierać informację o przebiegu pojazdu w chwili dokonania wymiany oraz opis co zostało wymienione (minimum 10 znaków)
+
+ \\ \hline
+	Dane wejściowe &
+
+Przebieg pojazdu, opis wymiany eksploatacyjnej
+(Opcjonalne: zdjęcia, kwota wymiany eksploatacyjnej)
+
+ \\ \hline
+	Wynik & 
+	
+Dodanie informacji o wymianie eksploatacyjnej pojazdu wraz z informacją kto dodał wymiany
+
+\\ \hline
+	Źródło danych wejściowych &
+	
+Użytkownik (Właściciel pojazdu, Serwis samochodowy)
+\\ \hline
+
+	Przeznaczenie & 
+	
+Właściciel pojazdu, Serwis samochodowy
+
+\\ \hline
+	\end{tabular}
+
+\end{center}
+\end{table}
+
+%----------------------DODAWANIE ULEPSZEŃ------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie ulepszeń}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 6 				\\ \hline
+	Nazwa			& Dodawanie ulepszeń
+ \\ \hline
+	Opis &
+	
+	Aplikacja powinna umożliwić dodanie informacji o ulepszeniach pojazdu (np. Przyciemnianie szyb)
+
+\\ \hline
+	Przesłanka & 
+
+Możliwość dodawania informacji o historii pojazdu
+
+  \\ \hline
+	Ograniczenia i~warunki & 
+
+Każde ulepszenie musi zawierać informację o przebiegu pojazdu w chwili dokonania ulepszenia oraz opis co zostało ulepszone (minimum 10 znaków)
+
+ \\ \hline
+	Dane wejściowe &
+
+Przebieg pojazdu, opis ulepszeń
+(Opcjonalne: zdjęcia, kwota dokonania ulepszenia)
+
+ \\ \hline
+	Wynik & 
+
+Dodanie informacji o ulepszeniach pojazdu wraz z informacją kto dodał ulepszenia
+
+\\ \hline
+	Źródło danych wejściowych &
+	
+Użytkownik (Właściciel pojazdu, Serwis samochodowy)
+
+\\ \hline
+
+	Przeznaczenie & 
+	
+Właściciel pojazdu, Serwis samochodowy
+
+\\ \hline
+	\end{tabular}
+
+\end{center}
+\end{table}
+
+%----------------------DODAWANIE USZKODZEŃ------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie uszkodzeń}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 7 				\\ \hline
+	Nazwa			& Dodawanie uszkodzeń
+ \\ \hline
+	Opis &
+Aplikacja powinna umożliwić dodanie informacji o uszkodzeniach pojazdu (np. Pęknięcie szyby)
+
+\\ \hline
+	Przesłanka & 
+
+Możliwość dodawania informacji o historii pojazdu
+
+  \\ \hline
+	Ograniczenia i~warunki & 
+
+Każde uszkodzenie musi zawierać informację o przebiegu pojazdu w chwili wystąpienia uszkodzenia oraz opis uległo uszkodzeniu (minimum 10 znaków)
+
+ \\ \hline
+	Dane wejściowe &
+
+Przebieg pojazdu, opis uszkodzeń
+(Opcjonalne: zdjęcia)
+
+ \\ \hline
+	Wynik & 
+
+Dodanie informacji o uszkodzeniach pojazdu
+
+
+\\ \hline
+	Źródło danych wejściowych &
+
+Użytkownik (Właściciel pojazdu)
+
+\\ \hline
+
+	Przeznaczenie & 
+	
+Właściciel pojazdu
+
+\\ \hline
+	\end{tabular}
+
 \end{center}
 \end{table}
 
 
+%----------------------SPRZEDAWANIE------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Sprzedaż samochodu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 8 				\\ \hline
+	Nazwa			& Sprzedaż samochodu
+ \\ \hline
+	Opis &
+	
+Aplikacja powinna umożliwić sprzedaż pojazdu, czyli przypisanie pojazdu do innego konta
+
+\\ \hline
+	Przesłanka & 
+
+Możliwość zmiany właściciela pojazdu
+
+  \\ \hline
+	Ograniczenia i~warunki & 
+
+Przypisać pojazd można tylko do zweryfikowanego konta po wprowadzeniu adresu email nowego właściciela. Nowy właściciel musi potwierdzić dokonanie zmiany właściciela.
+
+ \\ \hline
+	Dane wejściowe &
+
+Adres email nowego właściciela
+
+
+ \\ \hline
+	Wynik & 
+
+Zmiana właściciela pojazdu
+
+
+\\ \hline
+	Źródło danych wejściowych &
+
+Użytkownik (Właściciel pojazdu)
+
+
+\\ \hline
+
+	Przeznaczenie & 
+	
+Właściciel pojazdu
+
+\\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
+
+%----------------------UDOSTĘPNIANIE HISTORII--------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Udostępnienie historii samochodu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 9 				\\ \hline
+	Nazwa			& Udostępnienie historii samochodu
+ \\ \hline
+	Opis &
+	Aplikacja powinna umożliwić udostępnienie historii pojazdu. Historia pojazdu powinna zawierać wszystkie informacje wprowadzone przez właściciela pojazdu oraz serwisy samochodowe. Każdy wpis powinien zawierać opis, datę oraz przebieg w momencie dodania wpisu. Aplikacja powinna generować link dzięki któremu można zobaczyć historię pojazdu bez logowania się do systemu 
+
+
+\\ \hline
+	Przesłanka & 
+
+Możliwość udostępnienia historii pojazdu potencjalnemu nabywcy 
+
+  \\ \hline
+	Ograniczenia i~warunki & 
+
+Każdy użytkownik może zobaczyć udostępnioną historię pojazdu tylko gdy posiada link wygenerowany przez właściciela pojazdu. Do obejrzenia historii nie jest potrzebne logowanie do systemu.
+
+
+ \\ \hline
+	Dane wejściowe &
+
+Wybór pojazdu którego historia ma zostać udostępniona
+
+
+ \\ \hline
+	Wynik & 
+
+Link umożliwiający zobaczenie wszystkich wpisów dla danego pojazdu
+
+
+\\ \hline
+	Źródło danych wejściowych &
+
+Użytkownik (Właściciel pojazdu)
+
+
+\\ \hline
+
+	Przeznaczenie & 
+	
+Właściciel pojazdu
+
+\\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
 
 %---------------------------------------------------------
 %					Część Trzecia
