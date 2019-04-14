@@ -10,8 +10,8 @@ class App extends Component {
     return (
     <div>
       <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route exact path="/home" component={HomePage} />
+        <Route authorize={['owner']} exact path="/" component={LoginPage} />
+        <Route authorize={['service']} exact path="/home" component={HomePage} />
       </Switch>
     </div>
     );

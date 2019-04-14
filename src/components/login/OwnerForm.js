@@ -57,10 +57,10 @@ export default class OwnerForm extends Component{
                 </Grid>
                 <Grid item>
                     <Field
-                        name="password"
+                        name="reapeted-password"
                         required
                         component={TextField}
-                        id="outlined-password-input"
+                        id="outlined-reapeted-password-input"
                         label="Repeat password"
                         type="password"
                         autoComplete="current-password"
