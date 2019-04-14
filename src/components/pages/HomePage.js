@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import DrawerBar from './../bars/DrawerBar'
+import TopBar from './../bars/TopBar'
 
 export default class HomePage extends Component{
 
     render(){
         return(
-            <p1>Home page</p1>
+            <div>
+                <TopBar />
+                <DrawerBar />
+            </div>
         );
     }
 }
