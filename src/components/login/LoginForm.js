@@ -133,9 +133,6 @@ export default class LoginForm extends Component{
                                 </StyledButton>
                             </Grid>
                     </Grid>
-                    <StyledButton type="submit" variant="contained" color="primary">
-                                    Log In
-                    </StyledButton>
                     {this.state.registerFormIsOpened && <RegisterForm isOpened={this.state.registerFormIsOpened} handleOnClose={this.handleCloseRegisterForm} /> }
                 </Form>
                 )}
