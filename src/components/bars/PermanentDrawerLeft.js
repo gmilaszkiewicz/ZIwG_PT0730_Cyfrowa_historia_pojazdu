@@ -13,25 +13,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { StyledCarList as CarList } from "./../car-card/CarList";
-const routes = [
-  {
-    path: "/cars",
-    exact: true,
-    sidebar: () => <div />,
-    main: () => <div />
-  },
-  {
-    path: "/bubblegum",
-    sidebar: () => <CarList />,
-    main: () => <h2>Bubblegum</h2>
-  },
-  {
-    path: "/shoelaces",
-    sidebar: () => <div>shoelaces!</div>,
-    main: () => <h2>Shoelaces</h2>
-  }
-];
+import { routes } from "./routes";
 
 const drawerWidth = 240;
 
@@ -41,7 +23,7 @@ const styles = theme => ({
   },
   appBar: {
     marginLeft: drawerWidth,
-    zIndex:1400
+    zIndex: 1400
   },
   drawer: {
     width: drawerWidth,
@@ -60,7 +42,6 @@ const styles = theme => ({
 
 function PermanentDrawerLeft(props) {
   const { classes } = props;
-
   return (
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
@@ -82,13 +63,13 @@ function PermanentDrawerLeft(props) {
           <div className={classes.toolbar} />
           <Divider />
           <List>
-            {["Show my cars", "Car services"].map((text, index) => (
+            {routes.map((route, index) => (
               <Link to={`${routes[index].path}`}>
-                <ListItem button key={text}>
+                <ListItem button key={route.name}>
                   <ListItemIcon>
                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={route.name} />
                 </ListItem>
               </Link>
             ))}

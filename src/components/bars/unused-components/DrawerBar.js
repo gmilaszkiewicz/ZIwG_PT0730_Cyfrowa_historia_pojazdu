@@ -9,7 +9,6 @@ import {
   Toolbar
 } from "@material-ui/core";
 import styled from "styled-components";
-
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
