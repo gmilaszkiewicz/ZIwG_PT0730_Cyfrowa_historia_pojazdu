@@ -12,14 +12,6 @@ export const CarCard = ({ className, name, vin }) => {
     <div className={className}>
       <Card className="card">
         <CardActionArea>
-          {/* <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            className="media"
-            height="140"
-            image="C:\Users\mkucia\Desktop\Gospodoarka\ZIwG_PT0730_Cyfrowa_historia_pojazdu\src\assets\car.jpg"
-            title="Contemplative Reptile"
-          /> */}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {name}
@@ -41,7 +33,6 @@ export const CarCard = ({ className, name, vin }) => {
 };
 
 export const StyledCarCard = styled(CarCard)`
-
   .media {
     height:145px;
   }

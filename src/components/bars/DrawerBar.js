@@ -13,9 +13,7 @@ import styled from "styled-components";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { MyCars } from "./MyCars";
 import { StyledCarList as CarList } from "./../car-card/CarList";
-import zIndex from "@material-ui/core/styles/zIndex";
 import TopBar from "./TopBar";
 const StyledDrawer = styled(Drawer)`
   .drawer {
@@ -39,17 +37,17 @@ const routes = [
   {
     path: "/cars",
     exact: true,
-    sidebar: () => <MyCars />,
-    main: () => <MyCars />
+    // sidebar: () => <div>aaa</div>,
+    main: () => <CarList />
   },
   {
     path: "/bubblegum",
-    sidebar: () => <div>bubblegum!</div>,
-    main: () => <h2>Bubblegum</h2>
+    // sidebar: () => <div>bubblegum!</div>,
+    main: () => <CarList />
   },
   {
     path: "/shoelaces",
-    sidebar: () => <div>shoelaces!</div>,
+    // sidebar: () => <div>shoelaces!</div>,
     main: () => <h2>Shoelaces</h2>
   }
 ];
@@ -91,7 +89,7 @@ function SidebarExample() {
           ))}
         </div>
 
-        <div style={{ flex: 1, padding: "10px" }}>
+        <div>
           {routes.map((route, index) => (
             <Route
               key={index}
