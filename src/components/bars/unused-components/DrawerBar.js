@@ -12,7 +12,7 @@ import styled from "styled-components";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { StyledCarList as CarList } from "./../car-card/CarList";
+import { StyledCarList as CarList } from "./../car/CarList";
 import TopBar from "./TopBar";
 const StyledDrawer = styled(Drawer)`
   .drawer {

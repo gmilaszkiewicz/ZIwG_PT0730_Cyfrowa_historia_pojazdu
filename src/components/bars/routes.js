@@ -1,4 +1,4 @@
-import { StyledCarList as CarList } from "./../car-card/CarList";
+import { StyledCarList as CarList } from "./../car/CarList";
 import React from "react";
 export const routes = [
   {
