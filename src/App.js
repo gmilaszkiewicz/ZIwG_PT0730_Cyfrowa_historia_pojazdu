@@ -5,43 +5,33 @@ import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
 import { StyledCarCard as CarCard } from "./components/car-card/CarCard";
 import { StyledCarList as CarList } from "./components/car-card/CarList";
-import { MuiThemeProvider } from '@material-ui/core';
-import {createMuiTheme} from '@material-ui/core/styles';
-import Firebase, { FirebaseContext } from './config/firebase/index';
+import {BrowserRouter} from 'react-router-dom'
+import { withAuthentication } from "./components/session"
+import * as ROUTES from './constans/routes'
 
-const muiTheme = createMuiTheme({
-    palette:{
-        type: 'light',
-    },
-    typography: {
-      useNextVariants: true,
-    },
-})
 
-class App extends Component {
-  render() {
-    return (
-    <MuiThemeProvider theme={muiTheme}>
-      <FirebaseContext.Provider value={new Firebase()}> 
-        <Switch>
-          <Route authorize={["owner"]} exact path="/" component={LoginPage} />
-          <Route
-            authorize={["service"]}
-            exact
-            path="/home"
-            component={HomePage}
-          />
-          <Route
-            authorize={["service"]}
-            exact
-            path="/card"
-            component={CarList}
-          />
-        </Switch>
-      </FirebaseContext.Provider>
-    </MuiThemeProvider>
-    );
-  }
-}
 
-export default App;
+
+const App = () => (
+        <BrowserRouter>
+          <div>
+            {/* <Route authorize={["owner"]} exact path="/" component={LoginPage} />
+            <Route
+              authorize={["service"]}
+              exact
+              path="/home"
+              component={HomePage}
+            />
+            <Route
+              authorize={["service"]}
+              exact
+              path="/card"
+              component={CarList}
+            /> */}
+              <Route exact path={ROUTES.LANDING} component={LoginPage} />
+              <Route path={ROUTES.HOME} component={HomePage} />
+              </div>
+      </BrowserRouter>
+  );
+
+export default withAuthentication(App);

@@ -6,6 +6,8 @@ import {ToggleButton, ToggleButtonGroup} from '@material-ui/lab'
 import RegisterForm from '../login/RegisterForm';
 import { compose } from 'recompose';
 import { withFirebase } from '../../config/firebase/context';
+import { withRouter } from 'react-router-dom';
+import * as ROUTES from './../../constans/routes'
 
 const StyledPaper = styled(Paper)`
   position: fixed;
@@ -85,12 +87,13 @@ class LoginForm extends Component{
                 initialValues={{ email: '', password: '' }}
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
-                    console.log(this.props.firebase)
+                    console.log(values)
                     this.props.firebase
                     .doSignInWithEmailAndPassword(values.email, values.password)
                     .then(() => {
+                        // console.log(values)
                         // this.setState({ ...INITIAL_STATE });
-                        // this.props.history.push("localhost:3000/home");
+                        this.props.history.push(ROUTES.HOME);
                         console.log("success logged")
                     })}, 1000);
 
@@ -155,6 +158,7 @@ class LoginForm extends Component{
 }
 
 const SignInForm = compose(
+    withRouter,
     withFirebase,
   )(LoginForm);
 
