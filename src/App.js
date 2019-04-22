@@ -3,8 +3,7 @@ import "./App.css";
 import LoginPage from "./components/pages/LoginPage";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
-import { StyledCarCard as CarCard } from "./components/car-card/CarCard";
-import { StyledCarList as CarList } from "./components/car-card/CarList";
+import { StyledCarList as CarList } from "./components/car/CarList";
 import {BrowserRouter} from 'react-router-dom'
 import { withAuthentication } from "./components/session"
 import * as ROUTES from './constans/routes'

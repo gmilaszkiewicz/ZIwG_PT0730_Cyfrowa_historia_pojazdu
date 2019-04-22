@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import DrawerBar from './../bars/DrawerBar'
-import TopBar from './../bars/TopBar'
+import React, { Component } from "react";
+import PermanentDrawerLeft from "../bars/PermanentDrawerLeft";
 import { withAuthorization, AuthUserContext } from '../session'
 
 class HomePage extends Component{
@@ -12,7 +11,7 @@ class HomePage extends Component{
             <div>
                 {/* <TopBar /> */}
                 {console.log(authUser.email)}
-                <DrawerBar />
+                <PermanentDrawerLeft />
             </div> )}
             </AuthUserContext.Consumer>
         );

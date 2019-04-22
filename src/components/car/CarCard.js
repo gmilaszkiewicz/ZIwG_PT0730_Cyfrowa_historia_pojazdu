@@ -4,6 +4,10 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+<<<<<<< HEAD:src/components/car-card/CarCard.js
+=======
+
+>>>>>>> fix-navbar:src/components/car/CarCard.js
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 export const CarCard = ({ className, name, vin }) => {
@@ -11,14 +15,6 @@ export const CarCard = ({ className, name, vin }) => {
     <div className={className}>
       <Card className="card">
         <CardActionArea>
-          {/* <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            className="media"
-            height="140"
-            image="C:\Users\mkucia\Desktop\Gospodoarka\ZIwG_PT0730_Cyfrowa_historia_pojazdu\src\assets\car.jpg"
-            title="Contemplative Reptile"
-          /> */}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {name}
@@ -40,7 +36,6 @@ export const CarCard = ({ className, name, vin }) => {
 };
 
 export const StyledCarCard = styled(CarCard)`
-
   .media {
     height:145px;
   }
