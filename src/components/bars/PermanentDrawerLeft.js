@@ -14,12 +14,19 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { routes } from "./routes";
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    flexGrow: 1
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -37,7 +44,10 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3
-  }
+  },
+  grow: {
+    flexGrow: 1,
+  },
 });
 
 function PermanentDrawerLeft(props) {
@@ -46,9 +56,35 @@ function PermanentDrawerLeft(props) {
     <div className={classes.root}>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
             Place for tittle
           </Typography>
+          <div>
+                <IconButton
+                  aria-owns='home'
+                  aria-haspopup="true"
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  // anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  // open={open}
+                  // onClose={this.handleClose}
+                >
+                  {/* <MenuItem onClick={this.handleClose}>Profile</MenuItem> */}
+                  {/* <MenuItem onClick={this.handleClose}>My account</MenuItem> */}
+                </Menu>
+              </div>
         </Toolbar>
       </AppBar>
       {/* <Router> */}
@@ -58,7 +94,7 @@ function PermanentDrawerLeft(props) {
           classes={{
             paper: classes.drawerPaper
           }}
-          anchor="left"
+          anchor="left"s
         >
           <div className={classes.toolbar} />
           <Divider />
