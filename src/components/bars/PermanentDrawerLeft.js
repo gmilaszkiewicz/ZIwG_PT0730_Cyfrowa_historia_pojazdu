@@ -51,7 +51,7 @@ function PermanentDrawerLeft(props) {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Router>
+      {/* <Router> */}
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -86,7 +86,7 @@ function PermanentDrawerLeft(props) {
             />
           ))}
         </main>
-      </Router>
+      {/* </Router> */}
     </div>
   );
 }
