@@ -28,7 +28,9 @@ const styles = theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth, 
+    background: '#424242'
+
   },
   toolbar: theme.mixins.toolbar,
   content: {
@@ -70,6 +72,7 @@ class PermanentDrawerLeft extends Component {
             paper: classes.drawerPaper
           }}
           anchor="left"
+          color="primary"
         >
           <div className={classes.toolbar} />
           <Divider />

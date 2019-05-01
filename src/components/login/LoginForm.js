@@ -143,7 +143,7 @@ class LoginForm extends Component{
                                 </Typography>
                             </Grid>
                             <Grid item>
-                                <StyledButton variant="contained" color="secondary" onClick={this.handleOpenRegisterForm}>
+                                <StyledButton variant="contained" color="primary" onClick={this.handleOpenRegisterForm}>
                                     Register account
                                 </StyledButton>
                             </Grid>
