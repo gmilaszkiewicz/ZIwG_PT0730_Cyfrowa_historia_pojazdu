@@ -10,9 +10,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { routes } from "./routes";
+import { routes } from "../../constans/tabs-routes";
 import { StyledCarList } from "../car/CarList";
 import TopBar from "./TopBar"
+import Button from '@material-ui/core/Button'
 
 
 const drawerWidth = 240;
@@ -39,13 +40,29 @@ const styles = theme => ({
 
 class PermanentDrawerLeft extends Component {
 
+  constructor(){
+    super()
+    this.state = {
+      choosenTab: 0
+    }
+  }
+
+  handleChangeTab = (event, index) => {
+    if(event.target.outerText==='Profile'){
+      index = 5
+    }
+    this.setState({
+      choosenTab: index
+    })
+  }
+
   render(){
 
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <TopBar drawerWidth={drawerWidth}/>
+        <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab}/>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -58,9 +75,15 @@ class PermanentDrawerLeft extends Component {
           <Divider />
           <List>
             {routes.map((route, index) => (
-                <ListItem component={Link} key={route.name} to={routes[index].path}>
+                route.visible && 
+                <ListItem 
+                component={Link} 
+                key={route.name} 
+                to={routes[index].path} 
+                selected={this.state.choosenTab === index}
+                onClick={event => this.handleChangeTab(event, index)}>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {route.icon()}
                   </ListItemIcon>
                   <ListItemText primary={route.name} />
                 </ListItem>
@@ -69,15 +92,9 @@ class PermanentDrawerLeft extends Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          {/* {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.sidebar}
-            />
-          ))} */}
-          <StyledCarList />
+          {routes.map((route, index) => (
+            (this.state.choosenTab === index) && route.main()
+          ))}
         </main>
       </div>
     );}

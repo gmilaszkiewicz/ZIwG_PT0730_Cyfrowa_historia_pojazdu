@@ -10,7 +10,6 @@ class HomePage extends Component{
                 {authUser => (
             <div>
                 {/* <TopBar /> */}
-                {console.log(authUser.email)}
                 <PermanentDrawerLeft />
             </div> )}
             </AuthUserContext.Consumer>

@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import SignOutButton from './SignOutButton';
 import { withStyles } from "@material-ui/core/styles";
+import Link from '@material-ui/core/Link'
 
 const drawerWidth = 240;
 
@@ -35,7 +36,8 @@ class TopBar extends Component{
         this.setState({ anchorEl: event.currentTarget });
       };
     
-      handleClose = () => {
+      handleClose = (event) => {
+        event.target.outerText==='Profile' && this.props.changeTab(event)
         this.setState({ anchorEl: null });
       };
     
@@ -54,6 +56,9 @@ class TopBar extends Component{
         return(
         <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
+            <IconButton component={Link} to="/home" className={classes.menuButton} color="inherit">
+              <HomeIcon />
+            </IconButton>
             <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
                 Place for tittle
             </Typography>
@@ -81,7 +86,7 @@ class TopBar extends Component{
                 onClose={this.handleClose}
                 className={classes.userMenu}
                 >
-                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                    <MenuItem name="profile" onClick={event => this.handleClose(event)}>Profile</MenuItem>
                     <SignOutButton />
                 </Menu>
             </div>
