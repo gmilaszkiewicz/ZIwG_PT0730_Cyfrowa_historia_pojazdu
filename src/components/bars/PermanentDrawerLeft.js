@@ -16,7 +16,6 @@ import { StyledCarList } from "../car/CarList";
 import TopBar from "./TopBar"
 import Button from '@material-ui/core/Button'
 
-
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -53,29 +52,12 @@ const styles = theme => ({
 
 class PermanentDrawerLeft extends Component {
 
-  constructor(){
-    super()
-    this.state = {
-      choosenTab: 0
-    }
-  }
-
-  handleChangeTab = (event, index) => {
-    if(event.target.outerText==='Profile'){
-      index = 5
-    }
-    this.setState({
-      choosenTab: index
-    })
-  }
-
   render(){
 
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
-        <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} authUser={this.props.authUser}/>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -94,9 +76,9 @@ class PermanentDrawerLeft extends Component {
                 component={Link} 
                 key={route.name} 
                 to={routes[index].path} 
-                selected={this.state.choosenTab === index}
+                selected={this.props.choosenTab === index}
                 className={classes.selectedListItem}
-                onClick={event => this.handleChangeTab(event, index)}>
+                onClick={event => this.props.changeTab(event, index)}>
                   <ListItemIcon className={classes.listItemIcon}>
                     {route.icon()}
                   </ListItemIcon>
@@ -106,11 +88,11 @@ class PermanentDrawerLeft extends Component {
           </List>
         </Drawer>
         <main className={classes.content}>
-          <div className={classes.toolbar} />
-          {routes.map((route, index) => (
-            (this.state.choosenTab === index) && route.main(this.props.authUser)
-          ))}
-        </main>
+                <div className={classes.toolbar} />
+                {routes.map((route, index) => (
+                (this.props.choosenTab === index) && route.main(this.props.authUser)
+                ))}
+          </main>
       </div>
     );}
 }
