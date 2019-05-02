@@ -4,22 +4,38 @@ import { StyledCarCard as CarCard } from "./CarCard";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { initialValues } from "./../../InitialValues";
+import { withFirebase } from "../../config/firebase/context";
+import { compose } from 'recompose';
 
 export class CarList extends Component {
-  componentDidMount() {
-    this.carList = initialValues.cars;
-  }
-  state = {};
 
-  carList = initialValues.cars;
+  constructor(){
+    super()
+    this.state = {
+      carList: []
+    }
+  }
+
+  componentDidMount() {
+    this.props.firebase.userCars().on('value', snapshot => {
+      let cars = []
+      Object.values(snapshot.val().cars).forEach((object) => {cars.push(object);})
+      this.setState({
+      carList: cars
+      })
+  })}
+
+  componentWillUnmount() {
+    this.props.firebase.userCars().off();
+  }
 
   render() {
     return (
       <div className={this.props.className}>
         <GridList cellHeight={200} className="grid-list" cols={3} spacing={10} padding={1}>
-          {this.carList.map((car, index) => (
+          {this.state.carList.map((car, index) => (
             <GridListTile key={index}>
-              <CarCard vin={car.vin} name={car.name} />
+              <CarCard vin={car.VIN} name={car.name} />
             </GridListTile>
           ))}
         </GridList>
@@ -28,7 +44,7 @@ export class CarList extends Component {
   }
 }
 
-export const StyledCarList = styled(CarList)`
+const StyledCarList = compose(withFirebase)(styled(CarList)`
   display: "flex";
   flex-wrap: "wrap";
   justify-content: "space-around";
@@ -39,4 +55,7 @@ export const StyledCarList = styled(CarList)`
   .icon {
     color: "rgba(255, 255, 255, 0.54)";
   }
-`;
+`);
+
+
+export {StyledCarList}

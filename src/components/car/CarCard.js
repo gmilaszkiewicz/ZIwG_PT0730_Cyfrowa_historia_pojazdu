@@ -20,10 +20,10 @@ export const CarCard = ({ className, name, vin }) => {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="secondary">
             Dodaj Naprawę
           </Button>
-          <Button size="small" color="primary">
+          <Button size="small" color="secondary">
             Dodaj Ulepszenie
           </Button>
         </CardActions>

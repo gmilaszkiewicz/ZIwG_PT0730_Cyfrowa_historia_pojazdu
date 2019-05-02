@@ -6,6 +6,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import Typography from '@material-ui/core/Typography'
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
@@ -37,6 +38,16 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3
+  },
+  selectedListItem:{
+  },
+  list:{
+    '&$selected': { 
+      backgroundColor: theme.palette.action.selected, 
+    },
+  },
+  listItemIcon:{
+    color: 'white',
   }
 });
 
@@ -64,7 +75,7 @@ class PermanentDrawerLeft extends Component {
 
     return (
       <div className={classes.root}>
-        <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab}/>
+        <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} authUser={this.props.authUser}/>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -76,7 +87,7 @@ class PermanentDrawerLeft extends Component {
         >
           <div className={classes.toolbar} />
           <Divider />
-          <List>
+          <List className={classes.list}>
             {routes.map((route, index) => (
                 route.visible && 
                 <ListItem 
@@ -84,11 +95,12 @@ class PermanentDrawerLeft extends Component {
                 key={route.name} 
                 to={routes[index].path} 
                 selected={this.state.choosenTab === index}
+                className={classes.selectedListItem}
                 onClick={event => this.handleChangeTab(event, index)}>
-                  <ListItemIcon>
+                  <ListItemIcon className={classes.listItemIcon}>
                     {route.icon()}
                   </ListItemIcon>
-                  <ListItemText primary={route.name} />
+                  <ListItemText primary={<Typography type="body1" style={{ color: 'white' }}>{route.name}</Typography>} />
                 </ListItem>
             ))}
           </List>
@@ -96,7 +108,7 @@ class PermanentDrawerLeft extends Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           {routes.map((route, index) => (
-            (this.state.choosenTab === index) && route.main()
+            (this.state.choosenTab === index) && route.main(this.props.authUser)
           ))}
         </main>
       </div>

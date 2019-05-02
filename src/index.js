@@ -13,7 +13,8 @@ import { grey } from '@material-ui/core/colors';
 
 const muiTheme = createMuiTheme({
     palette:{
-        primary: {
+      type: 'dark',
+          primary: {
             main: '#212121'
           },
           secondary: {
@@ -33,6 +34,16 @@ const muiTheme = createMuiTheme({
           main: grey[50]
       }
     },
+    overrides: {
+      MuiListItem: {
+
+       root: {
+         '&$selected': {
+           backgroundColor: 'white',
+         },
+        }
+      }
+    }
 })
 
 ReactDOM.render(

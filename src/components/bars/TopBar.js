@@ -20,9 +20,18 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1,
+    padding: 10
+
   },
   userMenu: {
     zIndex: theme.zIndex.appbar + 1
+  },
+  userInfo:{
+    display: 'flex',
+    flexDirection: 'row'
+  }, 
+  toolbar:{
+    paddingLeft:0
   }
 });
 
@@ -55,14 +64,17 @@ class TopBar extends Component{
 
         return(
         <AppBar position="fixed" className={classes.appBar}>
-            <Toolbar>
+            <Toolbar className={classes.toolbar}>
             <IconButton component={Link} to="/home" className={classes.menuButton} color="inherit">
               <HomeIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
                 Place for tittle
             </Typography>
-            <div>
+            <div className={classes.userInfo}>
+                <Typography variant="body1" color="inherit" noWrap className={classes.grow}>
+                    {this.props.authUser.email}
+                </Typography>
                 <IconButton
                 aria-owns={open ? 'menu-appbar' : undefined}
                 aria-haspopup="true"

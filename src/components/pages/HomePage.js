@@ -10,7 +10,7 @@ class HomePage extends Component{
                 {authUser => (
             <div>
                 {/* <TopBar /> */}
-                <PermanentDrawerLeft />
+                <PermanentDrawerLeft authUser={authUser}/>
             </div> )}
             </AuthUserContext.Consumer>
         );

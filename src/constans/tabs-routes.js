@@ -9,7 +9,7 @@ export const routes = [
     visible: true,
     icon: () => <InboxIcon />,
     sidebar: () => <CarList />,
-    main: () => <CarList />,
+    main: (authUser) => <CarList authUser={authUser} />,
     name: "Show my cars"
   },
   {

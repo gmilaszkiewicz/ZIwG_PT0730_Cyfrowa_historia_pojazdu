@@ -64,7 +64,7 @@ class LoginForm extends Component{
 
     handleRole = (event, role) =>{
         this.setState({
-            role
+            role: role
         })
     }
 

@@ -1,4 +1,5 @@
 import app from 'firebase/app';
+import 'firebase/database';
 import 'firebase/auth';
 
 const config = {
@@ -15,6 +16,7 @@ class Firebase {
     app.initializeApp(config);
 
     this.auth = app.auth();
+    this.db = app.database();
   }
 
   // *** Auth API ***
@@ -31,6 +33,12 @@ class Firebase {
 
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
+
+  // *** Car API ***
+
+  user = uid => this.db.ref(`usersdata/${uid}`);
+
+  userCars = () => this.db.ref('users/VWiS9gIe44WK3FchSydYT1XMWu12');
 
 }
 
