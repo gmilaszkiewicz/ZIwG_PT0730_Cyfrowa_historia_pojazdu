@@ -3,8 +3,14 @@ import PermanentDrawerLeft from "../bars/PermanentDrawerLeft";
 import { withAuthorization, AuthUserContext } from '../session'
 import TopBar from './../bars/TopBar'
 import PageContent from './../content/PageContent'
+import styled from 'styled-components';
 
 const drawerWidth = 240;
+
+const StyledDiv = styled.div`
+    display: flex;
+    flex-grow: 1;
+`
 
 class HomePage extends Component{
 
@@ -28,11 +34,11 @@ class HomePage extends Component{
         return(
             <AuthUserContext.Consumer>
                 {authUser => (
-            <div>
+            <StyledDiv>
                 <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} authUser={authUser}/>
                 <PermanentDrawerLeft authUser={authUser} drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} choosenTab={this.state.choosenTab}/>
-                {/* <PageContent choosenTab={this.state.choosenTab}/> */}
-            </div> )}
+                <PageContent choosenTab={this.state.choosenTab}/>
+            </StyledDiv> )}
             </AuthUserContext.Consumer>
         );
     }

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { StyledCarCard as CarCard } from "./CarCard";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import { initialValues } from "./../../InitialValues";
 import { withFirebase } from "../../config/firebase/context";
 import { compose } from 'recompose';
 

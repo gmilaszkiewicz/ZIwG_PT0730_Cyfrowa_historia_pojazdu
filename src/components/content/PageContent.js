@@ -12,7 +12,8 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing.unit * 3
-    }
+    },
+    toolbar: theme.mixins.toolbar,
 })
 
 class PageContent extends Component{
@@ -23,7 +24,6 @@ class PageContent extends Component{
         return(
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                {console.log(this.props)}
                 {routes.map((route, index) => (
                 (this.props.choosenTab === index) && route.main(this.props.authUser)
                 ))}
@@ -32,4 +32,4 @@ class PageContent extends Component{
     }
 }
 
-export default (withStyles)(PageContent)
+export default withStyles(styles)(PageContent)

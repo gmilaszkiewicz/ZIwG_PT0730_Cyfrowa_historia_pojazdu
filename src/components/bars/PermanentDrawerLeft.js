@@ -8,13 +8,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Typography from '@material-ui/core/Typography'
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { routes } from "../../constans/tabs-routes";
-import { StyledCarList } from "../car/CarList";
-import TopBar from "./TopBar"
-import Button from '@material-ui/core/Button'
 
 const drawerWidth = 240;
 
@@ -57,7 +52,7 @@ class PermanentDrawerLeft extends Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      // <div className={classes.root}>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -87,13 +82,7 @@ class PermanentDrawerLeft extends Component {
             ))}
           </List>
         </Drawer>
-        <main className={classes.content}>
-                <div className={classes.toolbar} />
-                {routes.map((route, index) => (
-                (this.props.choosenTab === index) && route.main(this.props.authUser)
-                ))}
-          </main>
-      </div>
+      // </div>
     );}
 }
 

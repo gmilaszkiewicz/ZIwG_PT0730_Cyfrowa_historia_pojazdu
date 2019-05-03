@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import LoginPage from "./components/pages/LoginPage";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import HomePage from "./components/pages/HomePage";
-import { StyledCarList as CarList } from "./components/car/CarList";
 import {BrowserRouter} from 'react-router-dom'
 import { withAuthentication } from "./components/session"
 import * as ROUTES from './constans/routes'
