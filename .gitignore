@@ -29,3 +29,5 @@ yarn-error.log*
 *.pdf
 *.gz
 *.toc
+*.xlsx
+docs/wykres_gantta.png
