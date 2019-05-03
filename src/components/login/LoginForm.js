@@ -91,7 +91,6 @@ class LoginForm extends Component{
                     this.props.firebase
                     .doSignInWithEmailAndPassword(values.email, values.password)
                     .then(() => {
-                        // console.log(values)
                         // this.setState({ ...INITIAL_STATE });
                         this.props.history.push(ROUTES.HOME);
                         console.log("success logged")
