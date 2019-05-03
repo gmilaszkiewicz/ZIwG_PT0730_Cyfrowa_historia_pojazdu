@@ -40,6 +40,10 @@ class Firebase {
 
   userCars = () => this.db.ref('users/VWiS9gIe44WK3FchSydYT1XMWu12');
 
+  fixCategories = () => this.db.ref('fixCategories');
+
+  damageCategories =  () => this.db.ref('damageCategories');
+
 }
 
 export default Firebase;

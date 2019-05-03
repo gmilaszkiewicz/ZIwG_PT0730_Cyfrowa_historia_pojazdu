@@ -6,8 +6,12 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import AddFixForm from './AddFixForm'
-import AddUpgradeForm from './AddUpgradeForm'
+import FixesForm from './FixesForm'
+
+
+const StyledCardAction = styled(CardActions)`
+  justify-content: space-around;
+`;
 
 export class CarCard extends Component {
 
@@ -49,34 +53,29 @@ export class CarCard extends Component {
     }))
   }
 
-  hadnleClick = () =>{
-    console.log("something")
-  }
-
   render(){
+    
     return (
-      <div>
-        <Card className="card">
+        <Card>
           <CardActionArea>
             <CardContent onClick={this.handleClick} >
-              <Typography gutterBottom variant="h5" component="h2">
+              <Typography gutterBottom variant="h5" component="h2" color="secondary">
                 {this.props.name}
               </Typography>
-              <Typography component="p">{this.props.vin}</Typography>
+              <Typography component="p" color="secondary">{this.props.vin}</Typography>
             </CardContent>
           </CardActionArea>
-          <CardActions>
+          <StyledCardAction>
             <Button size="small" color="secondary" onClick={this.handleOpenFixForm} >
               Dodaj Naprawę
             </Button>
             <Button size="small" color="secondary" onClick={this.handleOpenUpgradeForm}>
               Dodaj Ulepszenie
             </Button>
-          </CardActions>
+          </StyledCardAction>
+          {this.state.addFixIsOpened && <FixesForm category="Fix" isOpened={this.state.addFixIsOpened} handleOnClose={this.handleCloseAddFixForm} /> }
+          {this.state.addUpgradeIsOpend && <FixesForm category="Damage" isOpened={this.state.addUpgradeIsOpend} handleOnClose={this.handleCloseAddUpgradeForm} /> }
         </Card>
-        {this.state.addFixIsOpened && <AddFixForm isOpened={this.state.addFixIsOpened} handleOnClose={this.handleCloseAddFixForm} /> }
-        {this.state.addUpgradeIsOpend && <AddUpgradeForm isOpened={this.state.addUpgradeIsOpend} handleOnClose={this.handleCloseAddUpgradeForm} /> }
-      </div>
     );
   }
 };
