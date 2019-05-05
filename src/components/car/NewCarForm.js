@@ -1,11 +1,25 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
-import { Grid, Button, Divider, TextField } from "@material-ui/core";
+import { Grid, Button, Divider, TextField, Paper } from "@material-ui/core";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
+import { DropzoneArea } from "material-ui-dropzone";
+
+const StyledTextField = styled(TextField)`
+  width: 400px;
+  notchedoutline: {
+  }
+`;
+const StyledButton = styled(Button)`
+  width: 60px;
+`;
+
+const StyledDatePicker = styled(DatePicker)`
+  width: 400px;
+`;
 
 export class NewCarForm extends Component {
   saveCar = values => {
@@ -16,7 +30,6 @@ export class NewCarForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className={this.props.className}>
         <Formik
@@ -25,7 +38,7 @@ export class NewCarForm extends Component {
             name: "",
             Vin: "",
             registerNumber: "",
-            registerTime: ""
+            registerTime: new Date()
           }}
           onSubmit={values => {
             setTimeout(() => {
@@ -35,49 +48,38 @@ export class NewCarForm extends Component {
           render={props => (
             <Form>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid
-                  container
-                  direction="column"
-                  spacing={10}
-                  justify="center"
-                >
-                  <Grid item>
+                <Grid container spacing={20}>
+                  <Grid item xs>
                     <Field
-                      name="carName"
-                      component={TextField}
-                      id="carName"
+                      name="name"
+                      component={StyledTextField}
+                      id="name"
                       label="Car Name"
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
                     />
-                  </Grid>
-                  <Grid item>
                     <Field
-                      name="vin"
-                      component={TextField}
-                      id="vin"
+                      name="Vin"
+                      component={StyledTextField}
+                      id="Vin"
                       label="Vin"
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
                     />
-                  </Grid>
-                  <Grid item>
                     <Field
                       name="registerNumber"
-                      component={TextField}
+                      component={StyledTextField}
                       id="registerNumber"
                       label="Register Number"
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
                     />
-                  </Grid>
-                  <Grid item>
                     <Field
                       name="registerTime"
-                      component={DatePicker}
+                      component={StyledDatePicker}
                       id="registerTime"
                       label="Register Time"
                       margin="normal"
@@ -85,16 +87,17 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
-                  </Grid>
-                  <Grid item>
-                    <Button type="submit" variant="contained" color="primary">
+                    <StyledButton
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                    >
                       Save
-                    </Button>
+                    </StyledButton>
                   </Grid>
-                  <Grid item>
-                    <Divider variant="middle" />
+                  <Grid item xs>
+                    <DropzoneArea />
                   </Grid>
-                  <Grid />
                 </Grid>
               </MuiPickersUtilsProvider>
             </Form>
@@ -106,4 +109,8 @@ export class NewCarForm extends Component {
 }
 
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
-export const StyledNewCarForm = styled(composedNewCarForm)``;
+export const StyledNewCarForm = styled(composedNewCarForm)`
+  padding-left: 20%;
+  padding-top: 70px;
+  padding-right: 15%;
+`;
