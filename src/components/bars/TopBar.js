@@ -51,7 +51,6 @@ class TopBar extends Component{
       };
     
       handlelogOut = ({ firebase }) => {
-        console.log(firebase)
         firebase.doSignOut();
         this.handleClose();
       }

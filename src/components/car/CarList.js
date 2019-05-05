@@ -19,6 +19,7 @@ export class CarList extends Component {
     this.props.firebase.userCars().on('value', snapshot => {
       let cars = []
       Object.values(snapshot.val().cars).forEach((object) => {cars.push(object);})
+      
       this.setState({
       carList: cars
       })
