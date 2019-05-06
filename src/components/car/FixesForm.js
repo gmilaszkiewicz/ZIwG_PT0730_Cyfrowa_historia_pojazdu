@@ -62,11 +62,29 @@ class AddFixForm extends Component{
 
       componentDidMount() {
         const categoryName = this.props.category.toLowerCase() + "Categories";
-        this.props.firebase.fixCategories().on('value', snapshot => {
-          this.setState({
-          fixCategories: snapshot.val()
-          })
-      })}
+        if(categoryName === "fixCategories"){
+          this.props.firebase.fixCategories().on('value', snapshot => {
+            this.setState(prevState => ({
+            ...prevState,
+            fixCategories: snapshot.val(),
+            fixCategory: snapshot.val()[1] // nie wiem czemu pierwsza komorka snapshot jest pusta ... 
+          }))
+        })
+        }else if(categoryName === "damageCategories"){
+          this.props.firebase.damageCategories().on('value', snapshot => {
+            this.setState(prevState => ({
+            ...prevState,
+            damageCategories: snapshot.val(),
+            fixCategory: snapshot.val()[1]
+            }))
+        })
+        }
+    }
+
+    componentWillUnmount() {
+      this.props.firebase.fixCategories().off();
+      this.props.firebase.damageCategories().off();
+    }
 
       handleChange = prop => event => {
         this.setState({ [prop]: event.target.value });
@@ -103,22 +121,19 @@ class AddFixForm extends Component{
                           value={this.state.fixCategory}
                           onChange={this.handleChange('fixCategory')}
                           className={classNames(classes.margin, classes.selector)}
-                          input={
-                            <OutlinedInput
-                              labelWidth={30}
-                              name="Categories:"
-                            />
-                          }
+                          input={<OutlinedInput labelWidth={0} />}
                         >
-                          {this.state.fixCategories.map((category) => (
-                            <MenuItem key={category} value={category}>{category}</MenuItem>
-                          ))}
+                        {
+                          (this.props.category==="Fix")?(this.state.fixCategories.map((category) => (
+                            <MenuItem key={category} value={category}>{category}</MenuItem>))):(this.state.damageCategories.map((category) => (
+                            <MenuItem key={category} value={category}>{category}</MenuItem>)))
+                        }
                         </Select>
                           </div>
-                        <Grid container justify="space-between">
+                        <Grid container direction="row">
                         <Grid item xs={6} className={classes.comp} >
                           <TextField
-                            label={this.props.category.toLowerCase() + " name"}
+                            label={this.props.category + " name"}
                             className={classNames(classes.margin, classes.textField)}
                             margin="normal"
                             value={this.state.fixName}

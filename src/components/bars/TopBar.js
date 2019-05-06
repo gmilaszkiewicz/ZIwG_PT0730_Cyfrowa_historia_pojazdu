@@ -12,6 +12,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link'
 
 const drawerWidth = 240;
+const title = "Cyfrowa historia pojazdów";
 
 const styles = theme => ({
   appBar: {
@@ -69,7 +70,7 @@ class TopBar extends Component{
               <HomeIcon />
             </IconButton>
             <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
-                Place for tittle
+                {title}
             </Typography>
             <div className={classes.userInfo}>
                 <Typography variant="body1" color="inherit" noWrap className={classes.grow}>

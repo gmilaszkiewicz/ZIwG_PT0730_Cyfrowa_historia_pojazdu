@@ -26,19 +26,42 @@ const muiTheme = createMuiTheme({
               main: grey[50]
           }
     },
+
     typography: {
+      root:{
+        color: grey[50]
+      },
       useNextVariants: true,
       primary:{
           main: grey[50]
       }
     },
     overrides: {
+      MuiTypography:{
+        alignCenter:{
+          color: "white"
+        }
+      },
+      MuiButton:{
+        textPrimary:{
+            color: "white",
+          }
+      },
       MuiListItem: {
 
        root: {
+         color:"white",
          '&$selected': {
-           backgroundColor: 'white',
+          //  backgroundColor: '#9e9e9e',
          },
+        }
+      },
+      MuiInputLabel: { // Name of the component ⚛️ / style sheet
+        root: { // Name of the rule
+          color: "white",
+          "&$focused": { // increase the specificity for the pseudo class
+            color: "white"
+          }
         }
       }
     }
