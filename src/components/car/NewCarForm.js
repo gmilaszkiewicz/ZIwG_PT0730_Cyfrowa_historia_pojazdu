@@ -22,6 +22,9 @@ const StyledDatePicker = styled(DatePicker)`
 `;
 
 export class NewCarForm extends Component {
+  state = {
+    images: []
+  };
   saveCar = values => {
     this.props.firebase
       .addCar()
@@ -29,7 +32,17 @@ export class NewCarForm extends Component {
       .set(values);
   };
 
+  handleDropZoneChange = files => {
+    let imagesInBase64 = [];
+    let image2base64 = require("image-to-base64");
+    files.map(file => {
+      image2base64(file).then(image => imagesInBase64.push(image));
+    });
+    this.setState({ images: imagesInBase64 });
+  };
+
   render() {
+    console.log(this.state);
     return (
       <div className={this.props.className}>
         <Formik
@@ -96,7 +109,7 @@ export class NewCarForm extends Component {
                     </StyledButton>
                   </Grid>
                   <Grid item xs>
-                    <DropzoneArea />
+                    <DropzoneArea onChange={this.handleDropZoneChange} />
                   </Grid>
                 </Grid>
               </MuiPickersUtilsProvider>
