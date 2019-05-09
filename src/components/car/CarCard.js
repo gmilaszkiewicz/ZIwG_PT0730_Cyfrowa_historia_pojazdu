@@ -53,6 +53,10 @@ export class CarCard extends Component {
     }))
   }
 
+  handleClick = (event) => {
+    
+  }
+
   render(){
     
     return (

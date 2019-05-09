@@ -14,6 +14,8 @@ import Button from '@material-ui/core/Button'
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { compose } from 'recompose';
 import { withFirebase } from "../../config/firebase/context";
+import 'filepond/dist/filepond.min.css';
+import { FilePond, File, registerPlugin } from 'react-filepond'
 
 const styles = theme => ({
     root: {
@@ -44,6 +46,21 @@ const styles = theme => ({
     },
     comp:{
       alignItems: 'center'
+    },
+    pond:{
+      
+      '& .react-fine-uploader-gallery-dropzone': {
+        minHeight: 50
+      },
+      '& .react-fine-uploader-gallery-file-input-container': {
+        width: 140
+      },
+      '& .react-fine-uploader-gallery-dropzone-content': {
+        width: 'unset',
+        left: 'unset',
+        top: '20%',
+        right: '10%'
+      }
     }
   });
 
@@ -58,6 +75,7 @@ class AddFixForm extends Component{
         description: '',
         fixCategories: [],
         damageCategories: [],
+        files: []
       };
 
       componentDidMount() {
@@ -97,7 +115,7 @@ class AddFixForm extends Component{
     render(){
 
         const { classes } = this.props;
-         
+
         return(
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Dialog open={this.props.isOpened}  onClose={this.props.handleOnClose}>
@@ -140,14 +158,6 @@ class AddFixForm extends Component{
                             onChange={this.handleChange('fixName')}
                             variant="outlined"
                           />
-                          <TextField
-                          id="standard-dense"
-                          label="Price"
-                          value={this.state.price}
-                          onChange={this.handleChange('price')}
-                          className={classNames(classes.textField, classes.dense, classes.margin)}
-                          margin="dense"
-                          />
 
                           <DatePicker
                           margin="normal"
@@ -156,6 +166,16 @@ class AddFixForm extends Component{
                           value={this.state.selectedDate}
                           onChange={this.handleDateChange}
                           />
+                          <div className={classes.pond}>
+                          <FilePond
+                            className={classes.pond}
+                            files={this.state.files}
+                            allowMultiple={true}
+                            maxFiles={2}
+                            // onupdatefiles={setFiles}
+                            labelIdle='Browse files'
+                          />
+                          </div>
                           </Grid>
                           <Grid item xs={6}>
 
@@ -169,6 +189,14 @@ class AddFixForm extends Component{
                           InputProps={{
                               endAdornment: <InputAdornment position="start">KM</InputAdornment>,
                           }}
+                          />
+                          <TextField
+                          id="standard-dense"
+                          label="Price"
+                          value={this.state.price}
+                          onChange={this.handleChange('price')}
+                          className={classNames(classes.textField, classes.dense, classes.margin)}
+                          margin="dense"
                           />
                           
                         <TextField
