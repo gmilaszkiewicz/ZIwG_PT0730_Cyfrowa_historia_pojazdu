@@ -7,6 +7,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
+import { promised } from "q";
 
 const StyledTextField = styled(TextField)`
   width: 400px;
@@ -26,23 +27,27 @@ export class NewCarForm extends Component {
     images: []
   };
   saveCar = values => {
+    console.log(values);
     this.props.firebase
       .addCar()
       .push()
       .set(values);
   };
 
-  handleDropZoneChange = files => {
+  handleDropZoneChange = (files, setFieldValue) => {
+    this.setState({ images: files });
     let imagesInBase64 = [];
     let image2base64 = require("image-to-base64");
+    let formikImages = "";
     files.map(file => {
-      image2base64(file).then(image => imagesInBase64.push(image));
+      image2base64(file).then(image => {
+        imagesInBase64.push(image.concat(";"));
+      });
     });
-    this.setState({ images: imagesInBase64 });
+    Promise.all(files).then(console.log(imagesInBase64));
   };
 
   render() {
-    console.log(this.state);
     return (
       <div className={this.props.className}>
         <Formik
@@ -51,6 +56,7 @@ export class NewCarForm extends Component {
             name: "",
             Vin: "",
             registerNumber: "",
+            photos: "",
             registerTime: new Date()
           }}
           onSubmit={values => {
@@ -60,6 +66,7 @@ export class NewCarForm extends Component {
           }}
           render={props => (
             <Form>
+              {console.log(props)}
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container spacing={20}>
                   <Grid item xs>
@@ -109,7 +116,11 @@ export class NewCarForm extends Component {
                     </StyledButton>
                   </Grid>
                   <Grid item xs>
-                    <DropzoneArea onChange={this.handleDropZoneChange} />
+                    <DropzoneArea
+                      onChange={value =>
+                        this.handleDropZoneChange(value, props.setFieldValue)
+                      }
+                    />
                   </Grid>
                 </Grid>
               </MuiPickersUtilsProvider>
