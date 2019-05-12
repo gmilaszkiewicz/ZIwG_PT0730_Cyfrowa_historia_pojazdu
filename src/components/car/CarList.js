@@ -22,7 +22,6 @@ export class CarList extends Component {
       });
       this.groupImages(cars);
       this.setState({ carList: cars });
-      console.log(this.state)
     });
   }
   groupImages = cars => {
@@ -42,7 +41,7 @@ export class CarList extends Component {
     return (
       <div className={this.props.className}>
         <GridList
-          cellHeight={200}
+          cellHeight={350}
           className="grid-list"
           cols={3}
           spacing={10}

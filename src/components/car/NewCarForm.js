@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
-import { Grid, Button, Divider, TextField, Paper } from "@material-ui/core";
+import { Grid, Button, TextField } from "@material-ui/core";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
@@ -14,7 +14,7 @@ const StyledTextField = styled(TextField)`
   }
 `;
 const StyledButton = styled(Button)`
-  width: 60px;
+  width: 200px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
@@ -65,7 +65,7 @@ export class NewCarForm extends Component {
           enableReinitialize={false}
           initialValues={{
             name: "",
-            Vin: "",
+            VIN: "",
             registerNumber: "",
             photos: "",
             registerTime: new Date()
@@ -78,7 +78,7 @@ export class NewCarForm extends Component {
           render={props => (
             <Form>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container spacing={20}>
+                <Grid container spacing={10}>
                   <Grid item xs>
                     <Field
                       name="name"

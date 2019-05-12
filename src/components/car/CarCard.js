@@ -53,13 +53,18 @@ export class CarCard extends Component {
   };
 
   render() {
-    const { images, name, vin } = this.props;
-    console.log(images[0]);
+    const { images, name, vin, className } = this.props;
     return (
-      <Card>
+      <Card className={className}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {images.length > 0 && <img src={images[0]} />}
+            {images.length > 0 && (
+              <CardMedia
+                className="media"
+                image={images[0]}
+                title="Contemplative Reptile"
+              />
+            )}
             <Typography
               gutterBottom
               variant="h5"
@@ -110,6 +115,9 @@ export class CarCard extends Component {
 
 export const StyledCarCard = styled(CarCard)`
   .media {
-    height: 145px;
+    height: 200px;
+  }
+  .image {
+    width: 100px;
   }
 `;
