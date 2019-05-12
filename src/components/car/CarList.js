@@ -22,15 +22,14 @@ export class CarList extends Component {
       });
       this.groupImages(cars);
       this.setState({ carList: cars });
-      console.log(cars);
+      console.log(this.state)
     });
   }
   groupImages = cars => {
     let arrayOfImages = [];
-    console.log("TCL: CarList -> arrayOfImages", arrayOfImages);
     cars.forEach((car, index) => {
       arrayOfImages = [];
-      if (car.photos) arrayOfImages = car.photos.split(";");
+      if (car.photos) arrayOfImages = car.photos.split("&&&");
       car.photos = arrayOfImages;
     });
   };

@@ -54,14 +54,12 @@ export class CarCard extends Component {
 
   render() {
     const { images, name, vin } = this.props;
-    images.length > 0 && console.log(images[0]);
+    console.log(images[0]);
     return (
       <Card>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {images.length > 0 && (
-              <img src={`data:image/png;base64, ${images[0]}`} />
-            )}
+            {images.length > 0 && <img src={images[0]} />}
             <Typography
               gutterBottom
               variant="h5"

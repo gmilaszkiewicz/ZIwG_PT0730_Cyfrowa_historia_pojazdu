@@ -24,11 +24,10 @@ const StyledDatePicker = styled(DatePicker)`
 export class NewCarForm extends Component {
   state = {
     images: [],
-    imagesInBase64: "",
-    testState: ""
+    imagesInBase64: ""
   };
+
   saveCar = values => {
-    console.log(values);
     this.props.firebase
       .addCar()
       .push()
@@ -36,25 +35,28 @@ export class NewCarForm extends Component {
   };
 
   sleep = ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms)); //tymczasowe rozwiazanie xD
+  };
+  getBase64 = file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
   };
 
   handleDropZoneChange = async (files, setFieldValue) => {
     this.setState({ images: files });
     let imagesInBase64 = [];
-    let image2base64 = require("image-to-base64");
     files.map(file => {
-      image2base64(file).then(image => {
-        imagesInBase64.push(image.concat(";"));
-        console.log(image);
+      this.getBase64(file).then(image => {
+        imagesInBase64.push(image.concat("&&&"));
       });
     });
-    await this.sleep(400);
+    await this.sleep(400); //no niestety :(
     this.setState({ imagesInBase64: imagesInBase64.join() });
     setFieldValue("photos", imagesInBase64.join());
-  };
-  componentDidMount = () => {
-    console.log("mount");
   };
   render() {
     return (
@@ -75,8 +77,6 @@ export class NewCarForm extends Component {
           }}
           render={props => (
             <Form>
-              {console.log(props)}
-              {console.log(this.state)}
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container spacing={20}>
                   <Grid item xs>
