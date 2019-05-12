@@ -7,7 +7,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
-import { promised } from "q";
 
 const StyledTextField = styled(TextField)`
   width: 400px;
@@ -24,7 +23,9 @@ const StyledDatePicker = styled(DatePicker)`
 
 export class NewCarForm extends Component {
   state = {
-    images: []
+    images: [],
+    imagesInBase64: "",
+    testState: ""
   };
   saveCar = values => {
     console.log(values);
@@ -34,19 +35,26 @@ export class NewCarForm extends Component {
       .set(values);
   };
 
-  handleDropZoneChange = (files, setFieldValue) => {
+  sleep = ms => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  };
+
+  handleDropZoneChange = async (files, setFieldValue) => {
     this.setState({ images: files });
     let imagesInBase64 = [];
     let image2base64 = require("image-to-base64");
-    let formikImages = "";
     files.map(file => {
       image2base64(file).then(image => {
         imagesInBase64.push(image.concat(";"));
       });
     });
-    Promise.all(files).then(console.log(imagesInBase64));
+    await this.sleep(400);
+    this.setState({ imagesInBase64: imagesInBase64.join() });
+    this.setState({ testState: "test" });
   };
-
+  componentDidMount = () => {
+    console.log("mount");
+  };
   render() {
     return (
       <div className={this.props.className}>
@@ -67,6 +75,7 @@ export class NewCarForm extends Component {
           render={props => (
             <Form>
               {console.log(props)}
+              {console.log(this.state)}
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container spacing={20}>
                   <Grid item xs>
