@@ -4,26 +4,36 @@ import { StyledCarCard as CarCard } from "./CarCard";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { withFirebase } from "../../config/firebase/context";
-import { compose } from 'recompose';
+import { compose } from "recompose";
 
 export class CarList extends Component {
-
-  constructor(){
-    super()
+  constructor() {
+    super();
     this.state = {
       carList: []
-    }
+    };
   }
 
   componentDidMount() {
-    this.props.firebase.userCars().on('value', snapshot => {
-      let cars = []
-      Object.values(snapshot.val().cars).forEach((object) => {cars.push(object);})
-      
-      this.setState({
-      carList: cars
-      })
-  })}
+    this.props.firebase.userCars().on("value", snapshot => {
+      let cars = [];
+      Object.values(snapshot.val().cars).forEach(object => {
+        cars.push(object);
+      });
+      this.groupImages(cars);
+      this.setState({ carList: cars });
+      console.log(cars);
+    });
+  }
+  groupImages = cars => {
+    let arrayOfImages = [];
+    console.log("TCL: CarList -> arrayOfImages", arrayOfImages);
+    cars.forEach((car, index) => {
+      arrayOfImages = [];
+      if (car.photos) arrayOfImages = car.photos.split(";");
+      car.photos = arrayOfImages;
+    });
+  };
 
   componentWillUnmount() {
     this.props.firebase.userCars().off();
@@ -32,10 +42,16 @@ export class CarList extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <GridList cellHeight={200} className="grid-list" cols={3} spacing={10} padding={1}>
+        <GridList
+          cellHeight={200}
+          className="grid-list"
+          cols={3}
+          spacing={10}
+          padding={1}
+        >
           {this.state.carList.map((car, index) => (
             <GridListTile key={index}>
-              <CarCard vin={car.VIN} name={car.name} />
+              <CarCard vin={car.VIN} name={car.name} images={car.photos} />
             </GridListTile>
           ))}
         </GridList>
@@ -57,5 +73,4 @@ const StyledCarList = compose(withFirebase)(styled(CarList)`
   }
 `);
 
-
-export {StyledCarList}
+export { StyledCarList };

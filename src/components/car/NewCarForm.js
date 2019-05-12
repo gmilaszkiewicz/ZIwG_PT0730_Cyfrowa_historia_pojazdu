@@ -46,11 +46,12 @@ export class NewCarForm extends Component {
     files.map(file => {
       image2base64(file).then(image => {
         imagesInBase64.push(image.concat(";"));
+        console.log(image);
       });
     });
     await this.sleep(400);
     this.setState({ imagesInBase64: imagesInBase64.join() });
-    this.setState({ testState: "test" });
+    setFieldValue("photos", imagesInBase64.join());
   };
   componentDidMount = () => {
     console.log("mount");
@@ -59,7 +60,7 @@ export class NewCarForm extends Component {
     return (
       <div className={this.props.className}>
         <Formik
-          enableReinitialize
+          enableReinitialize={false}
           initialValues={{
             name: "",
             Vin: "",
