@@ -10,6 +10,7 @@ const drawerWidth = 240;
 const StyledDiv = styled.div`
     display: flex;
     flex-grow: 1;
+    min-height:1000px;
 `
 
 class HomePage extends Component{

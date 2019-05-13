@@ -1,6 +1,8 @@
 import { StyledCarList as CarList } from "../components/car/CarList";
 import React from "react";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
+import {StyledNewCarForm as  NewCarForm } from "./../components/car/NewCarForm";
+
 
 export const routes = [
   {
@@ -16,8 +18,8 @@ export const routes = [
     path: "#addcar",
     visible: true,
     icon: () => <InboxIcon />,
-    sidebar: () => <h2>Service</h2>,
-    main: () => <h2>Add car</h2>,
+    sidebar: () => <NewCarForm />,
+    main: (authUser, index) => <NewCarForm key={index} authUser={authUser} />,
     name: "Add car"
   },
   {
@@ -43,7 +45,7 @@ export const routes = [
     main: () => <h2>Add fixes</h2>,
     icon: () => <InboxIcon />,
     name: "Add fixes"
-  },  
+  },
   {
     path: "#profile",
     visible: false,
