@@ -52,11 +52,11 @@ const muiTheme = createMuiTheme({
        root: {
          color:"white",
          '&$selected': {
-          //  backgroundColor: '#9e9e9e',
+           backgroundColor: 'red',
          },
         }
       },
-      MuiInputLabel: { // Name of the component ⚛️ / style sheet
+      MuiInputLabel: { // Name of the component ?? / style sheet
         root: { // Name of the rule
           color: "white",
           "&$focused": { // increase the specificity for the pseudo class
@@ -64,6 +64,9 @@ const muiTheme = createMuiTheme({
           }
         }
       }
+    },
+    TextField:{
+      
     }
 })
 
