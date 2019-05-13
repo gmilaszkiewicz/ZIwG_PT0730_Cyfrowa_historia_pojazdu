@@ -25,30 +25,36 @@ const styles = theme => ({
       justifyContent: 'space-between',
     },
     margin: {
-      margin: theme.spacing(1),
+      margin: theme.spacing(2),
     },
     textField: {
       flexBasis: 300,
-      width: '250px',
+      width: '268px', 
+    },
+    input:{
+      color: "white",
+      "&$focused": {
+        color: "white"
+      }
     },
     button: {
-      margin: theme.spacing(1),
-      width:'250px',
+      margin: theme.spacing(2),
+      width:'268px',
     },
     selector:{
-      width: '430px',
+      width: '400px',
     },
     dense:{
-      width:'250px',
+      width:'268px',
     },
     picker:{
-      width:'250px',
+      width:'268px',
     },
     comp:{
       alignItems: 'center'
     },
     pond:{
-      
+      margin: theme.spacing(1),
       '& .react-fine-uploader-gallery-dropzone': {
         minHeight: 50
       },
@@ -154,6 +160,12 @@ class AddFixForm extends Component{
                             label={this.props.category + " name"}
                             className={classNames(classes.margin, classes.textField)}
                             margin="normal"
+                            InputProps={{
+                              className: classes.input
+                            }}
+                            InputLabelProps={{
+                              className: classes.input,
+                            }}
                             value={this.state.fixName}
                             onChange={this.handleChange('fixName')}
                             variant="outlined"
@@ -171,7 +183,7 @@ class AddFixForm extends Component{
                             className={classes.pond}
                             files={this.state.files}
                             allowMultiple={true}
-                            maxFiles={2}
+                            maxFiles={3}
                             // onupdatefiles={setFiles}
                             labelIdle='Browse files'
                           />
@@ -189,6 +201,9 @@ class AddFixForm extends Component{
                           InputProps={{
                               endAdornment: <InputAdornment position="start">KM</InputAdornment>,
                           }}
+                          InputLabelProps={{
+                            className: classes.input,
+                          }}
                           />
                           <TextField
                           id="standard-dense"
@@ -197,6 +212,12 @@ class AddFixForm extends Component{
                           onChange={this.handleChange('price')}
                           className={classNames(classes.textField, classes.dense, classes.margin)}
                           margin="dense"
+                          InputProps={{
+                            className: classes.input
+                          }}
+                          InputLabelProps={{
+                            className: classes.input,
+                          }}
                           />
                           
                         <TextField
@@ -208,6 +229,9 @@ class AddFixForm extends Component{
                           className={classNames(classes.margin, classes.textField)}
                           margin="normal"
                           variant="outlined"
+                          InputLabelProps={{
+                            className: classes.input,
+                          }}
                         />
                         <Button variant="contained" color="primary" className={classes.button}>
                           Accept

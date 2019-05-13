@@ -7,7 +7,7 @@ export default class CarServiceForm extends Component{
     render(){
         return(
             <div>
-                <Grid container direction="column" spacing={8} justify="center">
+                <Grid container direction="column" spacing={0} justify="center">
                 <Grid item>
                     <Field
                         name="name"
@@ -19,7 +19,7 @@ export default class CarServiceForm extends Component{
                         fullWidth
                     />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item>
                     <TextField
                         required
                         id="address1"
@@ -29,7 +29,7 @@ export default class CarServiceForm extends Component{
                         autoComplete="billing address-line1"
                     />
                 </Grid>
-                <Grid container spacing={16}>
+                <Grid container spacing={8}>
                     <Grid item xs={6}>
                         <TextField
                             required
@@ -38,7 +38,7 @@ export default class CarServiceForm extends Component{
                             label="City"
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item>
                         <TextField
                                 required
                                 id="zip"

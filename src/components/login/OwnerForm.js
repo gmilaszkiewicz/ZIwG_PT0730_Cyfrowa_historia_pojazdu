@@ -7,9 +7,9 @@ export default class OwnerForm extends Component{
     render(){
         return(
             <div>
-            <Grid container direction="column" spacing={8} justify="center">
-                <Grid container spacing={16}>
-                    <Grid item xs={6}>
+            <Grid container direction="column" spacing={0} justify="center">
+                <Grid container spacing={8}>
+                    <Grid item>
                         <Field
                             name="name" 
                             required
@@ -19,7 +19,7 @@ export default class OwnerForm extends Component{
                             margin="normal"
                         />
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item >
                         <Field
                             name="surname"
                             component={TextField}

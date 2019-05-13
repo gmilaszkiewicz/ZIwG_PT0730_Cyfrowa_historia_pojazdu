@@ -52,17 +52,12 @@ export class CarCard extends Component {
     }));
   };
 
-<<<<<<< HEAD
-  handleClick = (event) => {
+  handleClick = event => {
     
   }
 
-  render(){
-    
-=======
   render() {
     const { images, name, vin, className } = this.props;
->>>>>>> dev
     return (
       <Card className={className}>
         <CardActionArea>

@@ -6,12 +6,15 @@ import { withStyles } from "@material-ui/core/styles";
 const styles = theme => ({
     root: {
       display: "flex",
-      flexGrow: 1
+      flexGrow: 1,
     },
     content: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing(3)
+        padding: theme.spacing(3),
+        // backgroundImage: "url(https://wallpapercave.com/wp/WR4WVIP.jpg)",
+        // backgroundRepeat: "no-repeat",
+        // backgroundSize: "cover",
     },
     toolbar: theme.mixins.toolbar,
 })

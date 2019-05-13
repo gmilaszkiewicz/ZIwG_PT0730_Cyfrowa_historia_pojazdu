@@ -3,10 +3,15 @@ import {Dialog, Typography} from '@material-ui/core'
 import {Tab, Tabs} from '@material-ui/core'
 import OwnerForm from './OwnerForm';
 import CarServiceForm from './CarServiceForm'
+import { styled } from '@material-ui/styles';
+
+const StyledTab = styled(Tab)`
+    color: 'white';
+`;
 
 function TabContainer(props) {
     return (
-      <Typography component="div" style={{ padding: 24 }}>
+      <Typography component="div" style={{ padding: 24  }}>
         {props.children}
       </Typography>
     );
@@ -31,12 +36,12 @@ export default class RegisterForm extends Component{
                 <Tabs
                     value={this.state.numberOfTab}
                     onChange={this.handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
+                    indicatorColor="secondary"
+                    textColor="secondary"
                     variant="fullWidth"
                     >
-                    <Tab label="Owner" />
-                    <Tab label="Car service" />
+                    <StyledTab label="Owner" />
+                    <StyledTab label="Car service" />
                 </Tabs>
                 {this.state.numberOfTab===0 && (
                     <TabContainer>

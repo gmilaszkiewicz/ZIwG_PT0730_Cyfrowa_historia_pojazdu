@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
-import { Grid, Button, TextField } from "@material-ui/core";
+import { Grid, Button, TextField, InputLabel } from "@material-ui/core";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
@@ -11,14 +11,20 @@ import { DropzoneArea } from "material-ui-dropzone";
 const StyledTextField = styled(TextField)`
   width: 400px;
   notchedoutline: {
-  }
+    border-color:"black";
+  };
 `;
+
 const StyledButton = styled(Button)`
   width: 200px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
   width: 400px;
+`;
+
+const StyledInputLabel = styled(InputLabel)`
+  color: "black";
 `;
 
 export class NewCarForm extends Component {

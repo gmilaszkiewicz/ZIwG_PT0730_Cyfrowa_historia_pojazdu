@@ -27,15 +27,15 @@ const muiTheme = createMuiTheme({
           }
     },
 
-    typography: {
+    // typography: {
       root:{
         color: grey[50]
       },
-      useNextVariants: true,
-      primary:{
-          main: grey[50]
-      }
-    },
+    //   useNextVariants: true,
+    //   primary:{
+    //       main: grey[50]
+    //   }
+    // },
     overrides: {
       MuiTypography:{
         alignCenter:{
@@ -51,22 +51,33 @@ const muiTheme = createMuiTheme({
 
        root: {
          color:"white",
-         '&$selected': {
+         '&$selected:hover': {
            backgroundColor: 'red',
          },
+         '&$selected': {
+          backgroundColor: 'red',
+        },
         }
       },
       MuiInputLabel: { // Name of the component ?? / style sheet
         root: { // Name of the rule
           color: "white",
           "&$focused": { // increase the specificity for the pseudo class
-            color: "white"
+            color: "black"
           }
         }
       }
     },
-    TextField:{
-      
+    MuiOutlinedInput:{
+      root:{
+        borderColor: "black",
+        notchedOutline:{
+          borderColor: "black",
+        }
+      },
+      notchedOutline:{
+        borderColor: "black",
+      }
     }
 })
 

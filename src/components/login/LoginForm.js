@@ -100,7 +100,7 @@ class LoginForm extends Component{
                 render={props => (
                     <Form onSubmit={props.handleSubmit}>
                         <Field component={this.ToggleButtons} name="roles" />
-                        <Grid container direction="column" spacing={16} justify="center">
+                        <Grid container direction="column" spacing={2} justify="center">
                             <Grid item>
                                 <Field
                                     name="email" 
