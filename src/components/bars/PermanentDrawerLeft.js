@@ -10,6 +10,8 @@ import Typography from '@material-ui/core/Typography'
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 import { routes } from "../../constans/tabs-routes";
+import { connect } from "react-redux";
+import { chooseTab } from "./../../actions/index"
 
 const drawerWidth = 240;
 
@@ -45,6 +47,18 @@ const styles = theme => ({
   }
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    chooseTab: chosenTab => dispatch(chooseTab(chosenTab))
+  };
+}
+
+const mapStateToProps = state => {
+  return {
+      chosenTab: state.chosenTab
+  }
+}
+
 class PermanentDrawerLeft extends Component {
 
   render(){
@@ -71,9 +85,9 @@ class PermanentDrawerLeft extends Component {
                 component={Link} 
                 key={route.name} 
                 to={routes[index].path} 
-                selected={this.props.choosenTab === index}
+                selected={this.props.chosenTab === index}
                 className={classes.selectedListItem}
-                onClick={event => this.props.changeTab(event, index)}>
+                onClick={event => this.props.chooseTab(index)}>
                   <ListItemIcon className={classes.listItemIcon}>
                     {route.icon()}
                   </ListItemIcon>
@@ -90,4 +104,4 @@ PermanentDrawerLeft.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(PermanentDrawerLeft);
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(PermanentDrawerLeft));

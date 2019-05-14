@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { routes } from "../../constans/tabs-routes";
 import { withStyles } from "@material-ui/core/styles";
-
+import { connect } from "react-redux";
 
 const styles = theme => ({
     root: {
@@ -12,12 +12,15 @@ const styles = theme => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
         padding: theme.spacing(3),
-        // backgroundImage: "url(https://wallpapercave.com/wp/WR4WVIP.jpg)",
-        // backgroundRepeat: "no-repeat",
-        // backgroundSize: "cover",
     },
     toolbar: theme.mixins.toolbar,
 })
+
+const mapStateToProps = state => {
+    return {
+        chosenTab: state.chosenTab
+    }
+}
 
 class PageContent extends Component{
 
@@ -28,11 +31,11 @@ class PageContent extends Component{
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 {routes.map((route, index) => (
-                (this.props.choosenTab === index) && route.main(this.props.authUser, index)
+                (this.props.chosenTab === index) && route.main(this.props.authUser, index)
                 ))}
           </main>
         )
     }
 }
 
-export default withStyles(styles)(PageContent)
+export default connect(mapStateToProps)(withStyles(styles)(PageContent))

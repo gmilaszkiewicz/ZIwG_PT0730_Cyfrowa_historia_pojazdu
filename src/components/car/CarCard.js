@@ -8,10 +8,21 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FixesForm from "./FixesForm";
 import { CardMedia } from "@material-ui/core";
+import { connect } from "react-redux";
+import { chooseTab, chooseCar } from "./../../actions/index"
+
+const carInfoIndex = 6
 
 const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
 `;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    chooseTab: chosenTab => dispatch(chooseTab(chosenTab)),
+    chooseCar: chosenCar => dispatch(chooseCar(chosenCar))
+  };
+}
 
 export class CarCard extends Component {
   constructor() {
@@ -53,7 +64,8 @@ export class CarCard extends Component {
   };
 
   handleClick = event => {
-    
+    this.props.chooseTab(carInfoIndex)
+    this.props.chooseCar(this.props.car)
   }
 
   render() {
@@ -117,7 +129,7 @@ export class CarCard extends Component {
   }
 }
 
-export const StyledCarCard = styled(CarCard)`
+export const StyledCarCard = styled(connect(null,mapDispatchToProps)(CarCard))`
   .media {
     height: 200px;
   }

@@ -11,7 +11,6 @@ import { DropzoneArea } from "material-ui-dropzone";
 const StyledTextField = styled(TextField)`
   width: 400px;
   notchedoutline: {
-    border-color:"black";
   };
 `;
 
@@ -153,4 +152,5 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
   padding-left: 20%;
   padding-top: 70px;
   padding-right: 15%;
+  background-color: #424242;
 `;

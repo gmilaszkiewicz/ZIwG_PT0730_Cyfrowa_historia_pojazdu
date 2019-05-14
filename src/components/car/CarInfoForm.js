@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
@@ -15,13 +16,20 @@ const styles = theme => ({
   },
 });
 
+const mapStateToProps = state => {
+  return {
+      chosenCar: state.chosenCar
+  }
+}
+
 class CarInfoForm extends Component {
 
     render(){
-    const { classes } = props;
+    const { classes } = this.props;
 
     return (
         <div className={classes.root}>
+        {console.log(this.props.chosenCar)}
         <Grid container spacing={24}>
             <Grid item xs={12}>
             <Paper className={classes.paper}>xs=12</Paper>
@@ -50,8 +58,8 @@ class CarInfoForm extends Component {
     }
 }
 
-CenteredGrid.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// CenteredGrid.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
-export default withStyles(styles)(CarInfoForm);
+export default connect(mapStateToProps,null)(withStyles(styles)(CarInfoForm));

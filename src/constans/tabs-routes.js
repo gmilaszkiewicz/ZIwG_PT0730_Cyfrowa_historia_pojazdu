@@ -2,6 +2,7 @@ import { StyledCarList as CarList } from "../components/car/CarList";
 import React from "react";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import {StyledNewCarForm as  NewCarForm } from "./../components/car/NewCarForm";
+import CarInfoForm from './../components/car/CarInfoForm'
 
 
 export const routes = [
@@ -52,5 +53,12 @@ export const routes = [
     sidebar: () => <h2>Profile</h2>,
     main: () => <h2>Profile</h2>,
     name: "Profile"
+  },
+  {
+    path: "#carInfo",
+    visible: false,
+    sidebar: () => <h2>CarInfo</h2>,
+    main: (authUser, index) => <CarInfoForm />,
+    name: "CarInfo"
   }
 ];

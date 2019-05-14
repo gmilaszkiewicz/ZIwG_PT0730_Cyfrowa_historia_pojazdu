@@ -10,7 +10,7 @@ export class CarList extends Component {
   constructor() {
     super();
     this.state = {
-      carList: []
+      carList: [],
     };
   }
 
@@ -49,7 +49,7 @@ export class CarList extends Component {
         >
           {this.state.carList.map((car, index) => (
             <GridListTile key={index}>
-              <CarCard vin={car.VIN} name={car.name} images={car.photos} />
+              <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
             </GridListTile>
           ))}
         </GridList>

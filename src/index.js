@@ -7,6 +7,8 @@ import Firebase, { FirebaseContext } from './config/firebase/index';
 import {createMuiTheme} from '@material-ui/core/styles';
 import { MuiThemeProvider } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
+import { Provider } from "react-redux";
+import {store} from './store';
 
 
 const muiTheme = createMuiTheme({
@@ -27,15 +29,15 @@ const muiTheme = createMuiTheme({
           }
     },
 
-    // typography: {
+    typography: {
       root:{
         color: grey[50]
       },
-    //   useNextVariants: true,
-    //   primary:{
-    //       main: grey[50]
-    //   }
-    // },
+      useNextVariants: true,
+      primary:{
+          main: grey[50]
+      }
+    },
     overrides: {
       MuiTypography:{
         alignCenter:{
@@ -63,7 +65,7 @@ const muiTheme = createMuiTheme({
         root: { // Name of the rule
           color: "white",
           "&$focused": { // increase the specificity for the pseudo class
-            color: "black"
+            color: "white"
           }
         }
       }
@@ -82,11 +84,13 @@ const muiTheme = createMuiTheme({
 })
 
 ReactDOM.render(
-    <MuiThemeProvider theme={muiTheme}>
-        <FirebaseContext.Provider value={new Firebase()}> 
-            <App />
-        </FirebaseContext.Provider>
-    </MuiThemeProvider>
+    <Provider store={store}>
+      <MuiThemeProvider theme={muiTheme}>
+          <FirebaseContext.Provider value={new Firebase()}> 
+              <App />
+          </FirebaseContext.Provider>
+      </MuiThemeProvider>
+    </Provider>
     ,
      document.getElementById('root')
 );

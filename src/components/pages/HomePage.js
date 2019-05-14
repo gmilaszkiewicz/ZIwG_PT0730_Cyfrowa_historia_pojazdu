@@ -15,30 +15,14 @@ const StyledDiv = styled.div`
 
 class HomePage extends Component{
 
-    constructor(){
-        super()
-        this.state = {
-            choosenTab: 0
-        }
-    }
-
-    handleChangeTab = (event, index) => {
-        if(event.target.outerText==='Profile'){
-            index = 5
-        }
-        this.setState({
-            choosenTab: index
-        })
-    }
-
     render(){
         return(
             <AuthUserContext.Consumer>
                 {authUser => (
             <StyledDiv>
-                <TopBar drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} authUser={authUser}/>
-                <PermanentDrawerLeft authUser={authUser} drawerWidth={drawerWidth} changeTab = {this.handleChangeTab} choosenTab={this.state.choosenTab}/>
-                <PageContent choosenTab={this.state.choosenTab}/>
+                <TopBar drawerWidth={drawerWidth}  authUser={authUser}/>
+                <PermanentDrawerLeft authUser={authUser} drawerWidth={drawerWidth}/>
+                <PageContent />
             </StyledDiv> )}
             </AuthUserContext.Consumer>
         );

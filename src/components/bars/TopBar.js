@@ -10,7 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import SignOutButton from './SignOutButton';
 import { withStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link'
+import { connect } from "react-redux";
+import { chooseTab } from "./../../actions/index"
 
+const profileTabIndex = 5;
 const drawerWidth = 240;
 const title = "Cyfrowa historia pojazdów";
 
@@ -36,6 +39,12 @@ const styles = theme => ({
   }
 });
 
+function mapDispatchToProps(dispatch) {
+  return {
+    chooseTab: chosenTab => dispatch(chooseTab(chosenTab))
+  };
+}
+
 class TopBar extends Component{
 
     state = {
@@ -47,7 +56,7 @@ class TopBar extends Component{
       };
     
       handleClose = (event) => {
-        event.target.outerText==='Profile' && this.props.changeTab(event)
+        event.target.outerText==='Profile' && this.props.chooseTab(profileTabIndex)
         this.setState({ anchorEl: null });
       };
     
@@ -108,4 +117,4 @@ class TopBar extends Component{
     }
 }
 
-export default withStyles(styles)(TopBar)
+export default connect(null, mapDispatchToProps)(withStyles(styles)(TopBar))
