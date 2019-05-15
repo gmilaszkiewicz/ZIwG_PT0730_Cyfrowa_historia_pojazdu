@@ -117,8 +117,7 @@ class LoginForm extends Component {
                     variant="outlined"
                     onChange={props.handleChange}
                     value={props.values.email}
-                    readonly
-                    onfocus="this.removeAttribute('readonly');"
+                    readOnly
                   />
                 </Grid>
                 <Grid item>
@@ -132,8 +131,7 @@ class LoginForm extends Component {
                     margin="normal"
                     variant="outlined"
                     onChange={props.handleChange}
-                    readonly
-                    onfocus="this.removeAttribute('readonly');"
+                    readOnly
                   />
                 </Grid>
                 <Grid item>
@@ -171,6 +169,7 @@ class LoginForm extends Component {
         />
         {this.state.registerFormIsOpened && (
           <RegisterForm
+            firebase={this.props.firebase}
             isOpened={this.state.registerFormIsOpened}
             handleOnClose={this.handleCloseRegisterForm}
           />
