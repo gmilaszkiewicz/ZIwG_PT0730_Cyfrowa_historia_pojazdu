@@ -17,6 +17,7 @@ const muiTheme = createMuiTheme({
           primary: {
             main: '#212121'
           },
+          contrastThreshold: 3,
           secondary: {
             main: grey[50]
           },
@@ -70,17 +71,17 @@ const muiTheme = createMuiTheme({
         }
       }
     },
-    MuiOutlinedInput:{
-      root:{
-        borderColor: "black",
-        notchedOutline:{
-          borderColor: "black",
-        }
-      },
-      notchedOutline:{
-        borderColor: "black",
-      }
-    }
+    // MuiOutlinedInput:{
+    //   root:{
+    //     borderColor: "black",
+    //     notchedOutline:{
+    //       borderColor: "black",
+    //     }
+    //   },
+    //   notchedOutline:{
+    //     borderColor: "black",
+    //   }
+    // }
 })
 
 ReactDOM.render(

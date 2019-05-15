@@ -23,7 +23,9 @@ class HomePage extends Component{
                 <TopBar drawerWidth={drawerWidth}  authUser={authUser}/>
                 <PermanentDrawerLeft authUser={authUser} drawerWidth={drawerWidth}/>
                 <PageContent />
+                {console.log(authUser)}
             </StyledDiv> )}
+            
             </AuthUserContext.Consumer>
         );
     }
