@@ -51,7 +51,13 @@ class Firebase {
       .set(values);
   };
 
-  // addFix=()=>this.db.ref(`users/VWiS9gIe44WK3FchSydYT1XMWu12/cars/${}`);
+  addFix = (name, values, userId) => {
+    const md5Name = this.md5(name);
+    this.db
+      .ref(`users/${userId}/cars/${md5Name}`)
+      .child("fixes")
+      .set(values);
+  };
 
   fixCategories = () => this.db.ref("fixCategories");
 

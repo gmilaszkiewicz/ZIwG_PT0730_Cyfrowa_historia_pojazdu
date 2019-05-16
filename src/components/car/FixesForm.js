@@ -72,19 +72,30 @@ const styles = theme => ({
 
 class AddFixForm extends Component {
   state = {
-    fixName: "",
+    name: "",
     price: "",
     course: 0,
-    selectedDate: new Date(),
-    fixCategory: "",
+    DateTime: new Date(),
+    fixCategoryName: "",
     description: "",
     fixCategories: [],
     damageCategories: [],
     files: []
   };
 
-  addFixes = () => {
-    console.log(this.state);
+  addFixes = name => {
+    const {
+      price,
+      files,
+      damageCategories,
+      fixCategories,
+      ...rest
+    } = this.state;
+    this.props.firebase.addFix(
+      name,
+      ...rest,
+      this.props.firebase.auth.currentUser.uid
+    );
   };
   componentDidMount() {
     const categoryName = this.props.category.toLowerCase() + "Categories";
@@ -121,7 +132,7 @@ class AddFixForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes,name } = this.props;
 
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -244,7 +255,7 @@ class AddFixForm extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  onClick={this.addFixes}
+                  onClick={this.addFixes(name)}
                 >
                   Accept
                 </Button>
