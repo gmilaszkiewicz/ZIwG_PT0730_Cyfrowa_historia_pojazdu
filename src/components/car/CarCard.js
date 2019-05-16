@@ -9,9 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import FixesForm from "./FixesForm";
 import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
-import { chooseTab, chooseCar } from "./../../actions/index"
+import { chooseTab, chooseCar } from "./../../actions/index";
 
-const carInfoIndex = 5
+const carInfoIndex = 5;
 
 const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
@@ -69,9 +69,9 @@ export class CarCard extends Component {
   };
 
   handleClick = event => {
-    this.props.chooseTab(carInfoIndex)
-    this.props.chooseCar(this.props.car)
-  }
+    this.props.chooseTab(carInfoIndex);
+    this.props.chooseCar(this.props.car);
+  };
 
   render() {
     const { images, name, vin, className } = this.props;
@@ -106,14 +106,14 @@ export class CarCard extends Component {
             color="secondary"
             onClick={this.handleOpenFixForm}
           >
-            Dodaj Naprawę
+            Add Fix
           </Button>
           <Button
             size="small"
             color="secondary"
             onClick={this.handleOpenUpgradeForm}
           >
-            Dodaj Ulepszenie
+            Add Modification
           </Button>
         </StyledCardAction>
         {this.state.addFixIsOpened && (
@@ -121,6 +121,7 @@ export class CarCard extends Component {
             category="Fix"
             isOpened={this.state.addFixIsOpened}
             handleOnClose={this.handleCloseAddFixForm}
+            name={name}
           />
         )}
         {this.state.addUpgradeIsOpend && (
@@ -128,6 +129,7 @@ export class CarCard extends Component {
             category="Damage"
             isOpened={this.state.addUpgradeIsOpend}
             handleOnClose={this.handleCloseAddUpgradeForm}
+            name={name}
           />
         )}
       </Card>
@@ -135,7 +137,12 @@ export class CarCard extends Component {
   }
 }
 
-export const StyledCarCard = styled(connect(null,mapDispatchToProps)(CarCard))`
+export const StyledCarCard = styled(
+  connect(
+    null,
+    mapDispatchToProps
+  )(CarCard)
+)`
   .media {
     height: 200px;
     border-radius: 20px;

@@ -19,6 +19,7 @@
     "material-ui-formik-components": "^0.2.4",
     "material-ui-pickers": "^2.2.4",
     "mui-datatables": "^2.2.0",
+    "md5": "^2.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone-component": "^3.2.0",
