@@ -14,7 +14,7 @@ import "dropzone/dist/min/dropzone.min.css";
 // import ReactDOMServer from 'react-dom
 // var ReactDOMServer = require('react-dom/server');
 
-// var componentConfig = { 
+// var componentConfig = {
 //   postUrl: 'no-url',
 //  };
 // var djsConfig = {
@@ -67,9 +67,7 @@ const StyledDatePicker = styled(DatePicker)`
   width: 400px;
 `;
 
-const StyledDropZoneArea = styled(DropzoneArea)`
- 
-`
+const StyledDropZoneArea = styled(DropzoneArea)``;
 
 export class NewCarForm extends Component {
   state = {
@@ -183,7 +181,7 @@ export class NewCarForm extends Component {
                       showPreviews={false}
                       showPreviewsInDropzone={true}
                       dropzoneText="Browse files"
-                      dropZoneClass ="dropzone"
+                      dropZoneClass="dropzone"
                     />
                     {/* <DropzoneComponent config={componentConfig}
                        eventHandlers={eventHandlers}
@@ -213,4 +211,14 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
   padding-left: 10%;
   padding-top: 30px;
   padding-right: 10%;
+  height: 550px;
+  .MuiGrid-root {
+    justify-content: center;
+  }
+  .DropzoneArea-dropZone-620,
+  .dropzone {
+    width: 400px;
+    min-height: 0px;
+    height: 200px;
+  }
 `;
