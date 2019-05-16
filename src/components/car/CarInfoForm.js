@@ -16,6 +16,7 @@ const styles = theme => ({
     backgroundColor: 'white',
     borderRadius: '30px',
     padding: theme.spacing.unit*3,
+    color:"white"
 
   },
   paper: {
@@ -24,8 +25,8 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
   media: {
-    height: 230,
-    width: 330,
+    height: "90%",
+    width: "90%",
     borderRadius: 30,
     margin: theme.spacing(2),
   },
@@ -42,10 +43,7 @@ const styles = theme => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   rootOutlinedInput: {
-    // '&$cssFocused $notchedOutline': {
-    //   borderColor: purple[500],
-    // },
-    width: 370,
+    width: 580,
     color:"black",
     "&$cssDisabled $notchedOutline": {   //add this nested selector
       borderColor: "black",
@@ -69,6 +67,7 @@ const styles = theme => ({
   cssFocused: {},
   cssDisabled:{
     borderColor: "black",
+    color: "black"
   },
 });
 
@@ -142,10 +141,10 @@ class CarInfoForm extends Component {
                 />
             </Grid>
           <Grid item xs={6}>
-            {DisabledTextField("Name", this.props.chosenCar.name, classes)}
-            {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
-            {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
-            {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
+                {DisabledTextField("Name", this.props.chosenCar.name, classes)}
+                {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
+                {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
+                {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
           </Grid>
         </Grid>
         <FixesTable car={this.props.chosenCar} />

@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
+import styled from 'styled-components'
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -36,7 +37,7 @@ const styles = theme => ({
      name: "fixCategoryName",
      label: "Category",
      options: {
-      filter: true,
+    //   filter: true,
       sort: true,
      }
     },
@@ -44,23 +45,23 @@ const styles = theme => ({
      name: "name",
      label: "Name",
      options: {
-      filter: true,
-      sort: false,
+    //   filter: true,
+      sort: true,
      }
     },
     {
      name: "course",
      label: "Course",
      options: {
-      filter: true,
-      sort: false,
+    //   filter: true,
+      sort: true,
      }
     },
     {
      name: "price",
      label: "Price",
      options: {
-      filter: true,
+    //   filter: true,
       sort: true,
      }
     },
@@ -68,18 +69,26 @@ const styles = theme => ({
         name: "fixDate",
         label: "Fix date",
         options: {
-         filter: true,
+        //  filter: true,
          sort: true,
         }
        },
    ];
    
    const options = {
-     filterType: 'checkbox',
+     filterType: 'dropdown',
      viewColumns: false,
-     filter: false
+     filter: false,
+     responsive: "scroll"
    };
    
+
+const StyledMUIDataTable = styled(MUIDataTable)`
+    background-color: "white";
+    .ToolbarSelect-root{
+        background-color: "black";
+    }
+`
 
 class FixesTable extends Component{ 
 
@@ -91,7 +100,7 @@ class FixesTable extends Component{
 
         return(
             <Paper className={classes.root}>
-                <MUIDataTable
+                <StyledMUIDataTable
                     title={"Car modification:"}
                     data={data1}
                     columns={columns}

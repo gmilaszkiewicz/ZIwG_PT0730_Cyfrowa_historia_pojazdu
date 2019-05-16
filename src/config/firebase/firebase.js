@@ -54,7 +54,7 @@ class Firebase {
   addFix = (name, values, userId, category) => {
     let newCategory = "";
     if (category === "Fix") {
-      newCategory = "fixex";
+      newCategory = "fixes";
     } else newCategory = "damages";
     if (values) {
       const md5Name = this.md5(name);

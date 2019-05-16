@@ -10,13 +10,15 @@ import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import { withStyles } from "@material-ui/core/styles";
 import { StyledNewCarForm } from "./NewCarForm";
 import Zoom from '@material-ui/core/Zoom';
+import classNames from 'classnames';
+
 
 const styles = theme => ({
   speedDial: {
     position: "absolute",
     bottom: theme.spacing.unit * 6,
-    right: theme.spacing.unit * 7
-  }
+    right: theme.spacing.unit * 7,
+  },
 });
 
 export class CarList extends Component {
@@ -70,6 +72,10 @@ export class CarList extends Component {
 
   render() {
     const { classes } = this.props;
+    const speedDialClassName = classNames(
+      classes.speedDial,
+    );
+    
     return (
       <div
         className={this.props.className}
@@ -93,7 +99,7 @@ export class CarList extends Component {
         </GridList>
         <SpeedDial
           ariaLabel="SpeedDial tooltip example"
-          className={classes.speedDial}
+          className={speedDialClassName}
           icon={<SpeedDialIcon />}
           onClick={this.handleAddNewCar}
           open={false}

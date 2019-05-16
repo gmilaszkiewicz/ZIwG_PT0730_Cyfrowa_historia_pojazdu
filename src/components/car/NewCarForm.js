@@ -54,17 +54,15 @@ import "dropzone/dist/min/dropzone.min.css";
 //  }
 
 const StyledTextField = styled(TextField)`
-  width: 400px;
+  width: 450px;
 `;
 
 const StyledButton = styled(Button)`
-  margin-top: 30px;
-  padding-top: 30px;
-  width: 400px;
+  width: 450px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
-  width: 400px;
+  width: 450px;
 `;
 
 const StyledDropZoneArea = styled(DropzoneArea)``;
@@ -124,6 +122,7 @@ export class NewCarForm extends Component {
             }}
             onSubmit={values => {
               setTimeout(() => {
+                this.props.handleOnClose()
                 this.saveCar(values);
               }, 1000);
             }}
@@ -217,8 +216,10 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
   }
   .DropzoneArea-dropZone-620,
   .dropzone {
-    width: 400px;
+    width: 450px;
     min-height: 0px;
-    height: 200px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    /* height: 200px; */
   }
 `;

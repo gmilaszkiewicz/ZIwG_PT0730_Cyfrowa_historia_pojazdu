@@ -6,12 +6,14 @@ import { connect } from "react-redux";
 const styles = theme => ({
   root: {
     display: "flex",
-    flexGrow: 1
+    flexGrow: 1,
   },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    position: "relative",
+    overflowY: "auto"
   },
   toolbar: theme.mixins.toolbar
 });

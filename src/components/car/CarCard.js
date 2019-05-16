@@ -19,7 +19,7 @@ const StyledCardAction = styled(CardActions)`
 
 
 const StyledCardMedia = styled(CardMedia)`
-  border-radius: 50px;
+  border-radius: 20px;
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -75,8 +75,10 @@ export class CarCard extends Component {
 
   render() {
     const { images, name, vin, className } = this.props;
+
     return (
       <Card className={className}>
+      {console.log(this.props.className)}
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {(images !== undefined && images.length > 0) && (
@@ -136,15 +138,11 @@ export class CarCard extends Component {
   }
 }
 
-export const StyledCarCard = styled(
-  connect(
-    null,
-    mapDispatchToProps
-  )(CarCard)
-)`
+const connectedComponent = connect(null, mapDispatchToProps)(CarCard)
+
+export const StyledCarCard = styled(connectedComponent)`
   .media {
     height: 200px;
-    border-radius: 20px;
   }
   .image {
     width: 100px;
