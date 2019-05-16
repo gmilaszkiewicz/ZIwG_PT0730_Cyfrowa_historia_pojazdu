@@ -11,10 +11,14 @@ import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index"
 
-const carInfoIndex = 6
+const carInfoIndex = 5
 
 const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
+`;
+
+const StyledCardMedia = styled(CardMedia)`
+  border-radius: 20px;
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -75,7 +79,7 @@ export class CarCard extends Component {
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {images.length > 0 && (
-              <CardMedia
+              <StyledCardMedia
                 className="media"
                 image={images[0]}
                 title="Contemplative Reptile"
@@ -132,6 +136,7 @@ export class CarCard extends Component {
 export const StyledCarCard = styled(connect(null,mapDispatchToProps)(CarCard))`
   .media {
     height: 200px;
+    border-radius: 20px;
   }
   .image {
     width: 100px;

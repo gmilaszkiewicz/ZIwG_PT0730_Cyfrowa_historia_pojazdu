@@ -7,24 +7,74 @@ import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
+import DropzoneComponent from 'react-dropzone-component';
+import 'react-dropzone-component/styles/filepicker.css'
+import {Dialog} from '@material-ui/core'
+import 'dropzone/dist/min/dropzone.min.css'
+// import ReactDOMServer from 'react-dom
+// var ReactDOMServer = require('react-dom/server');
+
+
+// var componentConfig = { 
+//   postUrl: 'no-url',
+//  };
+// var djsConfig = { 
+//   addRemoveLinks: true,
+//   autoProcessQueue: false,
+//   maxFiles: 2,
+//   maxThumnails: 2,
+//  }
+
+// var myDropzone;
+
+// function removeFile (file) {
+//   if (myDropzone) {
+//       myDropzone.removeFile(file);
+//   }
+// }
+
+// function initCallback (dropzone) {
+//     myDropzone = dropzone;
+//     // myDropzone.on("complete", function(file) {
+//     //   myDropzone.processQueue(file);
+//     // });
+//     console.log(myDropzone)
+// }
+
+// function thumbnailGenerate(file){
+//   var progressElement = file.previewElement.querySelector('[data-dz-uploadprogress]')
+//       progressElement.style.width = '100%'
+//       // progressElement.style.display = 'none'
+// }
+
+// var eventHandlers = { 
+//   init: (dropzone) => initCallback(dropzone),
+//   addedfile: (file) => file.upload.progress = 100,
+//   maxfilesexceeded: (file) => removeFile(file),
+//   thumbnail: (file) =>thumbnailGenerate(file)
+//  }
+
 
 const StyledTextField = styled(TextField)`
   width: 400px;
-  notchedoutline: {
-  };
 `;
 
 const StyledButton = styled(Button)`
-  width: 200px;
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 400px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
   width: 400px;
 `;
 
-const StyledInputLabel = styled(InputLabel)`
-  color: "black";
-`;
+const StyledDropZoneArea = styled(DropzoneArea)`
+  width:75%;
+  :root{
+    width:75%;
+  }
+`
 
 export class NewCarForm extends Component {
   state = {
@@ -64,8 +114,10 @@ export class NewCarForm extends Component {
     setFieldValue("photos", imagesInBase64.join());
   };
   render() {
+    const { classes } = this.props;
     return (
-      <div className={this.props.className}>
+      <Dialog  onClose={this.props.handleOnClose} open={this.props.isOpened}>
+        <div className={this.props.className}>
         <Formik
           enableReinitialize={false}
           initialValues={{
@@ -83,8 +135,8 @@ export class NewCarForm extends Component {
           render={props => (
             <Form>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container spacing={10}>
-                  <Grid item xs>
+                <Grid container spacing={8}>
+                  {/* <Grid item xs> */}
                     <Field
                       name="name"
                       component={StyledTextField}
@@ -94,6 +146,7 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
+                    {/* </Grid> */}
                     <Field
                       name="Vin"
                       component={StyledTextField}
@@ -120,37 +173,47 @@ export class NewCarForm extends Component {
                       margin="normal"
                       value={props.values.registerTime}
                       variant="outlined"
-                      onChange={props.handleChange}
+                      onChange={props.handleChange}  
                     />
-                    <StyledButton
+
+                  {/* </Grid> */}
+                  {/* <Grid item xs> */}
+                    <StyledDropZoneArea
+                      filesLimit={3}
+                      onChange={value =>
+                        this.handleDropZoneChange(value, props.setFieldValue)
+                      }
+                      showPreviews={false}
+                      showPreviewsInDropzone={true}
+                      dropzoneText="Browse files"
+                      dropZoneClass =".filepicker"
+                    />
+                    {/* <DropzoneComponent config={componentConfig}
+                       eventHandlers={eventHandlers}
+                       djsConfig={djsConfig}
+                        /> */}
+                  {/* </Grid> */}
+                  <StyledButton
                       type="submit"
                       variant="contained"
                       color="primary"
                     >
                       Save
                     </StyledButton>
-                  </Grid>
-                  <Grid item xs>
-                    <DropzoneArea
-                      onChange={value =>
-                        this.handleDropZoneChange(value, props.setFieldValue)
-                      }
-                    />
-                  </Grid>
                 </Grid>
               </MuiPickersUtilsProvider>
             </Form>
           )}
         />
-      </div>
+        </div>
+      </Dialog>
     );
   }
 }
 
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
 export const StyledNewCarForm = styled(composedNewCarForm)`
-  padding-left: 20%;
-  padding-top: 70px;
-  padding-right: 15%;
-  background-color: #424242;
+  padding-left: 10%;
+  padding-top: 30px;
+  padding-right: 10%;
 `;
