@@ -7,18 +7,17 @@ import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
-import DropzoneComponent from 'react-dropzone-component';
-import 'react-dropzone-component/styles/filepicker.css'
-import {Dialog} from '@material-ui/core'
-import 'dropzone/dist/min/dropzone.min.css'
+import DropzoneComponent from "react-dropzone-component";
+import "react-dropzone-component/styles/filepicker.css";
+import { Dialog } from "@material-ui/core";
+import "dropzone/dist/min/dropzone.min.css";
 // import ReactDOMServer from 'react-dom
 // var ReactDOMServer = require('react-dom/server');
 
-
-// var componentConfig = { 
+// var componentConfig = {
 //   postUrl: 'no-url',
 //  };
-// var djsConfig = { 
+// var djsConfig = {
 //   addRemoveLinks: true,
 //   autoProcessQueue: false,
 //   maxFiles: 2,
@@ -47,13 +46,12 @@ import 'dropzone/dist/min/dropzone.min.css'
 //       // progressElement.style.display = 'none'
 // }
 
-// var eventHandlers = { 
+// var eventHandlers = {
 //   init: (dropzone) => initCallback(dropzone),
 //   addedfile: (file) => file.upload.progress = 100,
 //   maxfilesexceeded: (file) => removeFile(file),
 //   thumbnail: (file) =>thumbnailGenerate(file)
 //  }
-
 
 const StyledTextField = styled(TextField)`
   width: 400px;
@@ -70,11 +68,11 @@ const StyledDatePicker = styled(DatePicker)`
 `;
 
 const StyledDropZoneArea = styled(DropzoneArea)`
-  width:75%;
-  :root{
-    width:75%;
+  width: 75%;
+  :root {
+    width: 75%;
   }
-`
+`;
 
 export class NewCarForm extends Component {
   state = {
@@ -83,10 +81,7 @@ export class NewCarForm extends Component {
   };
 
   saveCar = values => {
-    this.props.firebase
-      .addCar()
-      .push()
-      .set(values);
+    this.props.firebase.addCar(values.name, values);
   };
 
   sleep = ms => {
@@ -116,27 +111,27 @@ export class NewCarForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Dialog  onClose={this.props.handleOnClose} open={this.props.isOpened}>
+      <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
         <div className={this.props.className}>
-        <Formik
-          enableReinitialize={false}
-          initialValues={{
-            name: "",
-            VIN: "",
-            registerNumber: "",
-            photos: "",
-            registerTime: new Date()
-          }}
-          onSubmit={values => {
-            setTimeout(() => {
-              this.saveCar(values);
-            }, 1000);
-          }}
-          render={props => (
-            <Form>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container spacing={8}>
-                  {/* <Grid item xs> */}
+          <Formik
+            enableReinitialize={false}
+            initialValues={{
+              name: "",
+              VIN: "",
+              registerNumber: "",
+              photos: "",
+              registerTime: new Date()
+            }}
+            onSubmit={values => {
+              setTimeout(() => {
+                this.saveCar(values);
+              }, 1000);
+            }}
+            render={props => (
+              <Form>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <Grid container spacing={8}>
+                    {/* <Grid item xs> */}
                     <Field
                       name="name"
                       component={StyledTextField}
@@ -148,10 +143,10 @@ export class NewCarForm extends Component {
                     />
                     {/* </Grid> */}
                     <Field
-                      name="Vin"
+                      name="VIN"
                       component={StyledTextField}
-                      id="Vin"
-                      label="Vin"
+                      id="VIN"
+                      label="VIN"
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
@@ -173,11 +168,11 @@ export class NewCarForm extends Component {
                       margin="normal"
                       value={props.values.registerTime}
                       variant="outlined"
-                      onChange={props.handleChange}  
+                      onChange={props.handleChange}
                     />
 
-                  {/* </Grid> */}
-                  {/* <Grid item xs> */}
+                    {/* </Grid> */}
+                    {/* <Grid item xs> */}
                     <StyledDropZoneArea
                       filesLimit={3}
                       onChange={value =>
@@ -186,25 +181,25 @@ export class NewCarForm extends Component {
                       showPreviews={false}
                       showPreviewsInDropzone={true}
                       dropzoneText="Browse files"
-                      dropZoneClass =".filepicker"
+                      dropZoneClass=".filepicker"
                     />
                     {/* <DropzoneComponent config={componentConfig}
                        eventHandlers={eventHandlers}
                        djsConfig={djsConfig}
                         /> */}
-                  {/* </Grid> */}
-                  <StyledButton
+                    {/* </Grid> */}
+                    <StyledButton
                       type="submit"
                       variant="contained"
                       color="primary"
                     >
                       Save
                     </StyledButton>
-                </Grid>
-              </MuiPickersUtilsProvider>
-            </Form>
-          )}
-        />
+                  </Grid>
+                </MuiPickersUtilsProvider>
+              </Form>
+            )}
+          />
         </div>
       </Dialog>
     );

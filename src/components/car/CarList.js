@@ -5,26 +5,25 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { withFirebase } from "../../config/firebase/context";
 import { compose } from "recompose";
-import SpeedDial from '@material-ui/lab/SpeedDial';
-import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
-import { withStyles } from '@material-ui/core/styles';
+import SpeedDial from "@material-ui/lab/SpeedDial";
+import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
+import { withStyles } from "@material-ui/core/styles";
 import { StyledNewCarForm } from "./NewCarForm";
-
 
 const styles = theme => ({
   speedDial: {
-    position: 'absolute',
+    position: "absolute",
     bottom: theme.spacing.unit * 6,
-    right: theme.spacing.unit * 7,
-  },
-})
+    right: theme.spacing.unit * 7
+  }
+});
 
 export class CarList extends Component {
   constructor() {
     super();
     this.state = {
       carList: [],
-      isOpenAddNewCarModal: false,
+      isOpenAddNewCarModal: false
     };
   }
 
@@ -51,22 +50,27 @@ export class CarList extends Component {
     this.props.firebase.userCars().off();
   }
 
-   handleAddNewCar = (event) =>{
+  handleAddNewCar = event => {
     this.setState({
       isOpenAddNewCarModal: true
-    })
-  }
+    });
+  };
 
-  handleCloseNewCarModal = (event) => {
+  handleCloseNewCarModal = event => {
     this.setState({
       isOpenAddNewCarModal: false
-    })
-  }
+    });
+  };
 
   render() {
-    const {classes}  = this.props
+    console.log(this.props)
+    const { classes } = this.props;
     return (
-      <div className={this.props.className} onClose={this.props.handleOnClose} open={this.props.isOpened}>
+      <div
+        className={this.props.className}
+        onClose={this.props.handleOnClose}
+        open={this.props.isOpened}
+      >
         <GridList
           cellHeight={350}
           className="grid-list"
@@ -76,7 +80,12 @@ export class CarList extends Component {
         >
           {this.state.carList.map((car, index) => (
             <GridListTile key={index}>
-              <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
+              <CarCard
+                vin={car.VIN}
+                name={car.name}
+                images={car.photos}
+                car={car}
+              />
             </GridListTile>
           ))}
         </GridList>
@@ -86,15 +95,19 @@ export class CarList extends Component {
           icon={<SpeedDialIcon />}
           onClick={this.handleAddNewCar}
           open={false}
-        ></SpeedDial>
-        {this.state.isOpenAddNewCarModal && <StyledNewCarForm isOpened={this.state.isOpenAddNewCarModal} handleOnClose={this.handleCloseNewCarModal}/>}
+        />
+        {this.state.isOpenAddNewCarModal && (
+          <StyledNewCarForm
+            isOpened={this.state.isOpenAddNewCarModal}
+            handleOnClose={this.handleCloseNewCarModal}
+          />
+        )}
       </div>
     );
-    
   }
 }
 
-const WithStylesCarList = withStyles(styles)(CarList)
+const WithStylesCarList = withStyles(styles)(CarList);
 
 const StyledCarList = compose(withFirebase)(styled(WithStylesCarList)`
   display: "flex";
