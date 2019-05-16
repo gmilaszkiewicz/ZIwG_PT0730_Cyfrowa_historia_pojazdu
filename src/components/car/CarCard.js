@@ -79,11 +79,11 @@ export class CarCard extends Component {
       <Card className={className}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {(images !== undefined && images > 0) && (
+            {(images !== undefined && images.length > 0) && (
               <StyledCardMedia
                 className="media"
-                image={images !==undefined? images[0] : undefined}
-                title="Contemplative Reptile"
+                image={images[0]}
+                title="Car"
               />
             )}
             <Typography

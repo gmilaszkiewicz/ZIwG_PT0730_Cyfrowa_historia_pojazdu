@@ -73,7 +73,7 @@ const mapStateToProps = state => {
 function DisabledTextField(label, value, classes){
   return(
     <TextField
-          disabled
+          // disabled
           id="outlined-disabled"
           label={label}
           defaultValue={value}

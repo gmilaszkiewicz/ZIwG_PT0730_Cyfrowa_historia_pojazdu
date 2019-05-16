@@ -45,7 +45,7 @@ export class CarList extends Component {
     cars.forEach((car, index) => {
       arrayOfImages = [];
       if (car.photos) arrayOfImages = car.photos.split("&&&");
-      // car.photos = arrayOfImages;
+      car.photos = arrayOfImages;
     });
   };
 
