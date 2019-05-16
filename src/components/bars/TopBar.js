@@ -15,7 +15,7 @@ import { chooseTab } from "./../../actions/index"
 
 const profileTabIndex = 4;
 const drawerWidth = 240;
-const title = "Cyfrowa historia pojazdów";
+const title = "Digital vehicle history";
 
 const styles = theme => ({
   appBar: {

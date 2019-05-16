@@ -24,8 +24,8 @@ const styles = theme => ({
     color: theme.palette.text.secondary,
   },
   media: {
-    height: 200,
-    width: 300,
+    height: 230,
+    width: 330,
     borderRadius: 30,
     margin: theme.spacing(2),
   },
@@ -45,8 +45,9 @@ const styles = theme => ({
     // '&$cssFocused $notchedOutline': {
     //   borderColor: purple[500],
     // },
-    width: 200,
-    "& $notchedOutline": {   //add this nested selector
+    width: 370,
+    color:"black",
+    "&$cssDisabled $notchedOutline": {   //add this nested selector
       borderColor: "black",
    },
    "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
@@ -61,8 +62,14 @@ const styles = theme => ({
     '&$cssFocused': {
       color: "black",
     },
+    '&$cssDisabled': {
+      color: "black",
+    }
   },
   cssFocused: {},
+  cssDisabled:{
+    borderColor: "black",
+  },
 });
 
 const mapStateToProps = state => {
@@ -74,21 +81,22 @@ const mapStateToProps = state => {
 function DisabledTextField(label, value, classes){
   return(
     <TextField
-          // disabled
+          disabled
           id="outlined-disabled"
           label={label}
           defaultValue={value}
-          // className={classes.textField}
           InputLabelProps={{
             classes: {
               root: classes.label,
               focused: classes.cssFocused,
+              disabled: classes.cssDisabled,
             },
           }}
           InputProps={{
             classes: {
               root: classes.rootOutlinedInput,
               notchedOutline: classes.notchedOutline,
+              disabled: classes.cssDisabled,
             },
           }}
           margin="normal"
@@ -122,34 +130,24 @@ class CarInfoForm extends Component {
       const {classes} = this.props;
       const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
     return (
-      
         <Paper className={classes.root}>
-        <Grid container spacing={0} direction="column">
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={24}>
+          <Grid item xs={6}>
             <CardMedia
-              className={classes.media}
-              image={mainPhoto}
-              title="My car"
-              component={Button}
-              onClick={this.showPhotosViewer}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-          {/* <Grid container direction="row" spacing={8}> */}
-          {/* <Grid item> */}
+                  className={classes.media}
+                  image={mainPhoto}
+                  title="My car"
+                  component={Button}
+                  onClick={this.showPhotosViewer}
+                />
+            </Grid>
+          <Grid item xs={6}>
             {DisabledTextField("Name", this.props.chosenCar.name, classes)}
-          {/* </Grid> */}
-          {/* <Grid item> */}
             {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
-          {/* </Grid> */}
-          {/* <Grid item> */}
             {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
-          {/* </Grid> */}
-          {/* <Grid item></Grid> */}
             {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
           </Grid>
-          </Grid>
-          {/* </Grid> */}
+        </Grid>
         <FixesTable car={this.props.chosenCar} />
         {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
         </Paper>
