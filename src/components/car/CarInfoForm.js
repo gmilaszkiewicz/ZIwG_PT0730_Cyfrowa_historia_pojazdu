@@ -66,7 +66,6 @@ class CarInfoForm extends Component {
   }
 
   handleClosePhotosViewer = event =>{
-    console.log("Close popup")
     this.setState({
       isOpenPhotosViewer: false
     })

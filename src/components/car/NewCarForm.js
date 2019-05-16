@@ -81,7 +81,11 @@ export class NewCarForm extends Component {
   };
 
   saveCar = values => {
-    this.props.firebase.addCar(values.name, values);
+    this.props.firebase.addCar(
+      values.name,
+      values,
+      this.props.firebase.auth.currentUser.uid
+    );
   };
 
   sleep = ms => {
@@ -109,6 +113,7 @@ export class NewCarForm extends Component {
     setFieldValue("photos", imagesInBase64.join());
   };
   render() {
+    console.log(this.props);
     const { classes } = this.props;
     return (
       <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>

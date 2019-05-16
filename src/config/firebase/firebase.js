@@ -39,11 +39,16 @@ class Firebase {
 
   user = uid => this.db.ref(`usersdata/${uid}`);
 
-  userCars = () => this.db.ref("users/VWiS9gIe44WK3FchSydYT1XMWu12");
+  userCars = userId => {
+    return this.db.ref(`users/${userId}`);
+  };
 
-  addCar = (name, values) => {
+  addCar = (name, values, userId) => {
     const md5Name = this.md5(name);
-    this.db.ref(`users/VWiS9gIe44WK3FchSydYT1XMWu12/cars`).child(md5Name).set(values);
+    this.db
+      .ref(`users/${userId}/cars`)
+      .child(md5Name)
+      .set(values);
   };
 
   // addFix=()=>this.db.ref(`users/VWiS9gIe44WK3FchSydYT1XMWu12/cars/${}`);

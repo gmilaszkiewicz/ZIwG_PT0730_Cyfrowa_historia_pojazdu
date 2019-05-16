@@ -30,7 +30,6 @@ export default class RegisterForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <Dialog
         aria-labelledby="simple-dialog-title"

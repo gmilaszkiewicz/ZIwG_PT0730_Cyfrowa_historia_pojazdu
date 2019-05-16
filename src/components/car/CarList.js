@@ -28,14 +28,18 @@ export class CarList extends Component {
   }
 
   componentDidMount() {
-    this.props.firebase.userCars().on("value", snapshot => {
-      let cars = [];
-      Object.values(snapshot.val().cars).forEach(object => {
-        cars.push(object);
+    this.props.firebase
+      .userCars(this.props.authUser.uid)
+      .on("value", snapshot => {
+        let cars = [];
+        if (snapshot.val()) {
+          Object.values(snapshot.val().cars).forEach(object => {
+            cars.push(object);
+          });
+          this.groupImages(cars);
+        }
+        this.setState({ carList: cars });
       });
-      this.groupImages(cars);
-      this.setState({ carList: cars });
-    });
   }
   groupImages = cars => {
     let arrayOfImages = [];
@@ -63,7 +67,6 @@ export class CarList extends Component {
   };
 
   render() {
-    console.log(this.props)
     const { classes } = this.props;
     return (
       <div
