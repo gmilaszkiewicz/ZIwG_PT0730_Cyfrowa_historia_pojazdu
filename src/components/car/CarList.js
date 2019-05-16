@@ -9,6 +9,7 @@ import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import { withStyles } from '@material-ui/core/styles';
 import { StyledNewCarForm } from "./NewCarForm";
+import Zoom from '@material-ui/core/Zoom';
 
 
 const styles = theme => ({
@@ -25,6 +26,7 @@ export class CarList extends Component {
     this.state = {
       carList: [],
       isOpenAddNewCarModal: false,
+      checked: true
     };
   }
 
@@ -43,7 +45,7 @@ export class CarList extends Component {
     cars.forEach((car, index) => {
       arrayOfImages = [];
       if (car.photos) arrayOfImages = car.photos.split("&&&");
-      car.photos = arrayOfImages;
+      // car.photos = arrayOfImages;
     });
   };
 
@@ -75,9 +77,11 @@ export class CarList extends Component {
           padding={1}
         >
           {this.state.carList.map((car, index) => (
-            <GridListTile key={index}>
-              <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
-            </GridListTile>
+             <Zoom in={this.state.checked} style={{ transitionDelay: this.state.checked ? index*400 : 0 }}>
+              <GridListTile key={index}>
+                <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
+              </GridListTile>
+            </Zoom>
           ))}
         </GridList>
         <SpeedDial

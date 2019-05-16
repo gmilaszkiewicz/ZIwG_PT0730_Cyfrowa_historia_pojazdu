@@ -14,7 +14,6 @@ import 'dropzone/dist/min/dropzone.min.css'
 // import ReactDOMServer from 'react-dom
 // var ReactDOMServer = require('react-dom/server');
 
-
 // var componentConfig = { 
 //   postUrl: 'no-url',
 //  };
@@ -70,10 +69,7 @@ const StyledDatePicker = styled(DatePicker)`
 `;
 
 const StyledDropZoneArea = styled(DropzoneArea)`
-  width:75%;
-  :root{
-    width:75%;
-  }
+ 
 `
 
 export class NewCarForm extends Component {
@@ -186,7 +182,7 @@ export class NewCarForm extends Component {
                       showPreviews={false}
                       showPreviewsInDropzone={true}
                       dropzoneText="Browse files"
-                      dropZoneClass =".filepicker"
+                      dropZoneClass ="dropzone"
                     />
                     {/* <DropzoneComponent config={componentConfig}
                        eventHandlers={eventHandlers}

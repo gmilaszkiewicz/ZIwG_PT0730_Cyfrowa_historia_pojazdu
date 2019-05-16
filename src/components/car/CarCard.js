@@ -17,8 +17,9 @@ const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
 `;
 
+
 const StyledCardMedia = styled(CardMedia)`
-  border-radius: 20px;
+  border-radius: 50px;
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -78,10 +79,10 @@ export class CarCard extends Component {
       <Card className={className}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {images.length > 0 && (
+            {(images !== undefined && images > 0) && (
               <StyledCardMedia
                 className="media"
-                image={images[0]}
+                image={images !==undefined? images[0] : undefined}
                 title="Contemplative Reptile"
               />
             )}
