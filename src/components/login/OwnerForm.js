@@ -1,81 +1,108 @@
-import React, { Component } from 'react';
-import {TextField, Grid, Button} from '@material-ui/core'
-import { Field } from 'formik';
+import React, { Component } from "react";
+import { TextField, Grid, Button } from "@material-ui/core";
+import { Field, Formik } from "formik";
 
-export default class OwnerForm extends Component{
-
-    render(){
-        return(
-            <div>
-            <Grid container direction="column" spacing={8} justify="center">
-                <Grid container spacing={16}>
-                    <Grid item xs={6}>
-                        <Field
-                            name="name" 
-                            required
-                            component={TextField}
-                            id="standard-required"
-                            label="Name"
-                            margin="normal"
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Field
-                            name="surname"
-                            component={TextField}
-                            id="standard-required"
-                            label="Surname"
-                            margin="normal"
-                        />
-                    </Grid>
+export default class OwnerForm extends Component {
+  registerUser = (email, password) => {
+    this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+  };
+  render() {
+    return (
+      <div>
+        <Formik
+          initialValues={{
+            name: "",
+            surname: "",
+            email: "",
+            password: "",
+            repetedPassword: ""
+          }}
+          onSubmit={() => {}}
+          render={props => (
+            <Grid container direction="column" spacing={0} justify="center">
+              <Grid container spacing={8}>
+                <Grid item>
+                  <Field
+                    name="name"
+                    required
+                    component={TextField}
+                    id="name"
+                    label="Name"
+                    margin="normal"
+                    onChange={props.handleChange}
+                  />
                 </Grid>
                 <Grid item>
-                    <Field
-                        name="email"
-                        required
-                        component={TextField}
-                        id="standard-required"
-                        type="email"
-                        autoComplete="email"
-                        label="Email"
-                        margin="normal"
-                        fullWidth
-                    />
+                  <Field
+                    name="surname"
+                    component={TextField}
+                    id="surname"
+                    label="Surname"
+                    margin="normal"
+                    onChange={props.handleChange}
+                  />
                 </Grid>
-                <Grid item>
-                    <Field
-                        name="password"
-                        required
-                        component={TextField}
-                        id="outlined-password-input"
-                        label="Password"
-                        type="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item>
-                    <Field
-                        name="reapeted-password"
-                        required
-                        component={TextField}
-                        id="outlined-reapeted-password-input"
-                        label="Repeat password"
-                        type="password"
-                        autoComplete="current-password"
-                        margin="normal"
-                        fullWidth
-                    />
-                </Grid>
-                 <Grid item>
-                    <Button variant="contained" color="primary"  fullWidth onClick={this.handleOpenRegisterFrom}>
-                        Register
-                    </Button>
-                 </Grid>
-        </Grid>
-        </div>
-        )
-    }
-
+              </Grid>
+              <Grid item>
+                <Field
+                  name="email"
+                  required
+                  component={TextField}
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  label="Email"
+                  margin="normal"
+                  onChange={props.handleChange}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item>
+                <Field
+                  name="password"
+                  required
+                  component={TextField}
+                  id="password"
+                  label="Password"
+                  type="password"
+                  margin="normal"
+                  onChange={props.handleChange}
+                  fullWidth
+                />
+              </Grid>
+              <Grid item>
+                <Field
+                  name="reapeted-password"
+                  required
+                  component={TextField}
+                  id="reapeted-password"
+                  label="Repeat password"
+                  onChange={props.handleChange}
+                  type="password"
+                  margin="normal"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={(e) => {
+                    this.registerUser(
+                      props.values.email,
+                      props.values.password
+                    );
+                    this.props.handleClose(e);
+                  }}
+                >
+                  Register
+                </Button>
+              </Grid>
+            </Grid>
+          )}
+        />
+      </div>
+    );
+  }
 }
