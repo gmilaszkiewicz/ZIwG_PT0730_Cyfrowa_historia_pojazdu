@@ -45,6 +45,7 @@ const styles = theme => ({
     // '&$cssFocused $notchedOutline': {
     //   borderColor: purple[500],
     // },
+    width: 200,
     "& $notchedOutline": {   //add this nested selector
       borderColor: "black",
    },
@@ -112,7 +113,6 @@ class CarInfoForm extends Component {
   }
 
   handleClosePhotosViewer = event =>{
-    console.log("Close popup")
     this.setState({
       isOpenPhotosViewer: false
     })
@@ -124,8 +124,8 @@ class CarInfoForm extends Component {
     return (
       
         <Paper className={classes.root}>
-        <Grid container spacing={8} direction="column">
-          <Grid item>
+        <Grid container spacing={0} direction="column">
+          <Grid item xs={12} sm={6}>
             <CardMedia
               className={classes.media}
               image={mainPhoto}
@@ -134,22 +134,22 @@ class CarInfoForm extends Component {
               onClick={this.showPhotosViewer}
             />
           </Grid>
-          <Grid item>
-          <Grid container direction="row">
-          <Grid item>
+          <Grid item xs={12} sm={6}>
+          {/* <Grid container direction="row" spacing={8}> */}
+          {/* <Grid item> */}
             {DisabledTextField("Name", this.props.chosenCar.name, classes)}
-          </Grid>
-          <Grid item>
+          {/* </Grid> */}
+          {/* <Grid item> */}
             {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
-            </Grid>
-            <Grid item>
+          {/* </Grid> */}
+          {/* <Grid item> */}
             {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
-            </Grid>
-            <Grid item></Grid>
-            {DisabledTextField("First registration", this.props.chosenCar.registerNumber,classes)}
+          {/* </Grid> */}
+          {/* <Grid item></Grid> */}
+            {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
           </Grid>
-        </Grid>
-        </Grid>
+          </Grid>
+          {/* </Grid> */}
         <FixesTable car={this.props.chosenCar} />
         {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
         </Paper>

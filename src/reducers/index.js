@@ -12,7 +12,6 @@ function rootReducer(state = initialState, action) {
       chosenTab: action.payload
   }}
   else if(action.type === CHOOSE_CAR){
-      console.log(action)
     return {
       ...state,
       chosenCar: action.payload

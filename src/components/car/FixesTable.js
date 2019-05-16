@@ -1,11 +1,7 @@
 import React, {Component} from "react"
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
 
@@ -37,7 +33,7 @@ const styles = theme => ({
 
   const columns = [
     {
-     name: "category",
+     name: "fixCategoryName",
      label: "Category",
      options: {
       filter: true,
@@ -69,30 +65,13 @@ const styles = theme => ({
      }
     },
     {
-        name: "date",
+        name: "fixDate",
         label: "Fix date",
         options: {
          filter: true,
          sort: true,
         }
        },
-   ];
-//    arr1.concat(arr2);
-//    const data1 = this.props.car.fixes.concat(this.props.car.damages)
-
-   const data = [
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
    ];
    
    const options = {
@@ -106,12 +85,15 @@ class FixesTable extends Component{
 
     render(){
         const { classes } = this.props;
+        const fixesObj = this.props.car.fixes
+        const damagesObj = this.props.car.damages
+        const data1 = Object.values(fixesObj).concat(Object.values(damagesObj))
 
         return(
             <Paper className={classes.root}>
                 <MUIDataTable
                     title={"Car modification:"}
-                    data={data}
+                    data={data1}
                     columns={columns}
                     options={options}
                 />
