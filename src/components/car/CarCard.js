@@ -104,14 +104,14 @@ export class CarCard extends Component {
             color="secondary"
             onClick={this.handleOpenFixForm}
           >
-            Dodaj Naprawę
+            Add Fix
           </Button>
           <Button
             size="small"
             color="secondary"
             onClick={this.handleOpenUpgradeForm}
           >
-            Dodaj Ulepszenie
+            Add Modification
           </Button>
         </StyledCardAction>
         {this.state.addFixIsOpened && (
@@ -127,6 +127,7 @@ export class CarCard extends Component {
             category="Damage"
             isOpened={this.state.addUpgradeIsOpend}
             handleOnClose={this.handleCloseAddUpgradeForm}
+            name={name}
           />
         )}
       </Card>

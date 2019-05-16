@@ -72,29 +72,42 @@ const styles = theme => ({
 
 class AddFixForm extends Component {
   state = {
-    name: "",
+    fixName: "",
     price: "",
     course: 0,
-    DateTime: new Date(),
-    fixCategoryName: "",
+    selectedDate: new Date(),
+    fixCategory: "",
     description: "",
     fixCategories: [],
     damageCategories: [],
     files: []
   };
 
-  addFixes = name => {
+  addFixes = (name, e) => {
+    e.preventDefault();
     const {
+      fixName,
       price,
-      files,
-      damageCategories,
+      course,
+      selectedDate,
+      fixCategory,
+      description,
       fixCategories,
-      ...rest
+      damageCategories,
+      files
     } = this.state;
+    const values = {
+      name: fixName,
+      description,
+      course,
+      DateTime: selectedDate,
+      fixCategoryName: fixCategory
+    };
     this.props.firebase.addFix(
       name,
-      ...rest,
-      this.props.firebase.auth.currentUser.uid
+      values,
+      this.props.firebase.auth.currentUser.uid,
+      this.props.category
     );
   };
   componentDidMount() {
@@ -132,8 +145,8 @@ class AddFixForm extends Component {
   };
 
   render() {
-    const { classes,name } = this.props;
-
+    const { classes, name } = this.props;
+    console.log(this.state);
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>
@@ -255,7 +268,7 @@ class AddFixForm extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  onClick={this.addFixes(name)}
+                  onClick={e => this.addFixes(name, e)}
                 >
                   Accept
                 </Button>

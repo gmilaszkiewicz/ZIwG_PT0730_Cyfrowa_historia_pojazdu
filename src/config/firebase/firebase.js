@@ -51,12 +51,19 @@ class Firebase {
       .set(values);
   };
 
-  addFix = (name, values, userId) => {
-    const md5Name = this.md5(name);
-    this.db
-      .ref(`users/${userId}/cars/${md5Name}`)
-      .child("fixes")
-      .set(values);
+  addFix = (name, values, userId, category) => {
+    let newCategory = "";
+    if (category === "Fix") {
+      newCategory = "fixex";
+    } else newCategory = "damages";
+    if (values) {
+      const md5Name = this.md5(name);
+      this.db
+        .ref(`users/${userId}/cars/${md5Name}`)
+        .child(`${newCategory}`)
+        .push()
+        .set(values);
+    }
   };
 
   fixCategories = () => this.db.ref("fixCategories");
