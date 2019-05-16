@@ -15,14 +15,14 @@ export const routes = [
     main: (authUser, index) => <CarList key={index} authUser={authUser} />,
     name: "Show my cars"
   },
-  {
-    path: "#addcar",
-    visible: true,
-    icon: () => <InboxIcon />,
-    sidebar: () => <NewCarForm />,
-    main: (authUser, index) => <NewCarForm key={index} authUser={authUser} />,
-    name: "Add car"
-  },
+  // {
+  //   path: "#addcar",
+  //   visible: true,
+  //   icon: () => <InboxIcon />,
+  //   sidebar: () => <NewCarForm />,
+  //   main: (authUser, index) => <NewCarForm key={index} authUser={authUser} />,
+  //   name: "Add car"
+  // },
   {
     path: "#service",
     visible: true,

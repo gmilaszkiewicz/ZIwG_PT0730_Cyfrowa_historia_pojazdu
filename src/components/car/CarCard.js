@@ -11,7 +11,7 @@ import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index"
 
-const carInfoIndex = 6
+const carInfoIndex = 5
 
 const StyledCardAction = styled(CardActions)`
   justify-content: space-around;

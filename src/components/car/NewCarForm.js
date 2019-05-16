@@ -7,58 +7,74 @@ import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
-import { withStyles } from '@material-ui/core/styles';
-import { purple } from "@material-ui/core/colors";
 import DropzoneComponent from 'react-dropzone-component';
 import 'react-dropzone-component/styles/filepicker.css'
+import {Dialog} from '@material-ui/core'
 import 'dropzone/dist/min/dropzone.min.css'
+// import ReactDOMServer from 'react-dom
+// var ReactDOMServer = require('react-dom/server');
 
-var componentConfig = { postUrl: 'no-url' };
-var djsConfig = { autoProcessQueue: false }
-var eventHandlers = { 
-  addedfile: (file) => console.log(file),
-  maxfilesexceeded: 2,
- }
 
-const styles = theme => ({
-  rootOutlinedInput: {
-    // '&$cssFocused $notchedOutline': {
-    //   borderColor: purple[500],
-    // },
-    "& $notchedOutline": {   //add this nested selector
-      borderColor: "black",
-   },
-   "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-    borderColor: "black"
-    }
-  },
-  notchedOutline: {
-    borderColor: purple[500],
-  },
-  label:{
-    color: "black",
-    '&$cssFocused': {
-      color: "black",
-    },
-  },
-  cssFocused: {},
-})
+// var componentConfig = { 
+//   postUrl: 'no-url',
+//  };
+// var djsConfig = { 
+//   addRemoveLinks: true,
+//   autoProcessQueue: false,
+//   maxFiles: 2,
+//   maxThumnails: 2,
+//  }
+
+// var myDropzone;
+
+// function removeFile (file) {
+//   if (myDropzone) {
+//       myDropzone.removeFile(file);
+//   }
+// }
+
+// function initCallback (dropzone) {
+//     myDropzone = dropzone;
+//     // myDropzone.on("complete", function(file) {
+//     //   myDropzone.processQueue(file);
+//     // });
+//     console.log(myDropzone)
+// }
+
+// function thumbnailGenerate(file){
+//   var progressElement = file.previewElement.querySelector('[data-dz-uploadprogress]')
+//       progressElement.style.width = '100%'
+//       // progressElement.style.display = 'none'
+// }
+
+// var eventHandlers = { 
+//   init: (dropzone) => initCallback(dropzone),
+//   addedfile: (file) => file.upload.progress = 100,
+//   maxfilesexceeded: (file) => removeFile(file),
+//   thumbnail: (file) =>thumbnailGenerate(file)
+//  }
+
 
 const StyledTextField = styled(TextField)`
   width: 400px;
 `;
 
 const StyledButton = styled(Button)`
-  width: 200px;
+  margin-top: 30px;
+  padding-top: 30px;
+  width: 400px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
   width: 400px;
 `;
 
-const StyledInputLabel = styled(InputLabel)`
-  color: "black";
-`;
+const StyledDropZoneArea = styled(DropzoneArea)`
+  width:75%;
+  :root{
+    width:75%;
+  }
+`
 
 export class NewCarForm extends Component {
   state = {
@@ -100,7 +116,8 @@ export class NewCarForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={this.props.className}>
+      <Dialog  onClose={this.props.handleOnClose} open={this.props.isOpened}>
+        <div className={this.props.className}>
         <Formik
           enableReinitialize={false}
           initialValues={{
@@ -119,7 +136,7 @@ export class NewCarForm extends Component {
             <Form>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <Grid container spacing={8}>
-                  <Grid item xs>
+                  {/* <Grid item xs> */}
                     <Field
                       name="name"
                       component={StyledTextField}
@@ -127,20 +144,9 @@ export class NewCarForm extends Component {
                       label="Car Name"
                       margin="normal"
                       variant="outlined"
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label,
-                          focused: classes.cssFocused,
-                        },
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.rootOutlinedInput,
-                          notchedOutline: classes.notchedOutline,
-                        },
-                      }}
                       onChange={props.handleChange}
                     />
+                    {/* </Grid> */}
                     <Field
                       name="Vin"
                       component={StyledTextField}
@@ -149,18 +155,6 @@ export class NewCarForm extends Component {
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label,
-                          focused: classes.cssFocused,
-                        },
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.rootOutlinedInput,
-                          notchedOutline: classes.notchedOutline,
-                        },
-                      }}
                     />
                     <Field
                       name="registerNumber"
@@ -170,18 +164,6 @@ export class NewCarForm extends Component {
                       margin="normal"
                       variant="outlined"
                       onChange={props.handleChange}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label,
-                          focused: classes.cssFocused,
-                        },
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.rootOutlinedInput,
-                          notchedOutline: classes.notchedOutline,
-                        },
-                      }}
                     />
                     <Field
                       name="registerTime"
@@ -191,56 +173,47 @@ export class NewCarForm extends Component {
                       margin="normal"
                       value={props.values.registerTime}
                       variant="outlined"
-                      onChange={props.handleChange}
-                      InputLabelProps={{
-                        classes: {
-                          root: classes.label,
-                          focused: classes.cssFocused,
-                        },
-                      }}
-                      InputProps={{
-                        classes: {
-                          root: classes.rootOutlinedInput,
-                          notchedOutline: classes.notchedOutline,
-                        },
-                      }}    
+                      onChange={props.handleChange}  
                     />
-                    <StyledButton
+
+                  {/* </Grid> */}
+                  {/* <Grid item xs> */}
+                    <StyledDropZoneArea
+                      filesLimit={3}
+                      onChange={value =>
+                        this.handleDropZoneChange(value, props.setFieldValue)
+                      }
+                      showPreviews={false}
+                      showPreviewsInDropzone={true}
+                      dropzoneText="Browse files"
+                      dropZoneClass =".filepicker"
+                    />
+                    {/* <DropzoneComponent config={componentConfig}
+                       eventHandlers={eventHandlers}
+                       djsConfig={djsConfig}
+                        /> */}
+                  {/* </Grid> */}
+                  <StyledButton
                       type="submit"
                       variant="contained"
                       color="primary"
                     >
                       Save
                     </StyledButton>
-                  </Grid>
-                  <Grid item xs>
-                    {/* <DropzoneArea
-                      onChange={value =>
-                        this.handleDropZoneChange(value, props.setFieldValue)
-                      }
-                      showPreviews={true}
-                      showPreviewsInDropzone={false}
-                    /> */}
-                    <DropzoneComponent config={componentConfig}
-                       eventHandlers={eventHandlers}
-                      //  djsConfig={djsConfig}
-                        />
-                  </Grid>
                 </Grid>
               </MuiPickersUtilsProvider>
             </Form>
           )}
         />
-      </div>
+        </div>
+      </Dialog>
     );
   }
 }
 
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
-export const materialUIStyled = withStyles(styles)(composedNewCarForm)
-export const StyledNewCarForm = styled(materialUIStyled)`
-  padding-left: 20%;
-  padding-top: 70px;
-  padding-right: 15%;
-  /* background-color: #424242; */
+export const StyledNewCarForm = styled(composedNewCarForm)`
+  padding-left: 10%;
+  padding-top: 30px;
+  padding-right: 10%;
 `;

@@ -5,12 +5,26 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import { withFirebase } from "../../config/firebase/context";
 import { compose } from "recompose";
+import SpeedDial from '@material-ui/lab/SpeedDial';
+import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
+import { withStyles } from '@material-ui/core/styles';
+import { StyledNewCarForm } from "./NewCarForm";
+
+
+const styles = theme => ({
+  speedDial: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 6,
+    right: theme.spacing.unit * 7,
+  },
+})
 
 export class CarList extends Component {
   constructor() {
     super();
     this.state = {
       carList: [],
+      isOpenAddNewCarModal: false,
     };
   }
 
@@ -37,9 +51,22 @@ export class CarList extends Component {
     this.props.firebase.userCars().off();
   }
 
+   handleAddNewCar = (event) =>{
+    this.setState({
+      isOpenAddNewCarModal: true
+    })
+  }
+
+  handleCloseNewCarModal = (event) => {
+    this.setState({
+      isOpenAddNewCarModal: false
+    })
+  }
+
   render() {
+    const {classes}  = this.props
     return (
-      <div className={this.props.className}>
+      <div className={this.props.className} onClose={this.props.handleOnClose} open={this.props.isOpened}>
         <GridList
           cellHeight={350}
           className="grid-list"
@@ -53,12 +80,23 @@ export class CarList extends Component {
             </GridListTile>
           ))}
         </GridList>
+        <SpeedDial
+          ariaLabel="SpeedDial tooltip example"
+          className={classes.speedDial}
+          icon={<SpeedDialIcon />}
+          onClick={this.handleAddNewCar}
+          open={false}
+        ></SpeedDial>
+        {this.state.isOpenAddNewCarModal && <StyledNewCarForm isOpened={this.state.isOpenAddNewCarModal} handleOnClose={this.handleCloseNewCarModal}/>}
       </div>
     );
+    
   }
 }
 
-const StyledCarList = compose(withFirebase)(styled(CarList)`
+const WithStylesCarList = withStyles(styles)(CarList)
+
+const StyledCarList = compose(withFirebase)(styled(WithStylesCarList)`
   display: "flex";
   flex-wrap: "wrap";
   justify-content: "space-around";

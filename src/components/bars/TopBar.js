@@ -13,7 +13,7 @@ import Link from '@material-ui/core/Link'
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
 
-const profileTabIndex = 5;
+const profileTabIndex = 4;
 const drawerWidth = 240;
 const title = "Cyfrowa historia pojazdów";
 
