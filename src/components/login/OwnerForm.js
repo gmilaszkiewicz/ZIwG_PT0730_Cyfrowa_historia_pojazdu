@@ -30,10 +30,6 @@ const StyledButton = styled(Button)`
 
 class OwnerForm extends Component {
 
-  registerUser = (email, password) => {
-    this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-  };
-
   render() {
     return (
       <div>

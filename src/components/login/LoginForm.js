@@ -90,9 +90,11 @@ class LoginForm extends Component {
   };
 
   handleRole = (event, role) => {
-    this.setState({
-      role: role
-    });
+    if(role!==null){
+      this.setState({
+        role: role
+      });
+    }
   };
 
   changeButtonsState = btnState => {
@@ -111,7 +113,9 @@ class LoginForm extends Component {
       <StyledToggleButton value="owner" id="owner">
         Owner
       </StyledToggleButton>
-      <StyledToggleButton value="service">Car Service</StyledToggleButton>
+      <StyledToggleButton value="service" id="service">
+        Car Service
+      </StyledToggleButton>
     </StyledToggleButtonGroup>
   );
 

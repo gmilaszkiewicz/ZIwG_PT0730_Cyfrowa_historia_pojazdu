@@ -1,11 +1,34 @@
 import React, { Component } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
-import { Field, Formik } from "formik";
+import { Field, Formik, Form } from "formik";
+import { withSnackbar } from "../snackbar";
+import * as yup from 'yup';
+import { StyledErrorMsg } from './LoginForm'
+import styled from 'styled-components'
 
-export default class CarServiceForm extends Component {
-  registerUser = (email, password) => {
-    this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-  };
+const StyledButton = styled(Button)`
+  &&{
+      margin-top: 4px;
+  }
+`
+
+const carServiceRegisterSchema = yup.object().shape({
+  name: yup.string()
+          .required("Required field"),
+  email: yup.string()
+          .email("Invalid e-mail")
+          .required("Email is required"),
+  password: yup.string()
+            .required("Required field")
+            .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+            , "Minimum 8 chars, letters and numbers"),
+  reapetedPassword: yup.string()
+                    .oneOf([yup.ref('password'), null], "Passwords are not same")
+                    .required('Password confirm is required')
+})
+
+class CarServiceForm extends Component {
+
   render() {
     return (
       <div>
@@ -19,8 +42,23 @@ export default class CarServiceForm extends Component {
             password: "",
             reapetedPassword: ""
           }}
-          onSubmit={() => {}}
+          validationSchema={carServiceRegisterSchema}
+          onSubmit={(values) => {
+            setTimeout(() => {
+              this.props.firebase.doCreateUserWithEmailAndPassword(values.email, values.password)
+              .then(() => {
+                this.props.snackbar.showMessage(
+                  'Successful registration!', "success")
+                this.props.handleClose()
+              })
+              .catch(error => {
+                this.props.snackbar.showMessage(
+                  error.message, "error")
+              }) 
+            }, 1000);
+          }}
           render={props => (
+            <Form>
             <Grid container direction="column" spacing={0} justify="center">
               <Grid item>
                 <Field
@@ -33,13 +71,14 @@ export default class CarServiceForm extends Component {
                   onChange={props.handleChange}
                   fullWidth
                 />
+                <StyledErrorMsg error id="component-error-text">{props.errors.name}</StyledErrorMsg>
               </Grid>
               <Grid item>
                 <Field
                   required
                   component={TextField}
-                  id="address1"
-                  name="address1"
+                  id="address"
+                  name="address"
                   onChange={props.handleChange}
                   label="Address"
                   fullWidth
@@ -73,6 +112,7 @@ export default class CarServiceForm extends Component {
                   fullWidth
                   onChange={props.handleChange}
                 />
+                <StyledErrorMsg error id="component-error-text">{props.errors.email}</StyledErrorMsg>
               </Grid>
               <Grid item>
                 <Field
@@ -87,6 +127,7 @@ export default class CarServiceForm extends Component {
                   fullWidth
                   onChange={props.handleChange}
                 />
+                <StyledErrorMsg error id="component-error-text">{props.errors.password}</StyledErrorMsg>
               </Grid>
               <Grid item>
                 <Field
@@ -101,27 +142,25 @@ export default class CarServiceForm extends Component {
                   onChange={props.handleChange}
                   fullWidth
                 />
+                <StyledErrorMsg error id="component-error-text">{props.errors.reapetedPassword}</StyledErrorMsg>
               </Grid>
               <Grid item>
-                <Button
+                <StyledButton
                   variant="contained"
                   color="primary"
                   fullWidth
-                  onClick={(e) => {
-                    this.registerUser(
-                      props.values.email,
-                      props.values.password
-                    );
-                    this.props.handleClose(e);
-                  }}
+                  type="submit"
                 >
                   Register
-                </Button>
+                </StyledButton>
               </Grid>
             </Grid>
+            </Form>
           )}
         />
       </div>
     );
   }
 }
+
+export default withSnackbar()(CarServiceForm)

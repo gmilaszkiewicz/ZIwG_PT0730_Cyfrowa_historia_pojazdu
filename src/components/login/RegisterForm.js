@@ -11,7 +11,7 @@ const StyledTab = styled(Tab)`
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 24 }}>
+    <Typography component="div" style={{ padding: 24, overflowX:"hidden" }}>
       {props.children}
     </Typography>
   );
