@@ -27,6 +27,9 @@ const muiTheme = createMuiTheme({
           },
           text:{
               main: grey[50]
+          },
+          zIndex:{
+            snackbar: 1050
           }
     },
 
@@ -49,6 +52,9 @@ const muiTheme = createMuiTheme({
         textPrimary:{
             color: "white",
           }
+      },
+      MuiSnackbar:{
+        zIndex: 900
       },
       MuiListItem: {
 

@@ -78,7 +78,6 @@ export class CarCard extends Component {
 
     return (
       <Card className={className}>
-      {console.log(this.props.className)}
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {(images !== undefined && images.length > 0) && (

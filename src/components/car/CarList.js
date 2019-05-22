@@ -16,8 +16,8 @@ import classNames from 'classnames';
 const styles = theme => ({
   speedDial: {
     position: "absolute",
-    bottom: theme.spacing.unit * 6,
-    right: theme.spacing.unit * 7,
+    bottom: theme.spacing(6),
+    right: theme.spacing(7),
   },
 });
 
@@ -90,7 +90,7 @@ export class CarList extends Component {
           padding={1}
         >
           {this.state.carList.map((car, index) => (
-             <Zoom in={this.state.checked} style={{ transitionDelay: this.state.checked ? index*400 : 0 }}>
+             <Zoom key={index} in={this.state.checked} style={{ transitionDelay: this.state.checked ? index*400 : 0 }}>
               <GridListTile key={index}>
                 <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
               </GridListTile>
@@ -103,6 +103,7 @@ export class CarList extends Component {
           icon={<SpeedDialIcon />}
           onClick={this.handleAddNewCar}
           open={false}
+          children={null}
         />
         {this.state.isOpenAddNewCarModal && (
           <StyledNewCarForm

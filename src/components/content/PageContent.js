@@ -3,6 +3,7 @@ import { routes } from "../../constans/tabs-routes";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -20,7 +21,8 @@ const styles = theme => ({
 
 const mapStateToProps = state => {
   return {
-    chosenTab: state.chosenTab
+    chosenTab: state.chosenTab,
+    snackBarStatus: state.snackBarStatus
   };
 };
 

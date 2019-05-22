@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { SignInForm } from '../login/LoginForm'
+import { snackSignInForm as SignInForm } from '../login/LoginForm'
 import styled from 'styled-components';
+import { connect } from "react-redux";
 
 const StyledDiv = styled.div`
     background-image: url("http://www.kinyu-z.net/data/wallpapers/226/1494552.jpg");
@@ -11,7 +12,7 @@ const StyledDiv = styled.div`
     background-size: cover;
 `
 
-export default class LoginPage extends Component{
+class LoginPage extends Component{
 
     render(){
         return(
@@ -21,3 +22,5 @@ export default class LoginPage extends Component{
         );
     }
 }
+
+export default LoginPage

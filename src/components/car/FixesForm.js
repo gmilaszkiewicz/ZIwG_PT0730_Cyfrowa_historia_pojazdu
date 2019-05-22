@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dialog, withStyles } from "@material-ui/core";
-import { Formik, Form } from "formik";
+import { Form } from "formik";
 import classNames from "classnames";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -15,7 +15,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { compose } from "recompose";
 import { withFirebase } from "../../config/firebase/context";
 import "filepond/dist/filepond.min.css";
-import { FilePond, File, registerPlugin } from "react-filepond";
+import { FilePond } from "react-filepond";
 
 const styles = theme => ({
   root: {
@@ -101,7 +101,7 @@ class AddFixForm extends Component {
       name: fixName,
       description,
       course,
-      DateTime: selectedDate,
+      dateTime: selectedDate,
       fixCategoryName: fixCategory,
       price
     };
@@ -148,7 +148,6 @@ class AddFixForm extends Component {
 
   render() {
     const { classes, name } = this.props;
-    console.log(this.state);
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>

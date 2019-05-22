@@ -11,6 +11,14 @@ const config = {
   messagingSenderId: "612644941968"
 };
 
+const appendZeroBefore = number => {
+  return (number<=9)? "0" + number: number
+}
+
+const dateToString = date => {
+  return appendZeroBefore(date.getDate()) + "-" + appendZeroBefore((date.getMonth()+1)) + "-" + date.getFullYear()
+}
+
 class Firebase {
   constructor() {
     app.initializeApp(config);
@@ -45,6 +53,7 @@ class Firebase {
 
   addCar = (name, values, userId) => {
     const md5Name = this.md5(name);
+    values.registerTime = dateToString(values.registerTime)
     this.db
       .ref(`users/${userId}/cars`)
       .child(md5Name)
@@ -58,6 +67,7 @@ class Firebase {
     } else newCategory = "damages";
     if (values) {
       const md5Name = this.md5(name);
+      values.dateTime = dateToString(values.dateTime)
       this.db
         .ref(`users/${userId}/cars/${md5Name}`)
         .child(`${newCategory}`)

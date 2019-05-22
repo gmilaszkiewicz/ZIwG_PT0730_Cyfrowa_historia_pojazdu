@@ -1,7 +1,5 @@
 import React, {Component} from "react"
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
 import Paper from '@material-ui/core/Paper';
 import MUIDataTable from "mui-datatables";
 import styled from 'styled-components'
@@ -9,7 +7,7 @@ import styled from 'styled-components'
 const styles = theme => ({
     root: {
         width: '100%',
-        marginTop: theme.spacing.unit * 3,
+        marginTop: theme.spacing(3),
         overflowX: 'auto',
       },
 });
@@ -44,7 +42,7 @@ const styles = theme => ({
      }
     },
     {
-        name: "fixDate",
+        name: "dateTime",
         label: "Fix date",
         options: {
          sort: true,
