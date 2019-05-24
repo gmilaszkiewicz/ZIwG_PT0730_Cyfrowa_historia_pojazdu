@@ -79,6 +79,35 @@ class Firebase {
   fixCategories = () => this.db.ref("fixCategories");
 
   damageCategories = () => this.db.ref("damageCategories");
+
+  // *** Merge Auth and DB User API *** //
+
+  onAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged(authUser => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once('value')
+          .then(snapshot => {
+            const dbUser = snapshot.val();
+
+            // default empty roles
+            if (dbUser && !dbUser.role) {
+              dbUser.role = "";
+            }
+
+            // merge auth and db user
+            authUser = {
+              uid: authUser.uid,
+              email: authUser.email,
+              ...dbUser,
+            };
+
+            next(authUser);
+          });
+      } else {
+        fallback();
+      }
+    });
 }
 
 export default Firebase;

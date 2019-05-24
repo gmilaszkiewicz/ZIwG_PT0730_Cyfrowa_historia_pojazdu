@@ -5,6 +5,7 @@ import { withSnackbar } from "../snackbar";
 import * as yup from 'yup';
 import { StyledErrorMsg } from './LoginForm'
 import styled from 'styled-components'
+import * as ROLES from '../../constans/roles';
 
 const StyledButton = styled(Button)`
   &&{
@@ -30,6 +31,9 @@ const carServiceRegisterSchema = yup.object().shape({
 class CarServiceForm extends Component {
 
   render() {
+
+    const role = ROLES.CAR_SERVICE
+
     return (
       <div>
         <Formik
@@ -44,8 +48,19 @@ class CarServiceForm extends Component {
           }}
           validationSchema={carServiceRegisterSchema}
           onSubmit={(values) => {
+            const data = values
             setTimeout(() => {
               this.props.firebase.doCreateUserWithEmailAndPassword(values.email, values.password)
+              .then((authUser) => {
+                return this.props.firebase
+                  .user(authUser.user.uid)
+                  .set({
+                    email: authUser.user.email,
+                    name: data.name,
+                    address: data.address1 + " " + data.zip + " " + data.city,
+                    role
+                  })
+              })
               .then(() => {
                 this.props.snackbar.showMessage(
                   'Successful registration!', "success")

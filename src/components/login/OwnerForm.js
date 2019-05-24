@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { StyledErrorMsg } from './LoginForm'
 import styled from 'styled-components'
 import withSnackbar from "../snackbar/withSnackbar";
+import * as ROLES from '../../constans/roles';
 
 
 const ownerRegisterSchema = yup.object().shape({
@@ -31,6 +32,9 @@ const StyledButton = styled(Button)`
 class OwnerForm extends Component {
 
   render() {
+    // const { name, email, password} = this.state;
+    const role = ROLES.OWNER;
+
     return (
       <div>
         <Formik
@@ -43,8 +47,18 @@ class OwnerForm extends Component {
           }}
           validationSchema={ownerRegisterSchema}
           onSubmit={(values, { setSubmitting, setValues, setStatus } , errors) => {
+            const data = values
             setTimeout(() => {
               this.props.firebase.doCreateUserWithEmailAndPassword(values.email, values.password)
+              .then((authUser) => {
+                return this.props.firebase
+                  .user(authUser.user.uid)
+                  .set({
+                    email: authUser.user.email,
+                    name: data.name + " " + data.surname,
+                    role
+                  })
+              })
               .then(() => {
                 this.props.snackbar.showMessage(
                   'Successful registration!', "success")
