@@ -77,17 +77,6 @@ const muiTheme = createMuiTheme({
         }
       }
     },
-    // MuiOutlinedInput:{
-    //   root:{
-    //     borderColor: "black",
-    //     notchedOutline:{
-    //       borderColor: "black",
-    //     }
-    //   },
-    //   notchedOutline:{
-    //     borderColor: "black",
-    //   }
-    // }
 })
 
 ReactDOM.render(

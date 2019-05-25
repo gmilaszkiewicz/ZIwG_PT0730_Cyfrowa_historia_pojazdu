@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { routes } from "../../constans/tabs-routes";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
+import { authRoutes } from './../../constans/authRoutes'
 
 
 const styles = theme => ({
@@ -33,7 +34,7 @@ class PageContent extends Component {
     return (
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {routes.map(
+        {authRoutes.map(
           (route, index) =>
             this.props.chosenTab === index &&
             route.main(this.props.authUser, index)

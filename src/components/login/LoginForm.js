@@ -18,6 +18,8 @@ import * as ROUTES from "./../../constans/routes";
 import * as yup from 'yup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import withSnackbar from './../snackbar/withSnackbar'
+import {createAuthRoutes} from './../../constans/authRoutes'
+import { routes } from "./../../constans/tabs-routes";
 
 
 const StyledPaper = styled(Paper)`

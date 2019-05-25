@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { routes } from "../../constans/tabs-routes";
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
+import { createAuthRoutes, authRoutes } from './../../constans/authRoutes'
 
 const drawerWidth = 240;
 
@@ -61,12 +62,12 @@ const mapStateToProps = state => {
 
 class PermanentDrawerLeft extends Component {
 
+  
   render(){
 
     const { classes } = this.props;
 
     return (
-      // <div className={classes.root}>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -79,8 +80,8 @@ class PermanentDrawerLeft extends Component {
           <div className={classes.toolbar} />
           <Divider />
           <List className={classes.list}>
-            {routes.map((route, index) => (
-                route.visible && 
+            {authRoutes.map((route, index) => (
+                route.visible && route.access.includes(this.props.authUser.role) &&
                 <ListItem 
                 component={Link} 
                 key={route.name} 
@@ -96,7 +97,6 @@ class PermanentDrawerLeft extends Component {
             ))}
           </List>
         </Drawer>
-      // </div>
     );}
 }
 

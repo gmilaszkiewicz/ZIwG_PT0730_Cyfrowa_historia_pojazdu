@@ -12,6 +12,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link'
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
+import { createAuthRoutes, authRoutes } from './../../constans/authRoutes'
+import { routes } from "../../constans/tabs-routes";
+
 
 const profileTabIndex = 4;
 const drawerWidth = 240;
@@ -48,22 +51,22 @@ function mapDispatchToProps(dispatch) {
 class TopBar extends Component{
 
     state = {
-        anchorEl: null,
-      };
-    
-      handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-      };
-    
-      handleClose = (event) => {
-        event.target.outerText==='Profile' && this.props.chooseTab(profileTabIndex)
-        this.setState({ anchorEl: null });
-      };
-    
-      handlelogOut = ({ firebase }) => {
-        firebase.doSignOut();
-        this.handleClose();
-      }
+      anchorEl: null,
+    };
+  
+    handleMenu = event => {
+      this.setState({ anchorEl: event.currentTarget });
+    };
+  
+    handleClose = (event) => {
+      event.target.outerText==='Profile' && this.props.chooseTab(profileTabIndex)
+      this.setState({ anchorEl: null });
+    };
+  
+    handlelogOut = ({ firebase }) => {
+      firebase.doSignOut();
+      this.handleClose();
+    }
 
     render(){
 

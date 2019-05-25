@@ -32,7 +32,7 @@ const StyledButton = styled(Button)`
 class OwnerForm extends Component {
 
   render() {
-    // const { name, email, password} = this.state;
+    const { name, email, password} = this.state;
     const role = ROLES.OWNER;
 
     return (
