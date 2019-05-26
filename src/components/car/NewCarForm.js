@@ -20,6 +20,7 @@ const StyledTextField = styled(TextField)`
 
 const StyledButton = styled(Button)`
   width: 450px;
+  margin-bottom: 10px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
@@ -101,7 +102,8 @@ export class NewCarForm extends Component {
             render={props => (
               <Form>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container spacing={8}>
+                  <Grid container spacing={0}>
+                    <Grid item>
                     <Field
                       name="name"
                       component={StyledTextField}
@@ -112,6 +114,8 @@ export class NewCarForm extends Component {
                       onChange={props.handleChange}
                     />
                     <StyledErrorMsg error id="component-error-text">{props.errors.name}</StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
                     <Field
                       name="VIN"
                       component={StyledTextField}
@@ -122,6 +126,8 @@ export class NewCarForm extends Component {
                       onChange={props.handleChange}
                     />
                     <StyledErrorMsg error id="component-error-text">{props.errors.VIN}</StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
                     <Field
                       name="registerNumber"
                       component={StyledTextField}
@@ -132,6 +138,8 @@ export class NewCarForm extends Component {
                       onChange={props.handleChange}
                     />
                     <StyledErrorMsg error id="component-error-text">{props.errors.registerNumber}</StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
                     <Field
                       name="registerTime"
                       component={StyledDatePicker}
@@ -141,8 +149,18 @@ export class NewCarForm extends Component {
                       value={props.values.registerTime}
                       variant="outlined"
                       onChange={props.handleChange}
+                    
                     />
+                    {/* <DatePicker
+                      margin="normal"
+                      label="Fix data:"
+                      className={classNames(classes.margin, classes.picker)}
+                      value={props.values.registerTime}
+                      onChange={props.handleChange}
+                    /> */}
                     <StyledErrorMsg error id="component-error-text">{props.errors.registerTime}</StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
                     <StyledDropZoneArea
                       filesLimit={3}
                       onChange={value =>
@@ -153,6 +171,8 @@ export class NewCarForm extends Component {
                       dropzoneText="Browse files"
                       dropZoneClass="dropzone"
                     />
+                    </Grid>
+                    <Grid item>
                     <StyledButton
                       type="submit"
                       variant="contained"
@@ -160,6 +180,7 @@ export class NewCarForm extends Component {
                     >
                       Save
                     </StyledButton>
+                    </Grid>
                   </Grid>
                 </MuiPickersUtilsProvider>
               </Form>
@@ -174,7 +195,7 @@ export class NewCarForm extends Component {
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
 export const StyledNewCarForm = styled(composedNewCarForm)`
   padding-left: 10%;
-  padding-top: 30px;
+  padding-top: 10px;
   padding-right: 10%;
   height: 550px;
   .MuiGrid-root {
@@ -185,7 +206,7 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
     width: 450px;
     min-height: 0px;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     /* height: 200px; */
   }
 `;

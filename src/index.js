@@ -75,6 +75,11 @@ const muiTheme = createMuiTheme({
             color: "white"
           }
         }
+      },
+      MuiFab: {
+          primary:{
+            backgroundColor:"red"
+          }
       }
     },
 })

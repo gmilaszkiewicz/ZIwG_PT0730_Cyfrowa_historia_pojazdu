@@ -3,6 +3,7 @@ import React from "react";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import CarInfoForm from './../components/car/CarInfoForm'
 import * as ROLES from '../constans/roles';
+import ServicesMap from './../components/services-map/ServicesMap'
 
 export const routes = [
   {
@@ -19,7 +20,7 @@ export const routes = [
     path: "#service",
     visible: true,
     sidebar: () => <h2>services</h2>,
-    main: () => <h2>Car sevices</h2>,
+    main: () => <ServicesMap />,
     icon: () => <InboxIcon />,
     name: "Car services",
     access: ROLES.OWNER
