@@ -184,6 +184,7 @@ class AddFixForm extends Component {
             <Grid container direction="row">
               <Grid item xs={6} className={classes.comp}>
                 <TextField
+                  required
                   label={this.props.category + " name"}
                   className={classNames(classes.margin, classes.textField)}
                   margin="normal"
@@ -218,6 +219,7 @@ class AddFixForm extends Component {
               </Grid>
               <Grid item xs={6}>
                 <TextField
+                  required
                   id="outlined-adornment-weight"
                   className={classNames(classes.margin, classes.textField)}
                   variant="outlined"
@@ -269,7 +271,8 @@ class AddFixForm extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  onClick={e => this.addFixes(name, e)}
+                  type="submit"
+                  onSubmit={e => this.addFixes(name, e)}
                 >
                   Accept
                 </Button>

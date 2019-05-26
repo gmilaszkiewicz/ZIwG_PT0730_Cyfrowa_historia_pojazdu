@@ -80,7 +80,7 @@ class PermanentDrawerLeft extends Component {
           <div className={classes.toolbar} />
           <Divider />
           <List className={classes.list}>
-            {authRoutes.map((route, index) => (
+            {routes.map((route, index) => (
                 route.visible && route.access.includes(this.props.authUser.role) &&
                 <ListItem 
                 component={Link} 

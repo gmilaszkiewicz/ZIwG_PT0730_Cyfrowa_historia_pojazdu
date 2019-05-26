@@ -34,7 +34,7 @@ class PageContent extends Component {
     return (
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {authRoutes.map(
+        {routes.map(
           (route, index) =>
             this.props.chosenTab === index &&
             route.main(this.props.authUser, index)

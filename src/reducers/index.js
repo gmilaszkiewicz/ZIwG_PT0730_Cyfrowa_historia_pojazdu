@@ -1,7 +1,7 @@
 import { CHOOSE_TAB, CHOOSE_CAR, CHANGE_SNACKBAR_STATUS } from "../constans/redux-cons";
 
 const initialState = {
-  chosenTab: 0,
+  chosenTab: undefined,
   chosenCar: {},
 };
 

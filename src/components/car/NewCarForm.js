@@ -10,6 +10,9 @@ import { DropzoneArea } from "material-ui-dropzone";
 import "react-dropzone-component/styles/filepicker.css";
 import { Dialog } from "@material-ui/core";
 import "dropzone/dist/min/dropzone.min.css";
+import * as yup from 'yup';
+import { StyledErrorMsg } from './../login/LoginForm'
+
 
 const StyledTextField = styled(TextField)`
   width: 450px;
@@ -24,6 +27,18 @@ const StyledDatePicker = styled(DatePicker)`
 `;
 
 const StyledDropZoneArea = styled(DropzoneArea)``;
+
+const newCarSchema = yup.object().shape({
+  name: yup.string()
+          .required("Required field"),
+  VIN: yup.string()
+          .required("Nr VIN is required")
+          .min(17, "VIN conatins 17 characters"),
+  registerNumber: yup.string()
+            .required("Required field"),
+  // registerTime: yup.date()
+            // .max(new Date(), "Wrong date")
+})
 
 export class NewCarForm extends Component {
   state = {
@@ -76,6 +91,7 @@ export class NewCarForm extends Component {
               photos: "",
               registerTime: new Date()
             }}
+            validationSchema={newCarSchema}
             onSubmit={values => {
               setTimeout(() => {
                 this.props.handleOnClose()
@@ -95,6 +111,7 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
+                    <StyledErrorMsg error id="component-error-text">{props.errors.name}</StyledErrorMsg>
                     <Field
                       name="VIN"
                       component={StyledTextField}
@@ -104,6 +121,7 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
+                    <StyledErrorMsg error id="component-error-text">{props.errors.VIN}</StyledErrorMsg>
                     <Field
                       name="registerNumber"
                       component={StyledTextField}
@@ -113,6 +131,7 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
+                    <StyledErrorMsg error id="component-error-text">{props.errors.registerNumber}</StyledErrorMsg>
                     <Field
                       name="registerTime"
                       component={StyledDatePicker}
@@ -123,6 +142,7 @@ export class NewCarForm extends Component {
                       variant="outlined"
                       onChange={props.handleChange}
                     />
+                    <StyledErrorMsg error id="component-error-text">{props.errors.registerTime}</StyledErrorMsg>
                     <StyledDropZoneArea
                       filesLimit={3}
                       onChange={value =>
