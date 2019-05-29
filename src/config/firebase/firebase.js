@@ -74,6 +74,11 @@ class Firebase {
       .set({ uid: uid });
   };
 
+  userByEmail = email => {
+    const md5Email = this.md5(email);
+    return this.db.ref(`usersByEmail/${md5Email}`);
+  };
+
   addFix = (name, values, userId, category) => {
     let newCategory = "";
     if (category === "Fix") {

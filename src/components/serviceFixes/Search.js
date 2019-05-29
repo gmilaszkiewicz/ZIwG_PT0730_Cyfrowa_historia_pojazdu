@@ -32,16 +32,21 @@ const useStyles = makeStyles({
   }
 });
 const classes = makeStyles();
-export const Search = ({ className }) => (
+export const Search = ({ className, onChange, onClick }) => (
   <Paper className={className}>
     {console.log(className)}
     <IconButton className={classes.iconButton} aria-label="Menu">
       <MenuIcon />
     </IconButton>
-    <InputBase className={classes.input} placeholder="Find Owner" />
+    <InputBase
+      className={classes.input}
+      placeholder="Find Owner"
+      onChange={onChange}
+    />
     <IconButton
       className={classnames(classes.iconButton, "icon-search")}
       aria-label="Search"
+      onClick={onClick}
     >
       <SearchIcon />
     </IconButton>

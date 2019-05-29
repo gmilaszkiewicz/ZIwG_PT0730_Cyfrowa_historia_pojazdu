@@ -28,7 +28,8 @@ export class AddFixesService extends Component {
     this.state = {
       carList: [],
       isOpenAddNewCarModal: false,
-      checked: true
+      checked: true,
+      email: ""
     };
   }
   groupImages = cars => {
@@ -55,13 +56,40 @@ export class AddFixesService extends Component {
       isOpenAddNewCarModal: false
     });
   };
+
+  handleSearchChange = e => {
+    this.setState({ email: e.target.value });
+  };
+
+  submitEmail = () => {
+    this.props.firebase.userByEmail(this.state.email).on("value", snapshot => {
+      let uid = snapshot.val().uid;
+      this.props.firebase.userCars(uid).on("value", snapshot => {
+        let cars = [];
+        console.log(uid);
+        if (snapshot.val()) {
+          Object.values(snapshot.val().cars).forEach(object => {
+            console.log(cars);
+            console.log(uid);
+            cars.push(object);
+          });
+          this.groupImages(cars);
+        }
+        this.setState({ carList: cars });
+      });
+    });
+  };
+
   render() {
     const { className } = this.props;
     return (
       <div className={className}>
         <div className="top">
           <div className="search-bar ">
-            <Search />
+            <Search
+              onChange={this.handleSearchChange}
+              onClick={this.submitEmail}
+            />
           </div>
         </div>
         <div className="content">
