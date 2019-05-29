@@ -12,12 +12,18 @@ const config = {
 };
 
 const appendZeroBefore = number => {
-  return (number<=9)? "0" + number: number
-}
+  return number <= 9 ? "0" + number : number;
+};
 
 const dateToString = date => {
-  return appendZeroBefore(date.getDate()) + "-" + appendZeroBefore((date.getMonth()+1)) + "-" + date.getFullYear()
-}
+  return (
+    appendZeroBefore(date.getDate()) +
+    "-" +
+    appendZeroBefore(date.getMonth() + 1) +
+    "-" +
+    date.getFullYear()
+  );
+};
 
 class Firebase {
   constructor() {
@@ -53,11 +59,19 @@ class Firebase {
 
   addCar = (name, values, userId) => {
     const md5Name = this.md5(name);
-    values.registerTime = dateToString(values.registerTime)
+    values.registerTime = dateToString(values.registerTime);
     this.db
       .ref(`users/${userId}/cars`)
       .child(md5Name)
       .set(values);
+  };
+
+  addUserByEmail = (uid, email) => {
+    const md5Email = this.md5(email);
+    this.db
+      .ref(`usersByEmail/`)
+      .child(md5Email)
+      .set({ uid: uid });
   };
 
   addFix = (name, values, userId, category) => {
@@ -67,7 +81,7 @@ class Firebase {
     } else newCategory = "damages";
     if (values) {
       const md5Name = this.md5(name);
-      values.dateTime = dateToString(values.dateTime)
+      values.dateTime = dateToString(values.dateTime);
       this.db
         .ref(`users/${userId}/cars/${md5Name}`)
         .child(`${newCategory}`)
@@ -86,7 +100,7 @@ class Firebase {
     this.auth.onAuthStateChanged(authUser => {
       if (authUser) {
         this.user(authUser.uid)
-          .once('value')
+          .once("value")
           .then(snapshot => {
             const dbUser = snapshot.val();
 
@@ -99,7 +113,7 @@ class Firebase {
             authUser = {
               uid: authUser.uid,
               email: authUser.email,
-              ...dbUser,
+              ...dbUser
             };
 
             next(authUser);
