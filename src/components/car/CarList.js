@@ -9,16 +9,15 @@ import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import { withStyles } from "@material-ui/core/styles";
 import { StyledNewCarForm } from "./NewCarForm";
-import Zoom from '@material-ui/core/Zoom';
-import classNames from 'classnames';
-
+import Zoom from "@material-ui/core/Zoom";
+import classNames from "classnames";
 
 const styles = theme => ({
   speedDial: {
     position: "absolute",
     bottom: theme.spacing(6),
-    right: theme.spacing(7),
-  },
+    right: theme.spacing(7)
+  }
 });
 
 export class CarList extends Component {
@@ -72,10 +71,8 @@ export class CarList extends Component {
 
   render() {
     const { classes } = this.props;
-    const speedDialClassName = classNames(
-      classes.speedDial,
-    );
-    
+    const speedDialClassName = classNames(classes.speedDial);
+
     return (
       <div
         className={this.props.className}
@@ -90,9 +87,18 @@ export class CarList extends Component {
           padding={1}
         >
           {this.state.carList.map((car, index) => (
-             <Zoom key={index} in={this.state.checked} style={{ transitionDelay: this.state.checked ? index*400 : 0 }}>
+            <Zoom
+              key={index}
+              in={this.state.checked}
+              style={{ transitionDelay: this.state.checked ? index * 400 : 0 }}
+            >
               <GridListTile key={index}>
-                <CarCard vin={car.VIN} name={car.name} images={car.photos} car={car}/>
+                <CarCard
+                  vin={car.VIN}
+                  name={car.name}
+                  images={car.photos}
+                  car={car}
+                />
               </GridListTile>
             </Zoom>
           ))}
