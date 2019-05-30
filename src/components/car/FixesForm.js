@@ -151,7 +151,7 @@ class AddFixForm extends Component {
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>
-          <Form>
+          <Form onSubmit={e => this.addFixes(name, e)}>
             <div className={classes.root}>
               <Typography
                 className={classes.margin}
@@ -272,7 +272,6 @@ class AddFixForm extends Component {
                   color="primary"
                   className={classes.button}
                   type="submit"
-                  onSubmit={e => this.addFixes(name, e)}
                 >
                   Accept
                 </Button>
