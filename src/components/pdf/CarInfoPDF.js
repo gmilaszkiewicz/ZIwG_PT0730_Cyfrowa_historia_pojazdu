@@ -5,7 +5,6 @@ import html2canvas from 'html2canvas';
 
 export const CarInfoPDF = (car, fixesTable) => (
     <Document>
-        {console.log(car)}
       <Page style={styles.body}>
         <Text style={styles.header} fixed>
           ~ Created with react-pdf ~

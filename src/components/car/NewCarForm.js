@@ -79,6 +79,20 @@ export class NewCarForm extends Component {
     this.setState({ imagesInBase64: imagesInBase64.join() });
     setFieldValue("photos", imagesInBase64.join());
   };
+
+  getCarDataFromAPI = async(carData) => {
+    let fetchedData = {}
+    fetch(`https://5cd467e9b231210014e3d8e7.mockapi.io/api/cars?search=${carData.VIN}`)
+    .then(results => {
+      return results.json()
+    })
+    .then(data => {
+      fetchedData = data
+    })
+    await this.sleep(500);
+    return fetchedData
+  }
+
   render() {
     return (
       <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
@@ -93,10 +107,12 @@ export class NewCarForm extends Component {
               registerTime: new Date()
             }}
             validationSchema={newCarSchema}
-            onSubmit={values => {
-              setTimeout(() => {
+            onSubmit={ (values) => {
+              setTimeout( async () => {
+                const data = await this.getCarDataFromAPI(values)
+                console.log(data)
                 this.props.handleOnClose()
-                this.saveCar(values);
+                // this.saveCar(values);
               }, 1000);
             }}
             render={props => (

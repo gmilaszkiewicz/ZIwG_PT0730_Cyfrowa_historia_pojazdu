@@ -84,7 +84,6 @@ export class CarCard extends Component {
   };
 
   handleSharePDF = event => {
-    console.log("sharePDF")
     const input = document.getElementById('carInfo');
     html2canvas(input)
       .then((canvas) => {
