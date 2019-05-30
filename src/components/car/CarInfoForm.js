@@ -8,11 +8,14 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CarPhotoViewer from './CarPhotosViewer';
 import FixesTable from './FixesTable'
 import TextField from '@material-ui/core/TextField'
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
+import { CarInfoPDF } from './../pdf/CarInfoPDF'  
+import { LoadingSpinner } from './../common/LoadingSpinner'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#9e9e9e',
     borderRadius: '30px',
     padding: theme.spacing(3),
     color:"white"
@@ -42,7 +45,7 @@ const styles = theme => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   rootOutlinedInput: {
-    width: 580,
+    width: '100%',
     color:"black",
     "&$cssDisabled $notchedOutline": {   //add this nested selector
       borderColor: "black",
@@ -108,7 +111,8 @@ class CarInfoForm extends Component {
   constructor(){
     super()
     this.state={
-      isOpenPhotosViewer: false
+      isOpenPhotosViewer: false,
+      loading: true
     }
   }
 
@@ -124,10 +128,20 @@ class CarInfoForm extends Component {
     })
   }
 
+  handleSetLoading = isLoading =>{
+    this.setState({
+      loading: isLoading
+    })
+  }
+
     render(){
       const {classes} = this.props;
       const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
-    return (
+      const selectedCar = this.props.chosenCar;
+      return (
+      <div>
+        {/* {(this.state.loading)? */}
+        {/* <LoadingSpinner loading={this.state.loading}/>: */}
         <Paper id="carInfo" className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={6}>
@@ -139,16 +153,33 @@ class CarInfoForm extends Component {
                   onClick={this.showPhotosViewer}
                 />
             </Grid>
-          <Grid item xs={6}>
-                {DisabledTextField("Name", this.props.chosenCar.name, classes)}
+          <Grid item xs={6} >
+            <Grid container spacing={2}>
+              <Grid item xs={6}>
+                {DisabledTextField("Brand", selectedCar.data.brand + " " + selectedCar.data.model, classes)}
+                {DisabledTextField("Car type", selectedCar.data.carType, classes)}
+                {DisabledTextField("Production year", selectedCar.data.productionYear, classes)}
                 {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
                 {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
+              </Grid>
+              <Grid item xs={6}>
                 {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
+                {DisabledTextField("Engine capacity", selectedCar.data.engineCapacity + " cm3",classes)}
+                {DisabledTextField("Engine power", selectedCar.data.enginePower + " kW",classes)}
+                {DisabledTextField("Fuel type", selectedCar.data.fuelType,classes)}
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
+        <div>
+            <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} />} fileName="somename.pdf">
+              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+            </PDFDownloadLink>
+        </div>
         <FixesTable car={this.props.chosenCar} />
         {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
         </Paper>
+      </div>
     );
     }
 }

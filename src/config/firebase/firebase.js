@@ -60,13 +60,20 @@ class Firebase {
     return this.db.ref(`users/${userId}`);
   };
 
-  addCar = (name, values, userId) => {
+  addCar = (name, values, userId, data) => {
     const md5Name = this.md5(name);
     values.registerTime = dateToString(values.registerTime)
     this.db
       .ref(`users/${userId}/cars`)
       .child(md5Name)
       .set(values);
+
+    console.log(data)
+
+    this.db
+      .ref(`users/${userId}/cars/${md5Name}`)
+      .child("data")
+      .set(data);
   };
 
   addFix = (name, values, userId, category) => {

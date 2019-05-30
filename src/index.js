@@ -78,7 +78,10 @@ const muiTheme = createMuiTheme({
       },
       MuiFab: {
           primary:{
-            backgroundColor:"red"
+            backgroundColor:"red",
+            '&:hover': {
+              backgroundColor: "red",
+            }
           }
       }
     },
