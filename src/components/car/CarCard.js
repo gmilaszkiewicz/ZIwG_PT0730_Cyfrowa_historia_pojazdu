@@ -10,16 +10,26 @@ import FixesForm from "./FixesForm";
 import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index";
+import ShareIcon from '@material-ui/icons/Share';
+import IconButton from '@material-ui/core/IconButton';
+import { CarInfoPDF } from './../pdf/CarInfoPDF'
+import ReactPDF from '@react-pdf/renderer';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
+
 
 const carInfoIndex = 5;
 
 const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
+
 `;
 
-
 const StyledCardMedia = styled(CardMedia)`
-  border-radius: 20px;
+  &&{
+    border-radius: 20px;
+  }
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -73,11 +83,20 @@ export class CarCard extends Component {
     this.props.chooseCar(this.props.car);
   };
 
+  handleSharePDF = event => {
+    console.log("sharePDF")
+    const input = document.getElementById('carInfo');
+    html2canvas(input)
+      .then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+      });
+  }
+
   render() {
     const { images, name, vin, className } = this.props;
 
     return (
-      <Card className={className}>
+      <Card id="card" className={className}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {(images !== undefined && images.length > 0) && (
@@ -105,6 +124,8 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenFixForm}
+            fullWidth
+            style={{ height: '50px'}}
           >
             Add Fix
           </Button>
@@ -112,9 +133,22 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenUpgradeForm}
+            fullWidth
+            style={{ height: '50px'}}
           >
             Add Modification
           </Button>
+          {/* <IconButton 
+            aria-label="Share"
+            onClick={this.handleSharePDF}
+          >
+            <ShareIcon />
+          </IconButton> */}
+           <div>
+            <PDFDownloadLink document={<CarInfoPDF car = {this.props.car} />} fileName="somename.pdf">
+              {({ blob, url, loading, error }) => (loading ? 'Loading ...' : 'Share data!')}
+            </PDFDownloadLink>
+          </div>
         </StyledCardAction>
         {this.state.addFixIsOpened && (
           <FixesForm
@@ -141,7 +175,7 @@ const connectedComponent = connect(null, mapDispatchToProps)(CarCard)
 
 export const StyledCarCard = styled(connectedComponent)`
   .media {
-    height: 200px;
+    height: 190px;
   }
   .image {
     width: 100px;

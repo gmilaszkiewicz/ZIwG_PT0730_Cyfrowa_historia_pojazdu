@@ -128,7 +128,7 @@ class CarInfoForm extends Component {
       const {classes} = this.props;
       const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
     return (
-        <Paper className={classes.root}>
+        <Paper id="carInfo" className={classes.root}>
         <Grid container spacing={24}>
           <Grid item xs={6}>
             <CardMedia
