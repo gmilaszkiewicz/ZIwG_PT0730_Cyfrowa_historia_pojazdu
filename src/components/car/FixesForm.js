@@ -16,6 +16,7 @@ import { compose } from "recompose";
 import { withFirebase } from "../../config/firebase/context";
 import "filepond/dist/filepond.min.css";
 import { FilePond } from "react-filepond";
+import withSnackbar from './../snackbar/withSnackbar'
 
 const styles = theme => ({
   root: {
@@ -111,6 +112,8 @@ class AddFixForm extends Component {
       this.props.firebase.auth.currentUser.uid,
       this.props.category
     );
+    this.props.snackbar.showMessage(
+      "Successful added fix!", "success")
   };
   componentDidMount() {
     const categoryName = this.props.category.toLowerCase() + "Categories";
@@ -151,7 +154,7 @@ class AddFixForm extends Component {
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>
-          <Form>
+          <Form onSubmit={e => this.addFixes(name, e)}>
             <div className={classes.root}>
               <Typography
                 className={classes.margin}
@@ -272,7 +275,6 @@ class AddFixForm extends Component {
                   color="primary"
                   className={classes.button}
                   type="submit"
-                  onSubmit={e => this.addFixes(name, e)}
                 >
                   Accept
                 </Button>
@@ -285,4 +287,4 @@ class AddFixForm extends Component {
   }
 }
 
-export default compose(withFirebase)(withStyles(styles)(AddFixForm));
+export default withSnackbar()(compose(withFirebase)(withStyles(styles)(AddFixForm)));
