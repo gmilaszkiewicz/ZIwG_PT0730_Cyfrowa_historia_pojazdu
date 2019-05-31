@@ -12,9 +12,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Link from '@material-ui/core/Link'
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
-import { createAuthRoutes, authRoutes } from './../../constans/authRoutes'
-import { routes } from "../../constans/tabs-routes";
-
 
 const profileTabIndex = 4;
 const drawerWidth = 240;

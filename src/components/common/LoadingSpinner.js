@@ -3,14 +3,15 @@ import { PropagateLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 
 const override = css`
-&&{
-  position:absolute;
-}
-display: block;
-margin: 0 auto;
-border-color: red;
-top:50%;
-left:50%;
+  &&{
+    position:absolute;
+  }
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+  color:red;
+  top:50%;
+  left:50%;
 `;
 
 export const LoadingSpinner = (loading) => {

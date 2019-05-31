@@ -12,10 +12,6 @@ import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index";
 import ShareIcon from '@material-ui/icons/Share';
 import IconButton from '@material-ui/core/IconButton';
-import ReactPDF from '@react-pdf/renderer';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
-
 
 const carInfoIndex = 5;
 
@@ -82,11 +78,6 @@ export class CarCard extends Component {
   };
 
   handleSharePDF = event => {
-    // const input = document.getElementById('carInfo');
-    // html2canvas(input)
-    //   .then((canvas) => {
-    //     const imgData = canvas.toDataURL('image/png');
-    //   });
     this.handleClick()
   }
 

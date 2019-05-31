@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CarPhotoViewer from './CarPhotosViewer';
 import FixesTable from './FixesTable'
 import TextField from '@material-ui/core/TextField'
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer'
+import { PDFDownloadLink } from '@react-pdf/renderer'
 import { CarInfoPDF } from './../pdf/CarInfoPDF'  
 import { LoadingSpinner } from './../common/LoadingSpinner'
 
@@ -163,6 +163,7 @@ class CarInfoForm extends Component {
                 {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
               </Grid>
               <Grid item xs={6}>
+                {DisabledTextField("Name", this.props.chosenCar.name,classes)}
                 {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
                 {DisabledTextField("Engine capacity", selectedCar.data.engineCapacity + " cm3",classes)}
                 {DisabledTextField("Engine power", selectedCar.data.enginePower + " kW",classes)}

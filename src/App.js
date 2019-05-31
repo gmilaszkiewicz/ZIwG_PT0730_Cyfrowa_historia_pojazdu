@@ -8,8 +8,6 @@ import { withAuthentication } from "./components/session"
 import * as ROUTES from './constans/routes'
 import SnackbarProvider from './components/snackbar/SnackbarProvider'
 
-  {/* the rest of your app belongs here, e.g. the router */}
-
 const App = () => (
   <SnackbarProvider SnackbarProps={{ autoHideDuration: 3000 }}>
       <BrowserRouter>

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { routes } from "../../constans/tabs-routes";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { authRoutes } from './../../constans/authRoutes'
-
 
 const styles = theme => ({
   root: {
