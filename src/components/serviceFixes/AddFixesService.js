@@ -29,7 +29,8 @@ export class AddFixesService extends Component {
       carList: [],
       isOpenAddNewCarModal: false,
       checked: true,
-      email: ""
+      email: "",
+      currentUid: ""
     };
   }
   groupImages = cars => {
@@ -64,13 +65,11 @@ export class AddFixesService extends Component {
   submitEmail = () => {
     this.props.firebase.userByEmail(this.state.email).on("value", snapshot => {
       let uid = snapshot.val().uid;
+      this.setState({ currentUid: uid });
       this.props.firebase.userCars(uid).on("value", snapshot => {
         let cars = [];
-        console.log(uid);
         if (snapshot.val()) {
           Object.values(snapshot.val().cars).forEach(object => {
-            console.log(cars);
-            console.log(uid);
             cars.push(object);
           });
           this.groupImages(cars);
@@ -94,9 +93,9 @@ export class AddFixesService extends Component {
         </div>
         <div className="content">
           <div
-            className={this.props.className}
             onClose={this.props.handleOnClose}
             open={this.props.isOpened}
+            className="car-list"
           >
             <GridList
               cellHeight={350}
@@ -119,6 +118,7 @@ export class AddFixesService extends Component {
                       name={car.name}
                       images={car.photos}
                       car={car}
+                      loggedUserUid={this.currentUid}
                     />
                   </GridListTile>
                 </Zoom>
@@ -144,7 +144,9 @@ export const StyledAddFixesService = styled(connectedAddFixesService)`
   flex-wrap: "wrap";
   justify-content: "space-around";
   overflow: "hidden";
-
+  .car-list {
+    margin-top: 20px;
+  }
   .icon {
     color: "rgba(255, 255, 255, 0.54)";
   }

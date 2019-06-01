@@ -98,6 +98,7 @@ export class CarList extends Component {
                   name={car.name}
                   images={car.photos}
                   car={car}
+                  loggedUserUid={this.props.firebase.auth.currentUser.uid}
                 />
               </GridListTile>
             </Zoom>

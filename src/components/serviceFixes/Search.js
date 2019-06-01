@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 const classes = makeStyles();
 export const Search = ({ className, onChange, onClick }) => (
   <Paper className={className}>
-    {console.log(className)}
     <IconButton className={classes.iconButton} aria-label="Menu">
       <MenuIcon />
     </IconButton>

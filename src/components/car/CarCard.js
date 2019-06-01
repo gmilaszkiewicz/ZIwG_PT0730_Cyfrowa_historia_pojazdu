@@ -17,7 +17,6 @@ const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
 `;
 
-
 const StyledCardMedia = styled(CardMedia)`
   border-radius: 20px;
 `;
@@ -74,13 +73,14 @@ export class CarCard extends Component {
   };
 
   render() {
-    const { images, name, vin, className } = this.props;
-
+    const { images, name, vin, className, loggedUserUid } = this.props;
+    console.log("TCL: CarCard -> render -> loggedUserUid", loggedUserUid)
+    
     return (
       <Card className={className}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {(images !== undefined && images.length > 0) && (
+            {images !== undefined && images.length > 0 && (
               <StyledCardMedia
                 className="media"
                 image={images[0]}
@@ -122,6 +122,7 @@ export class CarCard extends Component {
             isOpened={this.state.addFixIsOpened}
             handleOnClose={this.handleCloseAddFixForm}
             name={name}
+            loggedUserUid={loggedUserUid}
           />
         )}
         {this.state.addUpgradeIsOpend && (
@@ -130,6 +131,7 @@ export class CarCard extends Component {
             isOpened={this.state.addUpgradeIsOpend}
             handleOnClose={this.handleCloseAddUpgradeForm}
             name={name}
+            loggedUserUid={loggedUserUid}
           />
         )}
       </Card>
@@ -137,7 +139,10 @@ export class CarCard extends Component {
   }
 }
 
-const connectedComponent = connect(null, mapDispatchToProps)(CarCard)
+const connectedComponent = connect(
+  null,
+  mapDispatchToProps
+)(CarCard);
 
 export const StyledCarCard = styled(connectedComponent)`
   .media {

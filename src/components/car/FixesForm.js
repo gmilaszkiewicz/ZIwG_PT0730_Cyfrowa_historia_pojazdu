@@ -85,7 +85,7 @@ class AddFixForm extends Component {
 
   addFixes = (name, e) => {
     e.preventDefault();
-    this.props.handleOnClose()
+    this.props.handleOnClose();
     const {
       fixName,
       price,
@@ -108,7 +108,7 @@ class AddFixForm extends Component {
     this.props.firebase.addFix(
       name,
       values,
-      this.props.firebase.auth.currentUser.uid,
+      this.props.loggedUserUid,
       this.props.category
     );
   };
