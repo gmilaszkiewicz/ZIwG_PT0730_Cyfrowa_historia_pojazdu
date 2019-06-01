@@ -112,7 +112,7 @@ export class NewCarForm extends Component {
                 const data = await this.getCarDataFromAPI(values)
                 if(data[0]!==undefined){
                   this.props.handleOnClose()
-                  this.saveCar(values,data[0]);
+                  // this.saveCar(values,data[0]);
                   this.props.snackbar.showMessage(
                     "Successful added new car!", "success")
                 }else{

@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index";
 import ShareIcon from '@material-ui/icons/Share';
 import IconButton from '@material-ui/core/IconButton';
+import classNames from "classnames";
 
 const carInfoIndex = 5;
 
@@ -83,9 +84,9 @@ export class CarCard extends Component {
 
   render() {
     const { images, name, vin, className } = this.props;
-
+    console.log(className)
     return (
-      <Card id="card" className={className}>
+      <Card id="card" className={classNames(className, "card")}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {(images !== undefined && images.length > 0) && (
@@ -158,6 +159,9 @@ export class CarCard extends Component {
 const connectedComponent = connect(null, mapDispatchToProps)(CarCard)
 
 export const StyledCarCard = styled(connectedComponent)`
+  .card{
+    border-radius: 30px;
+  }
   .media {
     height: 190px;
   }

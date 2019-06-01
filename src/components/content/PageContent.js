@@ -13,7 +13,11 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
     position: "relative",
-    overflowY: "auto"
+    overflowY: "auto",
+    backgroundColor: "#323232",
+    backgroundImage: `url("http://www.kinyu-z.net/data/wallpapers/180/1334867.jpg")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   toolbar: theme.mixins.toolbar
 });

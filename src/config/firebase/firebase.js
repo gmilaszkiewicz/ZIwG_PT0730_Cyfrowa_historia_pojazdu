@@ -67,9 +67,7 @@ class Firebase {
       .ref(`users/${userId}/cars`)
       .child(md5Name)
       .set(values);
-
-    console.log(data)
-
+      
     this.db
       .ref(`users/${userId}/cars/${md5Name}`)
       .child("data")

@@ -7,7 +7,6 @@ class CarPhotoViewer extends Component{
     render(){
         return(
             <div style={{ position: 'relative', width: '100%', height: 500 }}>
-                {console.log(this.props.car.photos)}
                 <AutoRotatingCarousel
                     open={this.props.isOpened}
                     onClose={() => this.props.handleOnClose()}
@@ -17,9 +16,9 @@ class CarPhotoViewer extends Component{
                 >
                 {this.props.car.photos.filter((photo, index) => {return photo!==""}).map( (photo, index) => (
                     <Slide
-                    media={<img src={photo} alt="my car" />}
-                    mediaBackgroundStyle={{ backgroundColor: "#424242" }}
-                    style={{ backgroundColor: "#424242" }}
+                        media={<img src={photo} alt="my car" />}
+                        mediaBackgroundStyle={{ backgroundColor: "#424242" }}
+                        style={{ backgroundColor: "#424242" }}
                     />
                 ))}
                 </AutoRotatingCarousel>

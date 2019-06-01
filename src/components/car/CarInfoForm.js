@@ -11,11 +11,12 @@ import TextField from '@material-ui/core/TextField'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { CarInfoPDF } from './../pdf/CarInfoPDF'  
 import { LoadingSpinner } from './../common/LoadingSpinner'
+import { ShareButton } from './ShareButton'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#9e9e9e',
+    backgroundColor: '#333333',
     borderRadius: '30px',
     padding: theme.spacing(3),
     color:"white"
@@ -46,30 +47,30 @@ const styles = theme => ({
   },
   rootOutlinedInput: {
     width: '100%',
-    color:"black",
+    color:"white",
     "&$cssDisabled $notchedOutline": {   //add this nested selector
-      borderColor: "black",
+      borderColor: "white",
    },
    "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-    borderColor: "black"
+    borderColor: "white"
     }
   },
   notchedOutline: {
-    borderColor: "black",
+    borderColor: "white",
   },
   label:{
-    color: "black",
+    color: "white",
     '&$cssFocused': {
-      color: "black",
+      color: "white",
     },
     '&$cssDisabled': {
-      color: "black",
+      color: "white",
     }
   },
   cssFocused: {},
   cssDisabled:{
-    borderColor: "black",
-    color: "black"
+    borderColor: "white",
+    color: "white"
   },
 });
 
@@ -173,8 +174,8 @@ class CarInfoForm extends Component {
           </Grid>
         </Grid>
         <div>
-            <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} />} fileName="somename.pdf">
-              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download now!')}
+            <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} user={this.props.user} />} fileName="somename.pdf">
+              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : <ShareButton />)}
             </PDFDownloadLink>
         </div>
         <FixesTable car={this.props.chosenCar} />
