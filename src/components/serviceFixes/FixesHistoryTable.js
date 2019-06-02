@@ -74,16 +74,25 @@ const columns = [
 
 class FixesHistoryTable extends Component{
 
+    prepareDateFixesHistory = () => {
+        let finalFixes = []
+        const fixes =  (this.props.authUser.createdFixes)?Object.values(this.props.authUser.createdFixes):undefined
+        fixes.map(fix => (
+            fix && (Object.values(fix)).length>0 && finalFixes.push(...Object.values(fix))
+        ))
+        return finalFixes
+    }
+
     render(){
-        const fixes = (this.props.authUser.createdFixes)?Object.values(this.props.authUser.createdFixes):undefined
+        const data = this.prepareDateFixesHistory();
         return(
-            <StyledMUIDataTable
-                title={"Created fixes"}
-                data={fixes}
-                columns={columns}
-                options={options}
-            />
-        )
+        <StyledMUIDataTable
+            title={"Created fixes"}
+            data={data}
+            columns={columns}
+            options={options}
+        />
+    )
     }
 }
 

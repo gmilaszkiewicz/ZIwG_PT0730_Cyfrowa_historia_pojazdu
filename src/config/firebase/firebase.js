@@ -126,7 +126,7 @@ class Firebase {
       userEmail: ownerInfo.email,
       carBrand: car.data.brand + " " + car.data.model,
       productionYear: car.data.productionYear,
-      category: category,
+      category: values.fixCategoryName,
       price: values.price,
       description: values.description,
       fixedDate: values.dateTime
@@ -134,6 +134,7 @@ class Firebase {
     this.db
     .ref(`users/${user.uid}/createdFixes`)
     .child(`${ownerInfo.currentUid}`)
+    .push()
     .set(fixesInfo);
   }
 
