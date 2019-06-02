@@ -305,11 +305,11 @@ Priorytet & Funkcjonalność podstawowa \\ \hline
 	\hline
 	Id wymagania 	& 10 				\\ \hline
 	Nazwa			& Udostępnienie historii samochodu \\ \hline
-	Opis &	Aplikacja powinna umożliwić udostępnienie historii pojazdu. Historia pojazdu powinna zawierać wszystkie informacje wprowadzone przez właściciela pojazdu oraz serwisy samochodowe. Każdy wpis powinien zawierać opis, datę oraz przebieg w momencie dodania wpisu. Aplikacja powinna generować link dzięki któremu można zobaczyć historię pojazdu bez logowania się do systemu \\ \hline
+	Opis &	Aplikacja powinna umożliwić udostępnienie historii pojazdu. Historia pojazdu powinna zawierać wszystkie informacje wprowadzone przez właściciela pojazdu oraz serwisy samochodowe. Każdy wpis powinien zawierać opis, datę oraz przebieg w momencie dodania wpisu. Aplikacja powinna generować plik PDF zawierający historię pojazdu \\ \hline
 	Przesłanka & Możliwość udostępnienia historii pojazdu potencjalnemu nabywcy   \\ \hline
-	Ograniczenia i~warunki & Każdy użytkownik może zobaczyć udostępnioną historię pojazdu tylko gdy posiada link wygenerowany przez właściciela pojazdu. Do obejrzenia historii nie jest potrzebne logowanie do systemu. \\ \hline
+	Ograniczenia i~warunki & Właściciel może udostępnić historię tylko tych pojazdów które posiada \\ \hline
 	Dane wejściowe &Wybór pojazdu którego historia ma zostać udostępniona \\ \hline
-	Wynik & Link umożliwiający zobaczenie wszystkich wpisów dla danego pojazdu\\ \hline
+	Wynik & Plik PDF umożliwiający zobaczenie wszystkich wpisów dla danego pojazdu\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 	Przeznaczenie & Właściciel pojazdu\\ \hline
 	Priorytet & Funkcjonalność podstawowa \\ \hline
@@ -371,6 +371,26 @@ Priorytet & Funkcjonalność podstawowa \\ \hline
 	Ograniczenia i~warunki & Oś czasu może przeglądać tylko właściciel pojazdu \\ \hline
 	Dane wejściowe & Wybór pojazdu dla którego ma zostać wyświetlona oś czasu \\ \hline
 	Wynik &Wyświetlenie historii pojazdu na osi czasu\\ \hline
+	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
+	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność rozszerzona \\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
+%----------------------MAPA SERWISÓW------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Mapa serwisów}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 14				\\ \hline
+	Nazwa			& Mapa serwisów \\ \hline
+	Opis &Aplikacja powinna umożliwić wyświetlanie informacji o położeni serwisów korzystających z systemu
+\\ \hline
+	Przesłanka & Możliwość zobaczenia mapy serwisów \\ \hline
+	Ograniczenia i~warunki & Mapa będzie wyświetlała tylko te serwisy które korzystają z systemu\\ \hline
+	Dane wejściowe & Brak \\ \hline
+	Wynik &Wyświetlenie mapy serwisów\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 	Przeznaczenie & Właściciel pojazdu\\ \hline
 	Priorytet & Funkcjonalność rozszerzona \\ \hline
@@ -517,6 +537,22 @@ Aplikacja mobilna została napisana przy użyciu narzędzia programistycznego \t
 		\label{app_mobilna}
 	\end{figure}
 
+Aplikacja webowa została napisana przy użyciu narzędzia \textit{React JS} oraz \textit{Bootstrap}.
+%dopisać!!!!!!!!!!!!!!!!!!!!!!!!
+Wygląd aplikacji webowej został przedstawia rysunek  \ref{app_webowa1} i \ref{app_webowa2}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.33]{app_web1.png}
+		\caption{Wygląd aplikacji webowej}
+		\label{app_webowa1}
+	\end{figure}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.33]{app_web2.png}
+		\caption{Wygląd aplikacji webowej}
+		\label{app_webowa2}
+	\end{figure}
 
 
 %---------------------------------------------------------
@@ -525,7 +561,7 @@ Aplikacja mobilna została napisana przy użyciu narzędzia programistycznego \t
 \newpage
 \section{Wnioski}
 
-Celem pracy było stworzenie systemu, który będzie umożliwiał w łatwy i wygodny sposób dokumentować historię pojazdów. Projekt zakładał zrealizowany przy użyciu stosunkowo nowych technologi, co pozwoliło poszerzyć naszą wiedzę oraz zdobyć cenne doświadczenie. Wszystkie założenia projektowe zostały spełnione.
+Celem pracy było stworzenie systemu, który będzie umożliwiał w łatwy i wygodny sposób dokumentować historię pojazdów. Projekt został zrealizowany przy użyciu stosunkowo nowych technologi, co pozwoliło poszerzyć naszą wiedzę oraz zdobyć cenne doświadczenie. Wszystkie założenia projektowe zostały spełnione.
 
 Podczas realizacji projektu pojawiały się różne trudności, które były na bieżąco rozwiązywane. Jedną z przeszkód było brak darmowego dostępu do API portalu \textit{historiapojazdu.gov.pl}. Ten problem został rozwiązany poprzez stworzenie własnej testowej bazy pojazdów, w której zostały wpisane ręcznie informacje kilku samochodów. Dzięki temu można było przetestować działanie aplikacji.
 
