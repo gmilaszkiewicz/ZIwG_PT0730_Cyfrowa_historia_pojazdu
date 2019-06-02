@@ -158,7 +158,7 @@ w systemie - login (adres e-mail) i hasło użytkownika
 \end{table}
 
 
-%----------------------REJESTRACJA POJAZDU------------------------------------
+%----------------------PRZEGLĄDANIE POJAZDÓW------------------------------------
 \begin{table}[H]
 \begin{center}
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Przeglądanie pojazdów}} 
@@ -316,7 +316,67 @@ Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
-
+%-------------------FUNKCJONALNOŚCI ROZSZERZONE---------------------------
+%----------------------ZMIANA NR REJESTRACYJNEGO------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Zmiana numeru rejestracyjnego}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 11 				\\ \hline
+	Nazwa			& Zmiana numeru rejestracyjnego \\ \hline
+	Opis &Aplikacja powinna umożliwić zmianę numeru rejestracyjnego pojazdu
+\\ \hline
+	Przesłanka & Możliwość aktualizacji numeru rejestracyjnego pojazdu  \\ \hline
+	Ograniczenia i~warunki & Zmienić numer rejestracyjny może tylko właściciel pojazdu \\ \hline
+	Dane wejściowe & Nowy numer rejestracyjny \\ \hline
+	Wynik & Zmiana numeru rejestracyjnego\\ \hline
+	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
+	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność rozszerzona \\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
+%----------------------TANKOWANIE------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Historia tankowania}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 12 				\\ \hline
+	Nazwa			& Historia tankowania \\ \hline
+	Opis &Aplikacja powinna umożliwić dodanie informacji o tankowaniach pojazdu
+\\ \hline
+	Przesłanka & Możliwość dodania informacji o tankowaniu pojazdu  \\ \hline
+	Ograniczenia i~warunki & Informację o tankowaniu może dodać tylko właściciel pojazdu \\ \hline
+	Dane wejściowe & Przebieg, rodzaj zatankowanego paliwa, objętość zatankowanego paliwa, kwota \\ \hline
+	Wynik &Dodanie informacji o tankowaniu pojazdu\\ \hline
+	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
+	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność rozszerzona \\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
+%----------------------OŚ CZASU------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Zdarzenia na osi czasu}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 13 				\\ \hline
+	Nazwa			& Zdarzenia na osi czasu \\ \hline
+	Opis &Aplikacja powinna umożliwić wyświetlanie informacji o historii pojazdu na osi czasu
+\\ \hline
+	Przesłanka & Możliwość przejrzenia historii pojazdu na osi czasu \\ \hline
+	Ograniczenia i~warunki & Oś czasu może przeglądać tylko właściciel pojazdu \\ \hline
+	Dane wejściowe & Wybór pojazdu dla którego ma zostać wyświetlona oś czasu \\ \hline
+	Wynik &Wyświetlenie historii pojazdu na osi czasu\\ \hline
+	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
+	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność rozszerzona \\ \hline
+	\end{tabular}
+\end{center}
+\end{table}
 %---------------------------------------------------------
 %					Część Trzecia
 %---------------------------------------------------------
