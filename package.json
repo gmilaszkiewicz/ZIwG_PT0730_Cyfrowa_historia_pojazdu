@@ -8,11 +8,8 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "@material-ui/pickers": "latest",
-<<<<<<< HEAD
     "classnames": "^2.2.6",
-=======
     "@react-pdf/renderer": "^1.6.0",
->>>>>>> validation
     "date-fns": "2.0.0-alpha.27",
     "filepond": "^4.4.3",
     "firebase": "^5.9.4",
