@@ -9,10 +9,9 @@ import SpeedDial from "@material-ui/lab/SpeedDial";
 import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import { withStyles } from "@material-ui/core/styles";
 import { StyledNewCarForm } from "./NewCarForm";
-import Zoom from '@material-ui/core/Zoom';
-import classNames from 'classnames';
+import Zoom from "@material-ui/core/Zoom";
+import classNames from "classnames";
 import { LoadingSpinner } from "../common/LoadingSpinner";
-
 
 const styles = theme => ({
   speedDial: {
@@ -36,7 +35,7 @@ export class CarList extends Component {
   componentDidMount() {
     this.setState({
       loading: true
-    })
+    });
     this.props.firebase
       .userCars(this.props.authUser.uid)
       .on("value", snapshot => {
@@ -50,7 +49,7 @@ export class CarList extends Component {
         this.setState({ carList: cars, loading: false });
       });
   }
-  groupImages =  (cars) => {
+  groupImages = cars => {
     let arrayOfImages = [];
     cars.forEach((car, index) => {
       arrayOfImages = [];
@@ -78,14 +77,14 @@ export class CarList extends Component {
   render() {
     const { classes } = this.props;
     const speedDialClassName = classNames(classes.speedDial);
-
-    return (
-        this.state.loading?<LoadingSpinner /> :
-        <div
-          className={this.props.className}
-          onClose={this.props.handleOnClose}
-          open={this.props.isOpened}
-        >
+    return this.state.loading ? (
+      <LoadingSpinner />
+    ) : (
+      <div
+        className={this.props.className}
+        onClose={this.props.handleOnClose}
+        open={this.props.isOpened}
+      >
         <GridList
           cellHeight={350}
           className="grid-list"
@@ -97,7 +96,9 @@ export class CarList extends Component {
             <Zoom
               key={index}
               in={this.state.checked}
-              style={{ transitionDelay: this.state.checked ? index * 400 : 0 }}
+              style={{
+                transitionDelay: this.state.checked ? index * 400 : 0
+              }}
             >
               <GridListTile key={index}>
                 <CarCard
@@ -106,6 +107,7 @@ export class CarList extends Component {
                   images={car.photos}
                   car={car}
                   loggedUserUid={this.props.firebase.auth.currentUser.uid}
+                  authUser={this.props.authUser}
                 />
               </GridListTile>
             </Zoom>
@@ -125,7 +127,7 @@ export class CarList extends Component {
             handleOnClose={this.handleCloseNewCarModal}
           />
         )}
-        </div>
+      </div>
     );
   }
 }
@@ -138,10 +140,10 @@ const StyledCarList = compose(withFirebase)(styled(WithStylesCarList)`
   justify-content: "space-around";
   overflow: "hidden";
 
-  .grid-list{
+  .grid-list {
   }
-  .grid-item{
-    &&{
+  .grid-item {
+    && {
       border-radius: 30px;
     }
   }

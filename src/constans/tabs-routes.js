@@ -32,7 +32,7 @@ export const routes = [
     path: "#fixeshistory",
     visible: true,
     sidebar: () => <AddFixesService />,
-    main: () => <AddFixesService />,
+    main: (authUser, index) => <AddFixesService authUser={authUser} />,
     icon: () => <MaterialIcon icon="history" color={"white"} />,
     name: "Fixes history",
     access: ROLES.CAR_SERVICE
