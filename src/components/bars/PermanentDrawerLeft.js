@@ -19,7 +19,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     display: "flex",
-    flexGrow: 1
+    flexGrow: 1,
   },
   drawer: {
     width: drawerWidth,
@@ -27,14 +27,13 @@ const styles = theme => ({
   },
   drawerPaper: {
     width: drawerWidth, 
-    background: '#424242'
-
+    background: '#333333'
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
   },
   selectedListItem:{
   },

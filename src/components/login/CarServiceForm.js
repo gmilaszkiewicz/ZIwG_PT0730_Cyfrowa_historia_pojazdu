@@ -62,6 +62,14 @@ class CarServiceForm extends Component {
                   })
               })
               .then(() => {
+                this.props.firebase
+                .addService(data.name)
+                .set({
+                  name: data.name,
+                  address: data.address1 + " " + data.zip + " " + data.city
+                })
+              })
+              .then(() => {
                 this.props.snackbar.showMessage(
                   'Successful registration!', "success")
                 this.props.handleClose()

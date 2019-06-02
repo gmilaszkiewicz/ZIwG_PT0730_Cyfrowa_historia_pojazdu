@@ -37,8 +37,7 @@ class Firebase {
 
   // *** Auth API ***
 
-  doCreateUserWithEmailAndPassword = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+  doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -51,19 +50,34 @@ class Firebase {
 
   // *** Car API ***
 
-  user = uid => this.db.ref(`usersdata/${uid}`);
+  user = uid => {
+   return this.db.ref(`users/${uid}`);
+  }
+
+  services = () => {
+    return this.db.ref(`services/`);
+  }
+
+  addService = (name) => {
+    return this.db.ref(`services/${name}`)
+  }
 
   userCars = userId => {
     return this.db.ref(`users/${userId}`);
   };
 
-  addCar = (name, values, userId) => {
+  addCar = (name, values, userId, data) => {
     const md5Name = this.md5(name);
     values.registerTime = dateToString(values.registerTime);
     this.db
       .ref(`users/${userId}/cars`)
       .child(md5Name)
       .set(values);
+      
+    this.db
+      .ref(`users/${userId}/cars/${md5Name}`)
+      .child("data")
+      .set(data);
   };
 
   addUserByEmail = (uid, email) => {

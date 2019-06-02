@@ -10,6 +10,9 @@ import FixesForm from "./FixesForm";
 import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index";
+import ShareIcon from '@material-ui/icons/Share';
+import IconButton from '@material-ui/core/IconButton';
+import classNames from "classnames";
 
 const carInfoIndex = 5;
 
@@ -18,7 +21,9 @@ const StyledCardAction = styled(CardActions)`
 `;
 
 const StyledCardMedia = styled(CardMedia)`
-  border-radius: 20px;
+  &&{
+    border-radius: 20px;
+  }
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -72,12 +77,15 @@ export class CarCard extends Component {
     this.props.chooseCar(this.props.car);
   };
 
+  handleSharePDF = event => {
+    this.handleClick()
+  }
+
   render() {
     const { images, name, vin, className, loggedUserUid } = this.props;
-    console.log("TCL: CarCard -> render -> loggedUserUid", loggedUserUid)
     
     return (
-      <Card className={className}>
+      <Card id="card" className={classNames(className, "card")}>
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {images !== undefined && images.length > 0 && (
@@ -105,6 +113,8 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenFixForm}
+            fullWidth
+            style={{ height: '50px'}}
           >
             Add Fix
           </Button>
@@ -112,9 +122,17 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenUpgradeForm}
+            fullWidth
+            style={{ height: '50px'}}
           >
             Add Modification
           </Button>
+          <IconButton 
+            aria-label="Share"
+            onClick={this.handleSharePDF}
+          >
+            <ShareIcon />
+          </IconButton>
         </StyledCardAction>
         {this.state.addFixIsOpened && (
           <FixesForm
@@ -145,8 +163,11 @@ const connectedComponent = connect(
 )(CarCard);
 
 export const StyledCarCard = styled(connectedComponent)`
+  .card{
+    border-radius: 30px;
+  }
   .media {
-    height: 200px;
+    height: 190px;
   }
   .image {
     width: 100px;

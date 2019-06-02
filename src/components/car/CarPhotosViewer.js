@@ -14,11 +14,11 @@ class CarPhotoViewer extends Component{
                     autoplay={false}
                     landscape={true}
                 >
-                {this.props.car.photos.map( (photo, index) => (
+                {this.props.car.photos.filter((photo, index) => {return photo!==""}).map( (photo, index) => (
                     <Slide
-                    media={<img src={photo} alt="my car" />}
-                    mediaBackgroundStyle={{ backgroundColor: "#424242" }}
-                    style={{ backgroundColor: "#424242" }}
+                        media={<img src={photo} alt="my car" />}
+                        mediaBackgroundStyle={{ backgroundColor: "#424242" }}
+                        style={{ backgroundColor: "#424242" }}
                     />
                 ))}
                 </AutoRotatingCarousel>

@@ -56,7 +56,7 @@ export const routes = [
     path: "#carInfo",
     visible: false,
     sidebar: () => <h2>CarInfo</h2>,
-    main: (authUser, index) => <CarInfoForm />,
+    main: (authUser, index) => <CarInfoForm user={authUser} />,
     name: "CarInfo",
     access: [ROLES.OWNER, ROLES.CAR_SERVICE]
   }

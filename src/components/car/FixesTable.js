@@ -10,6 +10,7 @@ const styles = theme => ({
         marginTop: theme.spacing(3),
         overflowX: 'auto',
       },
+
 });
 
   const columns = [
@@ -67,23 +68,36 @@ const StyledMUIDataTable = styled(MUIDataTable)`
 
 class FixesTable extends Component{ 
 
-    render(){
-        const { classes } = this.props;
-        const fixesObj = this.props.car.fixes
-        const damagesObj = this.props.car.damages
-        const data1 = (fixesObj !== undefined && damagesObj !== undefined)? Object.values(fixesObj).concat(Object.values(damagesObj)):undefined
-
-        return(
-            <Paper className={classes.root}>
-                <StyledMUIDataTable
-                    title={"Car modification:"}
-                    data={data1}
-                    columns={columns}
-                    options={options}
-                />
-            </Paper>
-        )
+prepareFixesAndDamages(){
+    const fixes = (this.props.car.fixes)?Object.values(this.props.car.fixes):undefined
+    const damages = (this.props.car.damages)?Object.values(this.props.car.damages):undefined
+    if(fixes !== undefined && damages !== undefined){
+        return fixes.concat(damages)
     }
+    else if(fixes !== undefined){
+        return fixes
+    }
+    else if(damages !== undefined){
+        return damages
+    }
+    return []
+}
+
+render(){
+    const { classes } = this.props;
+    const data = this.prepareFixesAndDamages();
+
+    return(
+        <Paper id="carInfoTable" className={classes.root}>
+            <StyledMUIDataTable
+                title={"Car modification:"}
+                data={data}
+                columns={columns}
+                options={options}
+            />
+        </Paper>
+    )
+}
 }
 
 export default withStyles(styles)(FixesTable)

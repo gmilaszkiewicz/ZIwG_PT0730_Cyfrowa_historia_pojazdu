@@ -12,6 +12,7 @@ import { Dialog } from "@material-ui/core";
 import "dropzone/dist/min/dropzone.min.css";
 import * as yup from 'yup';
 import { StyledErrorMsg } from './../login/LoginForm'
+import withSnackbar from './../snackbar/withSnackbar'
 
 
 const StyledTextField = styled(TextField)`
@@ -34,7 +35,8 @@ const newCarSchema = yup.object().shape({
           .required("Required field"),
   VIN: yup.string()
           .required("Nr VIN is required")
-          .min(17, "VIN conatins 17 characters"),
+          .min(17, "VIN must conatins 17 characters")
+          .max(17, "VIN must conatins 17 characters"),
   registerNumber: yup.string()
             .required("Required field"),
   // registerTime: yup.date()
@@ -47,11 +49,12 @@ export class NewCarForm extends Component {
     imagesInBase64: ""
   };
 
-  saveCar = values => {
+  saveCar = (values,data) => {
     this.props.firebase.addCar(
       values.name,
       values,
-      this.props.firebase.auth.currentUser.uid
+      this.props.firebase.auth.currentUser.uid,
+      data
     );
   };
 
@@ -79,6 +82,17 @@ export class NewCarForm extends Component {
     this.setState({ imagesInBase64: imagesInBase64.join() });
     setFieldValue("photos", imagesInBase64.join());
   };
+
+  getCarDataFromAPI = (carData) => {
+    return fetch(`https://5cd467e9b231210014e3d8e7.mockapi.io/api/cars?search=${carData.VIN}`)
+    .then(results => {
+      return results.json()
+    })
+    .then(data => {
+      return data
+    })
+  }
+
   render() {
     return (
       <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
@@ -93,10 +107,18 @@ export class NewCarForm extends Component {
               registerTime: new Date()
             }}
             validationSchema={newCarSchema}
-            onSubmit={values => {
-              setTimeout(() => {
-                this.props.handleOnClose()
-                this.saveCar(values);
+            onSubmit={ (values) => {
+              setTimeout( async () => {
+                const data = await this.getCarDataFromAPI(values)
+                if(data[0]!==undefined){
+                  this.props.handleOnClose()
+                  // this.saveCar(values,data[0]);
+                  this.props.snackbar.showMessage(
+                    "Successful added new car!", "success")
+                }else{
+                  this.props.snackbar.showMessage(
+                    "Car with this data isn't exist!", "error")
+                }
               }, 1000);
             }}
             render={props => (
@@ -193,7 +215,7 @@ export class NewCarForm extends Component {
 }
 
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
-export const StyledNewCarForm = styled(composedNewCarForm)`
+export const StyledNewCarForm = withSnackbar()(styled(composedNewCarForm)`
   padding-left: 10%;
   padding-top: 10px;
   padding-right: 10%;
@@ -209,4 +231,4 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
     margin-top: 10px;
     /* height: 200px; */
   }
-`;
+`);
