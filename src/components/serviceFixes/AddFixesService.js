@@ -118,7 +118,7 @@ export class AddFixesService extends Component {
                       name={car.name}
                       images={car.photos}
                       car={car}
-                      loggedUserUid={this.currentUid}
+                      loggedUserUid={this.state.currentUid}
                     />
                   </GridListTile>
                 </Zoom>
