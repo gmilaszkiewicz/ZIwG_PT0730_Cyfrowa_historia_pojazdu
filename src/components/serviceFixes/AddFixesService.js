@@ -29,6 +29,7 @@ export class AddFixesService extends Component {
       carList: [],
       isOpenAddNewCarModal: false,
       checked: true,
+      isService: true,
       email: "",
       currentUid: ""
     };
@@ -119,6 +120,7 @@ export class AddFixesService extends Component {
                       images={car.photos}
                       car={car}
                       loggedUserUid={this.state.currentUid}
+                      authUser={this.props.authUser}
                     />
                   </GridListTile>
                 </Zoom>

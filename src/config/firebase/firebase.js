@@ -37,7 +37,8 @@ class Firebase {
 
   // *** Auth API ***
 
-  doCreateUserWithEmailAndPassword = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
+  doCreateUserWithEmailAndPassword = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
 
   doSignInWithEmailAndPassword = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);
@@ -51,16 +52,16 @@ class Firebase {
   // *** Car API ***
 
   user = uid => {
-   return this.db.ref(`users/${uid}`);
-  }
+    return this.db.ref(`users/${uid}`);
+  };
 
   services = () => {
     return this.db.ref(`services/`);
-  }
+  };
 
-  addService = (name) => {
-    return this.db.ref(`services/${name}`)
-  }
+  addService = name => {
+    return this.db.ref(`services/${name}`);
+  };
 
   userCars = userId => {
     return this.db.ref(`users/${userId}`);
@@ -73,7 +74,7 @@ class Firebase {
       .ref(`users/${userId}/cars`)
       .child(md5Name)
       .set(values);
-      
+
     this.db
       .ref(`users/${userId}/cars/${md5Name}`)
       .child("data")
@@ -93,7 +94,7 @@ class Firebase {
     return this.db.ref(`usersByEmail/${md5Email}`);
   };
 
-  addFix = (name, values, userId, category) => {
+  addFix = (name, values, userId, category, user) => {
     let newCategory = "";
     if (category === "Fix") {
       newCategory = "fixes";
@@ -101,6 +102,14 @@ class Firebase {
     if (values) {
       const md5Name = this.md5(name);
       values.dateTime = dateToString(values.dateTime);
+      if (user.role === "CAR_SERVICE") {
+        values = { verified: user.name, ...values };
+        this.db
+          .ref(`users/${userId}/cars/${md5Name}`)
+          .child(`${newCategory}`)
+          .push()
+          .set(values);
+      } else values = { verified: "owner", ...values };
       this.db
         .ref(`users/${userId}/cars/${md5Name}`)
         .child(`${newCategory}`)

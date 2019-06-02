@@ -16,7 +16,7 @@ import { compose } from "recompose";
 import { withFirebase } from "../../config/firebase/context";
 import "filepond/dist/filepond.min.css";
 import { FilePond } from "react-filepond";
-import withSnackbar from './../snackbar/withSnackbar'
+import withSnackbar from "./../snackbar/withSnackbar";
 
 const styles = theme => ({
   root: {
@@ -110,12 +110,13 @@ class AddFixForm extends Component {
       name,
       values,
       this.props.loggedUserUid,
-      this.props.category
+      this.props.category,
+      this.props.user
     );
-    this.props.snackbar.showMessage(
-      "Successful added fix!", "success")
+    this.props.snackbar.showMessage("Successful added fix!", "success");
   };
   componentDidMount() {
+    console.log(this.props.firebase);
     const categoryName = this.props.category.toLowerCase() + "Categories";
     if (categoryName === "fixCategories") {
       this.props.firebase.fixCategories().on("value", snapshot => {
@@ -287,4 +288,6 @@ class AddFixForm extends Component {
   }
 }
 
-export default withSnackbar()(compose(withFirebase)(withStyles(styles)(AddFixForm)));
+export default withSnackbar()(
+  compose(withFirebase)(withStyles(styles)(AddFixForm))
+);
