@@ -80,7 +80,7 @@ export class NewCarForm extends Component {
     });
     await this.sleep(400); //no niestety :(
     this.setState({ imagesInBase64: imagesInBase64.join() });
-    setFieldValue("photos", imagesInBase64.join());
+    setFieldValue("photos", imagesInBase64.join(" "));
   };
 
   getCarDataFromAPI = (carData) => {
@@ -112,7 +112,7 @@ export class NewCarForm extends Component {
                 const data = await this.getCarDataFromAPI(values)
                 if(data[0]!==undefined){
                   this.props.handleOnClose()
-                  // this.saveCar(values,data[0]);
+                  this.saveCar(values,data[0]);
                   this.props.snackbar.showMessage(
                     "Successful added new car!", "success")
                 }else{
