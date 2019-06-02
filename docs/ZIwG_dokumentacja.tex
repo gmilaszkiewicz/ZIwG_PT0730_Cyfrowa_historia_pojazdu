@@ -498,6 +498,26 @@ Kalkulacja kosztów oraz nakładów pracy potrzebnej do realizacji projektu zost
 \section{Opis implementacji i wdrożenia projektu}
 (kroki potrzebne by uruchomić / zainstalować projekt + wymagania sprzętowe i programowe)
 
+Baza danych została umieszczona w \textit{Firebase}. W niej przechowywane są informacje o~użytkownikach oraz o ich pojazdach i naprawach. Informacje o użytkownikach oraz o pojazdach w celu zwiększenia bezpieczeństwa zostały zahaszowane algorytmem kryptograficznym md5. Fragment bazy danych został pokazany na rysunku \ref{baza}.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{baza_danych.png}
+		\caption{Fragment bazy danych}
+		\label{baza}
+	\end{figure}
+
+Aplikacja mobilna została napisana przy użyciu narzędzia programistycznego \textit{Flutter}. Dzięki temu powstała jednocześnie aplikacja na system operacyjny \textit{Android} oraz \textit{iOS}. Wygląd aplikacji mobilnej przedstawia rysunek \ref{app_mobilna}. W celu zainstalowania aplikacji na telefon z~systemem \textit{Android} wystarczy umieścić plik \textit{.apk} z aplikacją na telefonie, a następnie poprzez manager plików zainstalować aplikację.
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.21]{app_mobilna1.png}
+		\includegraphics[scale=0.20]{app_mobilna2.png}
+		\caption{Wygląd aplikacji mobilnej}
+		\label{app_mobilna}
+	\end{figure}
+
+
 
 %---------------------------------------------------------
 %					Część siódma
