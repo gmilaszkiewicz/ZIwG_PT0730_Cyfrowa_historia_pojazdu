@@ -5,8 +5,7 @@ import CarInfoForm from "./../components/car/CarInfoForm";
 import * as ROLES from "../constans/roles";
 import ServicesMap from "./../components/services-map/ServicesMap";
 import { StyledAddFixesService as AddFixesService } from "./../components/serviceFixes/AddFixesService";
-import MaterialIcon, {colorPalette} from 'material-icons-react';
-
+import MaterialIcon, { colorPalette } from "material-icons-react";
 
 export const routes = [
   {
@@ -29,21 +28,21 @@ export const routes = [
     access: ROLES.OWNER
   },
   {
-    path: "#fixeshistory",
+    path: "#addfixes",
     visible: true,
     sidebar: () => <AddFixesService />,
     main: (authUser, index) => <AddFixesService authUser={authUser} />,
     icon: () => <MaterialIcon icon="history" color={"white"} />,
-    name: "Fixes history",
+    name: "Add fixes",
     access: ROLES.CAR_SERVICE
   },
   {
-    path: "#addfixes",
+    path: "#fixeshistory",
     visible: true,
     sidebar: () => <h2>Service</h2>,
-    main: () => <h2>Add fixes</h2>,
+    main: () => <h2>history</h2>,
     icon: () => <MaterialIcon icon="note_add" color={"white"} />,
-    name: "Add fixes",
+    name: "Fixes History",
     access: ROLES.CAR_SERVICE
   },
   {
