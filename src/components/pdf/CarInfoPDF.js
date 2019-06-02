@@ -1,27 +1,51 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { Page, Text, Document, StyleSheet, Image, Font } from '@react-pdf/renderer';
 import html2canvas from 'html2canvas';
 
-// let tableImage = ""
+export class CarInfoPDF extends Component {
 
-export class CarInfoPDF extends Component{
-
-  getVehicleHistory = () => {
-    return html2canvas(document.getElementById('carInfoTable'))
-    .then((canvas) => {
-      return canvas.toDataURL('image/png');
-    })
+  state = {
+    tableInBase64: ""
   }
 
-  // async componentDidMount(){
-  //   tableImage = await this.getVehicleHistory();
-  // }
+  sleep = ms => {
+    return new Promise(resolve => setTimeout(resolve, ms)); //tymczasowe rozwiazanie xD
+  };
+  getBase64 = file => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
+    });
+  };
 
-  render(){
+  getVehicleHistory = async (tmp) => {
+    (html2canvas(document.getElementById('carInfoTable'))
+      .then((canvas) => {
+        // console.log(canvas.toDataURL('image/png'))
+        tmp = canvas.toDataURL('image/png');
+        // this.setState({
+        //   tableInBase64: canvas.toDataURL('image/png')
+        // })
+      }))
+    await this.sleep(1500)
+    this.setState({
+      tableInBase64: tmp
+    })
+    // return tmp
+  }
+
+  async componentDidMount() {
+    // tableImage = await this.getVehicleHistory();
+    let tmp = ""
+    this.getVehicleHistory(tmp)
+  }
+
+  render() {
     const selectedCar = this.props.car;
     const user = this.props.user;
-    console.log(selectedCar.photos)
-    return(
+    return (
       <Document>
         <Page style={styles.body}>
           <Text style={styles.title}>
@@ -39,10 +63,10 @@ export class CarInfoPDF extends Component{
             Technical data:
           </Text>
           <Text style={styles.text}>
-            Car type: {selectedCar.data.carType} 
+            Car type: {selectedCar.data.carType}
           </Text>
           <Text style={styles.text}>
-            Production year: {selectedCar.data.productionYear} 
+            Production year: {selectedCar.data.productionYear}
           </Text>
           <Text style={styles.text}>
             Course: {selectedCar.data.course} KM
@@ -54,28 +78,30 @@ export class CarInfoPDF extends Component{
             Engine power: {selectedCar.data.enginePower} kW
           </Text>
           <Text style={styles.text}>
-            Fuel type: {selectedCar.data.fuelType} 
+            Fuel type: {selectedCar.data.fuelType}
           </Text>
 
           <Text style={styles.subtitle} break>
             Photos:
           </Text>
-          {selectedCar.photos.map((photo,index) => {
-            return (photo!== '')?
+          {selectedCar.photos.map((photo, index) => {
+            return (photo !== '') ?
               <Image
                 key={index}
                 style={styles.image}
                 src={photo}
-              />:undefined
+              /> : undefined
           })}
 
           <Text style={styles.subtitle} break>
             Vehicle history:
           </Text>
-          <Image
-            style={styles.image}
-            src={this.getVehicleHistory()}
-          />
+          {!this.state.tableInBase64 === "" &&
+            <Image
+              style={styles.image}
+              src={this.state.tableInBase64}
+            />
+          }
 
           <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
             `${pageNumber} / ${totalPages}`
@@ -85,7 +111,7 @@ export class CarInfoPDF extends Component{
     )
   }
 }
-  
+
 Font.register({
   family: 'Oswald',
   src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
@@ -98,7 +124,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
   },
   title: {
-    paddingTop:20,
+    paddingTop: 20,
     paddingBottom: 30,
     fontSize: 28,
     textAlign: 'center',

@@ -43,6 +43,13 @@ const styles = theme => ({
      }
     },
     {
+        name: "verified",
+        label: "Verified",
+        options:{
+            sort:true
+        }
+    },
+    {
         name: "dateTime",
         label: "Fix date",
         options: {

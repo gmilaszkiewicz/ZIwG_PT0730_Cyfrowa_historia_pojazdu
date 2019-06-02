@@ -80,7 +80,7 @@ export class NewCarForm extends Component {
     });
     await this.sleep(400); //no niestety :(
     this.setState({ imagesInBase64: imagesInBase64.join() });
-    setFieldValue("photos", imagesInBase64.join(" "));
+    setFieldValue("photos", imagesInBase64.join(""));
   };
 
   getCarDataFromAPI = (carData) => {
