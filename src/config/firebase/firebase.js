@@ -96,7 +96,6 @@ class Firebase {
 
   addFix = (name, values, ownerInfo, category, user, car) => {
     let newCategory = "";
-    console.log(ownerInfo)
     if (category === "Fix") {
       newCategory = "fixes";
     } else newCategory = "damages";
@@ -110,19 +109,21 @@ class Firebase {
           .child(`${newCategory}`)
           .push()
           .set(values);
-        this.addFixesToServicesHistory(user, ownerInfo.email, category, values,car)
-      } else values = { verified: "owner", ...values };
+        this.addFixesToServicesHistory(user, ownerInfo, category, values,car)
+      } else {
+      values = { verified: "owner", ...values }
       this.db
-        .ref(`users/${ownerInfo.currentUid}/cars/${md5Name}`)
+        .ref(`users/${user.uid}/cars/${md5Name}`)
         .child(`${newCategory}`)
         .push()
         .set(values);
+      }
     }
   };
 
-  addFixesToServicesHistory = (user, userEmail, category, values,car) => {
+  addFixesToServicesHistory = (user, ownerInfo, category, values,car) => {
     const fixesInfo = {
-      userEmail: userEmail,
+      userEmail: ownerInfo.email,
       carBrand: car.data.brand + " " + car.data.model,
       productionYear: car.data.productionYear,
       category: category,
@@ -130,13 +131,9 @@ class Firebase {
       description: values.description,
       fixedDate: values.dateTime
     }
-    // console.log(car)
-    // console.log(values)
-    // console.log(fixesInfo)
     this.db
     .ref(`users/${user.uid}/createdFixes`)
-    .child(`${userEmail}`)
-    .push()
+    .child(`${ownerInfo.currentUid}`)
     .set(fixesInfo);
   }
 

@@ -48,20 +48,26 @@ export class AddFixesService extends Component {
     });
   };
 
-  handleSearchChange = e => {
-    this.setState((prevState) => ({ ownerInfo:{
-      email: e.target.value,
-      ...prevState }
+  handleSearchChange = event => {
+    event.preventDefault();
+    this.setState(({ 
+      // ...prevState,
+      ownerInfo:{
+        email: event.target.value,
+        // currentUid: prevState.ownerInfo.currentUid
+      }
     }));
   };
 
   submitEmail = () => {
     this.props.firebase.userByEmail(this.state.ownerInfo.email).on("value", snapshot => {
       let uid = snapshot.val().uid;
-      this.setState((prevState) => ({ ownerInfo: {
+      this.setState((prevState) => ({
         ...prevState,
-        currentUid: uid
-       }
+        ownerInfo: {
+          email: prevState.ownerInfo.email,
+          currentUid: uid
+        }
       }));
       this.props.firebase.userCars(uid).on("value", snapshot => {
         let cars = [];

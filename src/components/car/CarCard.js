@@ -146,7 +146,7 @@ export class CarCard extends Component {
             handleOnClose={this.handleCloseAddFixForm}
             name={name}
             user={this.state.user}
-            car={this.props.chosenCar}
+            car={this.props.car}
             ownerInfo={this.props.ownerInfo}
           />
         )}
@@ -157,7 +157,7 @@ export class CarCard extends Component {
             handleOnClose={this.handleCloseAddUpgradeForm}
             name={name}
             user={this.state.user}
-            car={this.props.chosenCar}
+            car={this.props.car}
             ownerInfo={this.props.ownerInfo}
           />
         )}

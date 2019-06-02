@@ -4,48 +4,65 @@ import styled from 'styled-components'
 
 const columns = [
     {
-     name: "name",
-     label: "Name",
+     name: "userEmail",
+     label: "Client",
      options: {
       filter: true,
       sort: true,
      }
     },
     {
-     name: "company",
-     label: "Company",
+     name: "category",
+     label: "Category",
      options: {
       filter: true,
       sort: false,
      }
     },
     {
-     name: "city",
-     label: "City",
+     name: "carBrand",
+     label: "Brand",
      options: {
       filter: true,
       sort: false,
      }
     },
     {
-     name: "state",
-     label: "State",
+     name: "productionYear",
+     label: "Production Year",
      options: {
       filter: true,
       sort: false,
      }
     },
-   ];
-   
-   const data = [
-    { name: "Joe James", company: "Test Corp", city: "Yonkers", state: "NY" },
-    { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-    { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-    { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
+    {
+        name: "price",
+        label: "Price",
+        options: {
+         filter: true,
+         sort: false,
+        }
+    },
+    {
+        name: "description",
+        label: "Description",
+        options: {
+         filter: true,
+         sort: false,
+        }
+    },
+    {
+        name: "fixedDate",
+        label: "Date",
+        options: {
+         filter: true,
+         sort: false,
+        }
+    },
    ];
    
    const options = {
-     filterType: 'checkbox',
+     filterType: 'none',
    };
 
    const StyledMUIDataTable = styled(MUIDataTable)`
@@ -58,10 +75,11 @@ const columns = [
 class FixesHistoryTable extends Component{
 
     render(){
+        const fixes = (this.props.authUser.createdFixes)?Object.values(this.props.authUser.createdFixes):undefined
         return(
             <StyledMUIDataTable
                 title={"Created fixes"}
-                data={data}
+                data={fixes}
                 columns={columns}
                 options={options}
             />
