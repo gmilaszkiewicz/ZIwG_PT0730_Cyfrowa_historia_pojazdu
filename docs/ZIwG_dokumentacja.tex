@@ -84,7 +84,7 @@ Następnym ryzykiem jest zmiana założonych funkcjonalności podstawowych syste
 
 \subsection{Funkcjonalności podstawowe i rozszerzone}
 
-W tabeli 1-X zostały przedstawione podstawowe funkcjonalności systemu.
+W tabelach 1-10 zostały przedstawione podstawowe funkcjonalności systemu, a w tabelach 11-15 funkcjonalności rozszerzone.
 
 %----------------------REJESTRACJA------------------------------------
 \begin{table}[H]
@@ -104,6 +104,7 @@ formularza rejestracyjnego\\ \hline
 	Wynik & Dodanie nowego użytkownika do systemu \\ \hline
 	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy, Osoba zewnętrzna) \\ \hline
 	Przeznaczenie & Każdy nowy użytkownik \\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 
 \end{center}
@@ -129,6 +130,7 @@ w systemie - login (adres e-mail) i hasło użytkownika
 	Wynik & Zalogowanie do systemu \\ \hline
 	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy, Osoba zewnętrzna) \\ \hline
 	Przeznaczenie & Każdy zarejestrowany użytkownik \\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 
 \end{table}
@@ -140,17 +142,41 @@ w systemie - login (adres e-mail) i hasło użytkownika
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
 	Id wymagania 	& 3 				\\ \hline
+	Nazwa			& Przeglądanie pojazdów \\ \hline
+	Opis & Aplikacja powinna umożliwić przeglądanie pojazdów w systemie. Właściciel pojazdów ma mieć możliwość zobaczenia jakie pojazdy są zarejestrowane do jego konta
+\\ \hline
+	Przesłanka & Możliwość przejrzenia swoich pojazdów  \\ \hline
+	Ograniczenia i~warunki & Właściciel pojazdów może zobaczyć tylko swoje samochody  \\ \hline
+	Dane wejściowe & Brak  \\ \hline
+	Wynik & Lista wszystkich pojazdów właściciela \\ \hline
+	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu) \\ \hline
+	Przeznaczenie & Właściciel pojazdu \\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
+	\end{tabular}
+
+\end{center}
+\end{table}
+
+
+%----------------------REJESTRACJA POJAZDU------------------------------------
+\begin{table}[H]
+\begin{center}
+\captionof{table}{Karta wymagań dla funkcjonalności \textit{Przeglądanie pojazdów}} 
+	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
+	\hline
+	Id wymagania 	& 4 				\\ \hline
 	Nazwa			& Rejestracja pojazdu \\ \hline
-	Opis & Aplikacja powinna umożliwić zarejestrowanie pojazdu w systemie. Zarejestrowanie pojazdu odbywać się będzie poprzez podanie kluczowych danych, które umożliwią pobranie dodatkowych informacji ze strony historiapojazdu.gov.pl
+	Opis & Aplikacja powinna umożliwić zarejestrowanie pojazdu w systemie. Zarejestrowanie pojazdu odbywać się będzie poprzez podanie kilku informacji na temat pojazdu
 \\ \hline
 	Przesłanka & Możliwość dodawania pojazdów do bazy danych  \\ \hline
-	Ograniczenia i~warunki & Pojazd można dodać tylko po poprawnym wprowadzeniu danych. Weryfikacja danych odbywa się poprzez stronę historiapojazdu.gov.pl  \\ \hline
+	Ograniczenia i~warunki & Pojazd można dodać tylko po poprawnym wprowadzeniu danych.  \\ \hline
 	Dane wejściowe &
 Dane niezbędne do identyfikacji pojazdu - numer rejestracyjny, numer nadwozia, data pierwszej rejestracji w kraju
 (Opcjonalne: zdjęcie pojazdu)  \\ \hline
 	Wynik & Dodanie pojazdu do systemu \\ \hline
 	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu) \\ \hline
 	Przeznaczenie & Właściciel pojazdu \\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 
 \end{center}
@@ -162,7 +188,7 @@ Dane niezbędne do identyfikacji pojazdu - numer rejestracyjny, numer nadwozia, 
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie napraw pojazdu}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 4 				\\ \hline
+	Id wymagania 	& 5				\\ \hline
 	Nazwa			& Dodawanie napraw pojazdu \\ \hline
 	Opis & Aplikacja powinna umożliwić dodanie informacji o naprawie pojazdu
 \\ \hline
@@ -170,16 +196,17 @@ Dane niezbędne do identyfikacji pojazdu - numer rejestracyjny, numer nadwozia, 
 Możliwość dodawania informacji o historii pojazdu
   \\ \hline
 	Ograniczenia i~warunki & 
-Każda naprawa musi zawierać informację o przebiegu pojazdu w chwili dokonania naprawy oraz opis co zostało naprawione (minimum 10 znaków)
+Każda naprawa musi zawierać informację o przebiegu pojazdu w chwili dokonania naprawy oraz opis co zostało naprawione
  \\ \hline
 	Dane wejściowe &
 
-Przebieg pojazdu, opis naprawy, skrócona nazwa naprawy
+Przebieg pojazdu, opis naprawy
 (Opcjonalne: zdjęcia, kwota naprawy)
  \\ \hline
 	Wynik & Dodanie informacji o naprawie pojazdu wraz z informacją kto dodał naprawę\\ \hline
 	Źródło danych wejściowych & Użytkownik (Właściciel pojazdu, Serwis samochodowy)\\ \hline
 	Przeznaczenie & Właściciel pojazdu, Serwis samochodowy\\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 
 \end{center}
@@ -191,15 +218,16 @@ Przebieg pojazdu, opis naprawy, skrócona nazwa naprawy
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie eksploatacji pojazdu}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 5 				\\ \hline
+	Id wymagania 	& 6 				\\ \hline
 	Nazwa			& Dodawanie eksploatacji pojazdu \\ \hline
 	Opis &	 Aplikacja powinna umożliwić dodanie informacji o wymianach eksploatacyjnych pojazdu (np. wymiana oleju)\\ \hline
 	Przesłanka & Możliwość dodawania informacji o historii pojazdu  \\ \hline
-	Ograniczenia i~warunki & Każda wymiana eksploatacyjna musi zawierać informację o przebiegu pojazdu w chwili dokonania wymiany oraz opis co zostało wymienione (minimum 10 znaków) \\ \hline
+	Ograniczenia i~warunki & Każda wymiana eksploatacyjna musi zawierać informację o przebiegu pojazdu w chwili dokonania wymiany oraz opis co zostało wymienione \\ \hline
 	Dane wejściowe &Przebieg pojazdu, opis wymiany eksploatacyjnej
 (Opcjonalne: zdjęcia, kwota wymiany eksploatacyjnej) \\ \hline
 	Wynik & Dodanie informacji o wymianie eksploatacyjnej pojazdu wraz z informacją kto dodał wymiany\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu, Serwis samochodowy)\\ \hline	Przeznaczenie & Właściciel pojazdu, Serwis samochodowy\\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
@@ -210,17 +238,18 @@ Przebieg pojazdu, opis naprawy, skrócona nazwa naprawy
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie ulepszeń}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 6 				\\ \hline
+	Id wymagania 	& 7 				\\ \hline
 	Nazwa			& Dodawanie ulepszeń
  \\ \hline
 	Opis &	Aplikacja powinna umożliwić dodanie informacji o ulepszeniach pojazdu (np. Przyciemnianie szyb)\\ \hline
 	Przesłanka & Możliwość dodawania informacji o historii pojazdu  \\ \hline
-	Ograniczenia i~warunki & Każde ulepszenie musi zawierać informację o przebiegu pojazdu w chwili dokonania ulepszenia oraz opis co zostało ulepszone (minimum 10 znaków) \\ \hline
+	Ograniczenia i~warunki & Każde ulepszenie musi zawierać informację o przebiegu pojazdu w chwili dokonania ulepszenia oraz opis co zostało ulepszone \\ \hline
 	Dane wejściowe &Przebieg pojazdu, opis ulepszeń
 (Opcjonalne: zdjęcia, kwota dokonania ulepszenia) \\ \hline
 	Wynik & Dodanie informacji o ulepszeniach pojazdu wraz z informacją kto dodał ulepszenia\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu, Serwis samochodowy)\\ \hline
 	Przeznaczenie &Właściciel pojazdu, Serwis samochodowy\\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
@@ -231,16 +260,17 @@ Przebieg pojazdu, opis naprawy, skrócona nazwa naprawy
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Dodawanie uszkodzeń}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 7 				\\ \hline
+	Id wymagania 	& 8 				\\ \hline
 	Nazwa			& Dodawanie uszkodzeń \\ \hline
 	Opis &Aplikacja powinna umożliwić dodanie informacji o uszkodzeniach pojazdu (np. Pęknięcie szyby)\\ \hline
 	Przesłanka & Możliwość dodawania informacji o historii pojazdu  \\ \hline
-	Ograniczenia i~warunki & Każde uszkodzenie musi zawierać informację o przebiegu pojazdu w chwili wystąpienia uszkodzenia oraz opis uległo uszkodzeniu (minimum 10 znaków) \\ \hline
+	Ograniczenia i~warunki & Każde uszkodzenie musi zawierać informację o przebiegu pojazdu w chwili wystąpienia uszkodzenia oraz opis co uległo uszkodzeniu \\ \hline
 	Dane wejściowe &Przebieg pojazdu, opis uszkodzeń
 (Opcjonalne: zdjęcia)\\ \hline
 	Wynik & Dodanie informacji o uszkodzeniach pojazdu\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 Przeznaczenie & Właściciel pojazdu\\ \hline
+Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
@@ -252,7 +282,7 @@ Przeznaczenie & Właściciel pojazdu\\ \hline
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Sprzedaż samochodu}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 8 				\\ \hline
+	Id wymagania 	& 9 				\\ \hline
 	Nazwa			& Sprzedaż samochodu \\ \hline
 	Opis &Aplikacja powinna umożliwić sprzedaż pojazdu, czyli przypisanie pojazdu do innego konta
 \\ \hline
@@ -262,6 +292,7 @@ Przeznaczenie & Właściciel pojazdu\\ \hline
 	Wynik & Zmiana właściciela pojazdu\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
@@ -272,7 +303,7 @@ Przeznaczenie & Właściciel pojazdu\\ \hline
 \captionof{table}{Karta wymagań dla funkcjonalności \textit{Udostępnienie historii samochodu}} 
 	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
 	\hline
-	Id wymagania 	& 9 				\\ \hline
+	Id wymagania 	& 10 				\\ \hline
 	Nazwa			& Udostępnienie historii samochodu \\ \hline
 	Opis &	Aplikacja powinna umożliwić udostępnienie historii pojazdu. Historia pojazdu powinna zawierać wszystkie informacje wprowadzone przez właściciela pojazdu oraz serwisy samochodowe. Każdy wpis powinien zawierać opis, datę oraz przebieg w momencie dodania wpisu. Aplikacja powinna generować link dzięki któremu można zobaczyć historię pojazdu bez logowania się do systemu \\ \hline
 	Przesłanka & Możliwość udostępnienia historii pojazdu potencjalnemu nabywcy   \\ \hline
@@ -281,6 +312,7 @@ Przeznaczenie & Właściciel pojazdu\\ \hline
 	Wynik & Link umożliwiający zobaczenie wszystkich wpisów dla danego pojazdu\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 	Przeznaczenie & Właściciel pojazdu\\ \hline
+	Priorytet & Funkcjonalność podstawowa \\ \hline
 	\end{tabular}
 \end{center}
 \end{table}
