@@ -89,7 +89,11 @@ export class CarCard extends Component {
     const { images, name, vin, className, loggedUserUid } = this.props;
 
     return (
-      <Card id="card" className={classNames(className, "card")}>
+      <Card
+        id="card"
+        className={classNames(className, "card")}
+        style={{ borderRadius: "15px", backgroundColor: "#333333" }}
+      >
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
             {images !== undefined && images.length > 0 && (
@@ -166,6 +170,9 @@ const connectedComponent = connect(
 )(CarCard);
 
 export const StyledCarCard = styled(connectedComponent)`
+  .MuiPaper-root {
+    border-radius: 40px;
+  }
   .card {
     border-radius: 30px;
   }
@@ -174,5 +181,10 @@ export const StyledCarCard = styled(connectedComponent)`
   }
   .image {
     width: 100px;
+  }
+  && {
+    #card {
+      border-radius: 40px;
+    }
   }
 `;
