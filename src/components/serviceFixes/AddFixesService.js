@@ -1,26 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { Form, Formik } from "formik";
 import { StyledSearch as Search } from "./Search";
 import { StyledCarCard as CarCard } from "./../car/CarCard";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
-import SpeedDial from "@material-ui/lab/SpeedDial";
-import SpeedDialIcon from "@material-ui/lab/SpeedDialIcon";
 import Zoom from "@material-ui/core/Zoom";
-import classnames from "classnames";
 import { StyledNewCarForm } from "./../car/NewCarForm";
-import { withStyles } from "@material-ui/core/styles";
-import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 
-const styles = theme => ({
-  speedDial: {
-    position: "absolute",
-    bottom: theme.spacing(6),
-    right: theme.spacing(7)
-  }
-});
 
 export class AddFixesService extends Component {
   constructor() {
@@ -30,8 +17,10 @@ export class AddFixesService extends Component {
       isOpenAddNewCarModal: false,
       checked: true,
       isService: true,
-      email: "",
-      currentUid: ""
+      ownerInfo: {
+        currentUid: "",
+        email: ""
+      }
     };
   }
   groupImages = cars => {
@@ -60,13 +49,20 @@ export class AddFixesService extends Component {
   };
 
   handleSearchChange = e => {
-    this.setState({ email: e.target.value });
+    this.setState((prevState) => ({ ownerInfo:{
+      email: e.target.value,
+      ...prevState }
+    }));
   };
 
   submitEmail = () => {
-    this.props.firebase.userByEmail(this.state.email).on("value", snapshot => {
+    this.props.firebase.userByEmail(this.state.ownerInfo.email).on("value", snapshot => {
       let uid = snapshot.val().uid;
-      this.setState({ currentUid: uid });
+      this.setState((prevState) => ({ ownerInfo: {
+        ...prevState,
+        currentUid: uid
+       }
+      }));
       this.props.firebase.userCars(uid).on("value", snapshot => {
         let cars = [];
         if (snapshot.val()) {
@@ -119,7 +115,7 @@ export class AddFixesService extends Component {
                       name={car.name}
                       images={car.photos}
                       car={car}
-                      loggedUserUid={this.state.currentUid}
+                      ownerInfo={this.state.ownerInfo}
                       authUser={this.props.authUser}
                     />
                   </GridListTile>

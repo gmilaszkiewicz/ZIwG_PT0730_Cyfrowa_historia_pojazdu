@@ -1,11 +1,11 @@
 import { StyledCarList as CarList } from "../components/car/CarList";
 import React from "react";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import CarInfoForm from "./../components/car/CarInfoForm";
 import * as ROLES from "../constans/roles";
 import ServicesMap from "./../components/services-map/ServicesMap";
 import { StyledAddFixesService as AddFixesService } from "./../components/serviceFixes/AddFixesService";
-import MaterialIcon, { colorPalette } from "material-icons-react";
+import FixesHistoryTable from './../components/serviceFixes/FixesHistoryTable'
+import MaterialIcon from 'material-icons-react';
 
 export const routes = [
   {
@@ -40,7 +40,7 @@ export const routes = [
     path: "#fixeshistory",
     visible: true,
     sidebar: () => <h2>Service</h2>,
-    main: () => <h2>history</h2>,
+    main: (authUser, index) => <FixesHistoryTable authUser={authUser} />,
     icon: () => <MaterialIcon icon="note_add" color={"white"} />,
     name: "Fixes History",
     access: ROLES.CAR_SERVICE

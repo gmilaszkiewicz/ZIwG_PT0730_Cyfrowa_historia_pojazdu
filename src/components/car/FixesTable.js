@@ -66,12 +66,12 @@ const styles = theme => ({
    };
    
 
-const StyledMUIDataTable = styled(MUIDataTable)`
+ const StyledMUIDataTable = styled(MUIDataTable)`
     background-color: "white";
     .ToolbarSelect-root{
         background-color: "black";
     }
-`
+`;
 
 class FixesTable extends Component{ 
 

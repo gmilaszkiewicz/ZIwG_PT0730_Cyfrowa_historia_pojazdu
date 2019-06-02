@@ -109,14 +109,14 @@ class AddFixForm extends Component {
     this.props.firebase.addFix(
       name,
       values,
-      this.props.loggedUserUid,
+      this.props.ownerInfo,
       this.props.category,
-      this.props.user
+      this.props.user,
+      this.props.car
     );
     this.props.snackbar.showMessage("Successful added fix!", "success");
   };
   componentDidMount() {
-    console.log(this.props.firebase);
     const categoryName = this.props.category.toLowerCase() + "Categories";
     if (categoryName === "fixCategories") {
       this.props.firebase.fixCategories().on("value", snapshot => {

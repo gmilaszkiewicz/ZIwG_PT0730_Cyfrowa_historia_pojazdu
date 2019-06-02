@@ -139,10 +139,6 @@ class LoginForm extends Component {
                 .catch(error => {
                   this.props.snackbar.showMessage(
                     error.message, "error")
-                  // const payload = { ...values, password: ""}
-                  // console.log(payload, errorsPayload)
-                  // setValues(payload)
-                  // setSubmitting(false) 
                 }) 
             }, 1000);
               this.changeButtonsState(false)

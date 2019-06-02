@@ -86,7 +86,7 @@ export class CarCard extends Component {
   };
 
   render() {
-    const { images, name, vin, className, loggedUserUid } = this.props;
+    const { images, name, vin, className, loggedUserUid, car } = this.props;
 
     return (
       <Card
@@ -145,8 +145,9 @@ export class CarCard extends Component {
             isOpened={this.state.addFixIsOpened}
             handleOnClose={this.handleCloseAddFixForm}
             name={name}
-            loggedUserUid={loggedUserUid}
             user={this.state.user}
+            car={this.props.chosenCar}
+            ownerInfo={this.props.ownerInfo}
           />
         )}
         {this.state.addUpgradeIsOpend && (
@@ -155,8 +156,9 @@ export class CarCard extends Component {
             isOpened={this.state.addUpgradeIsOpend}
             handleOnClose={this.handleCloseAddUpgradeForm}
             name={name}
-            loggedUserUid={loggedUserUid}
             user={this.state.user}
+            car={this.props.chosenCar}
+            ownerInfo={this.props.ownerInfo}
           />
         )}
       </Card>
