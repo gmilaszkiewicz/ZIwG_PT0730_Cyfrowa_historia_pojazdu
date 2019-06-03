@@ -138,6 +138,20 @@ class Firebase {
     .set(fixesInfo);
   }
 
+  sellCar(newUser, oldUser, car){
+    const md5Name = this.md5(car.name);
+    
+    this.db
+      .ref(`users/${newUser}/cars`)
+      .child(md5Name)
+      .set(car);
+
+    this.db
+      .ref(`users/${oldUser.uid}/cars`)
+      .child(md5Name)
+      .remove();
+  }
+
   fixCategories = () => this.db.ref("fixCategories");
 
   damageCategories = () => this.db.ref("damageCategories");

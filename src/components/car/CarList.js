@@ -77,6 +77,7 @@ export class CarList extends Component {
   render() {
     const { classes } = this.props;
     const speedDialClassName = classNames(classes.speedDial);
+    
     return this.state.loading ? (
       <LoadingSpinner />
     ) : (

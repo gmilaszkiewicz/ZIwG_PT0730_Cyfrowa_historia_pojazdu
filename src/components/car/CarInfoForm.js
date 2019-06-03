@@ -11,7 +11,8 @@ import TextField from '@material-ui/core/TextField'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { CarInfoPDF } from './../pdf/CarInfoPDF'  
 import { LoadingSpinner } from './../common/LoadingSpinner'
-import { ShareButton } from './ShareButton'
+import { ShareButton, SellCarButton } from './ShareButton'
+import  SalesForm  from './SalesForm';
 
 const styles = theme => ({
   root: {
@@ -113,6 +114,7 @@ class CarInfoForm extends Component {
     super()
     this.state={
       isOpenPhotosViewer: false,
+      isOpenSalesForm: true,
       loading: true
     }
   }
@@ -135,55 +137,69 @@ class CarInfoForm extends Component {
     })
   }
 
-    render(){
-      const {classes} = this.props;
-      const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
-      const selectedCar = this.props.chosenCar;
-      return (
-      <div>
-        {/* {(this.state.loading)? */}
-        {/* <LoadingSpinner loading={this.state.loading}/>: */}
-        <Paper id="carInfo" className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
-            <CardMedia
-                  className={classes.media}
-                  image={mainPhoto}
-                  title="My car"
-                  component={Button}
-                  onClick={this.showPhotosViewer}
-                />
+  handleCloseSalesForm = () => {
+    this.setState({
+      isOpenSalesForm: false
+    })
+  }
+
+  handleSellCar = () => {
+    this.setState({
+      isOpenSalesForm: true
+    })
+  }
+
+  render(){
+    const {classes} = this.props;
+    const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
+    const selectedCar = this.props.chosenCar;
+    return (
+    <div>
+      {/* {(this.state.loading)? */}
+      {/* <LoadingSpinner loading={this.state.loading}/>: */}
+      <Paper id="carInfo" className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={6}>
+          <CardMedia
+                className={classes.media}
+                image={mainPhoto}
+                title="My car"
+                component={Button}
+                onClick={this.showPhotosViewer}
+              />
+          </Grid>
+        <Grid item xs={6} >
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              {DisabledTextField("Brand", selectedCar.data.brand + " " + selectedCar.data.model, classes)}
+              {DisabledTextField("Car type", selectedCar.data.carType, classes)}
+              {DisabledTextField("Production year", selectedCar.data.productionYear, classes)}
+              {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
+              {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
             </Grid>
-          <Grid item xs={6} >
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                {DisabledTextField("Brand", selectedCar.data.brand + " " + selectedCar.data.model, classes)}
-                {DisabledTextField("Car type", selectedCar.data.carType, classes)}
-                {DisabledTextField("Production year", selectedCar.data.productionYear, classes)}
-                {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
-                {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
-              </Grid>
-              <Grid item xs={6}>
-                {DisabledTextField("Name", this.props.chosenCar.name,classes)}
-                {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
-                {DisabledTextField("Engine capacity", selectedCar.data.engineCapacity + " cm3",classes)}
-                {DisabledTextField("Engine power", selectedCar.data.enginePower + " kW",classes)}
-                {DisabledTextField("Fuel type", selectedCar.data.fuelType,classes)}
-              </Grid>
+            <Grid item xs={6}>
+              {DisabledTextField("Name", this.props.chosenCar.name,classes)}
+              {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
+              {DisabledTextField("Engine capacity", selectedCar.data.engineCapacity + " cm3",classes)}
+              {DisabledTextField("Engine power", selectedCar.data.enginePower + " kW",classes)}
+              {DisabledTextField("Fuel type", selectedCar.data.fuelType,classes)}
             </Grid>
           </Grid>
         </Grid>
-        <div>
-            <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} user={this.props.user} />} fileName="somename.pdf">
-              {({ blob, url, loading, error }) => (loading ? 'Loading document...' : <ShareButton />)}
-            </PDFDownloadLink>
-        </div>
-        <FixesTable car={this.props.chosenCar} />
-        {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
-        </Paper>
+      </Grid>
+      <div>
+        <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} user={this.props.user} />} fileName="somename.pdf">
+          {({ blob, url, loading, error }) => (loading ? 'Loading document...' : <ShareButton />)}
+        </PDFDownloadLink>
+        {/* <SellCarButton handleClick={this.handleSellCar}/> */}
       </div>
-    );
-    }
+      <FixesTable car={this.props.chosenCar} />
+      {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
+      {this.state.isOpenSalesForm && <SalesForm open={this.state.isOpenSalesForm} onClose={this.handleCloseSalesForm} car = {this.props.chosenCar} user={this.props.user}/>}
+      </Paper>
+    </div>
+  );
+  }
 }
 
 // CenteredGrid.propTypes = {
