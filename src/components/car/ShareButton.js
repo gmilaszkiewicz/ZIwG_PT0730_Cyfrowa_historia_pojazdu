@@ -30,15 +30,12 @@ export function ShareButton () {
     )
 }
 
-export class SellCarButton extends Component{
-
-  render(){
-    const classes = useStyles()
-    return (
-        <Button variant="contained" color="primary" className={classes.button} onClick={this.props.handleClick}>
-          Send
-          <Icon className={classes.rightIcon}>send</Icon>
-        </Button>
-    )
-  }
+export function SellCarButton({handleClick}){
+  const classes = useStyles()
+  return (
+      <Button variant="contained" color="primary" className={classes.button} onClick={handleClick}>
+        Sell car
+        <Icon className={classes.rightIcon}>send</Icon>
+      </Button>
+  )
 }

@@ -95,6 +95,7 @@ export class NewCarForm extends Component {
 
   render() {
     return (
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
         <div className={this.props.className}>
           <Formik
@@ -123,7 +124,6 @@ export class NewCarForm extends Component {
             }}
             render={props => (
               <Form>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Grid container spacing={0}>
                     <Grid item>
                     <Field
@@ -204,12 +204,12 @@ export class NewCarForm extends Component {
                     </StyledButton>
                     </Grid>
                   </Grid>
-                </MuiPickersUtilsProvider>
               </Form>
             )}
           />
         </div>
-      </Dialog>
+        </Dialog>
+      </MuiPickersUtilsProvider>
     );
   }
 }

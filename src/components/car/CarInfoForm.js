@@ -114,7 +114,7 @@ class CarInfoForm extends Component {
     super()
     this.state={
       isOpenPhotosViewer: false,
-      isOpenSalesForm: true,
+      isOpenSalesForm: false,
       loading: true
     }
   }
@@ -143,7 +143,8 @@ class CarInfoForm extends Component {
     })
   }
 
-  handleSellCar = () => {
+  handleSellCar = (event) => {
+    event.preventDefault()
     this.setState({
       isOpenSalesForm: true
     })
@@ -191,7 +192,7 @@ class CarInfoForm extends Component {
         <PDFDownloadLink document={<CarInfoPDF car = {this.props.chosenCar} user={this.props.user} />} fileName="somename.pdf">
           {({ blob, url, loading, error }) => (loading ? 'Loading document...' : <ShareButton />)}
         </PDFDownloadLink>
-        {/* <SellCarButton handleClick={this.handleSellCar}/> */}
+        <SellCarButton handleClick={(event) => this.handleSellCar(event)}/>
       </div>
       <FixesTable car={this.props.chosenCar} />
       {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }

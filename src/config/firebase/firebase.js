@@ -141,6 +141,20 @@ class Firebase {
   sellCar(newUser, oldUser, car){
     const md5Name = this.md5(car.name);
     
+    console.log(car.photos)
+
+    let tmpPhotos = []
+
+    car.photos.map(photo => {
+        tmpPhotos.push(photo.concat("&&&"));
+    });
+
+    // let tmp1Photos = car.photos.join("");
+
+    car.photos = tmpPhotos.join("")
+
+    console.log(tmpPhotos)
+
     this.db
       .ref(`users/${newUser}/cars`)
       .child(md5Name)

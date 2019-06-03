@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import MUIDataTable from "mui-datatables";
 import styled from 'styled-components'
 
+
+
 const columns = [
     {
      name: "userEmail",
@@ -62,8 +64,11 @@ const columns = [
    ];
    
    const options = {
-     filterType: 'none',
-   };
+    filterType: 'dropdown',
+    // viewColumns: true,
+    // filter: true,
+    responsive: "scroll"
+  };
 
    const StyledMUIDataTable = styled(MUIDataTable)`
    background-color: "white";

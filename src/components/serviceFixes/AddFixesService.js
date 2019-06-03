@@ -7,7 +7,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import Zoom from "@material-ui/core/Zoom";
 import { StyledNewCarForm } from "./../car/NewCarForm";
 import { withFirebase } from "./../../config/firebase/context";
-
+import withSnackbar from './../snackbar/withSnackbar'
 
 export class AddFixesService extends Component {
   constructor() {
@@ -61,24 +61,30 @@ export class AddFixesService extends Component {
 
   submitEmail = () => {
     this.props.firebase.userByEmail(this.state.ownerInfo.email).on("value", snapshot => {
-      let uid = snapshot.val().uid;
-      this.setState((prevState) => ({
-        ...prevState,
-        ownerInfo: {
-          email: prevState.ownerInfo.email,
-          currentUid: uid
-        }
-      }));
-      this.props.firebase.userCars(uid).on("value", snapshot => {
-        let cars = [];
-        if (snapshot.val()) {
-          Object.values(snapshot.val().cars).forEach(object => {
-            cars.push(object);
-          });
-          this.groupImages(cars);
-        }
-        this.setState({ carList: cars });
-      });
+      if(snapshot.val()){
+        let uid = snapshot.val().uid;
+        this.setState((prevState) => ({
+          ...prevState,
+          ownerInfo: {
+            email: prevState.ownerInfo.email,
+            currentUid: uid
+          }
+        }));
+        this.props.firebase.userCars(uid).on("value", snapshot => {
+          let cars = [];
+          if (snapshot.val() && snapshot.val().cars) {
+            Object.values(snapshot.val().cars).forEach(object => {
+              cars.push(object);
+            });
+            this.groupImages(cars);
+            this.setState({ carList: cars });
+          }else{
+            this.props.snackbar.showMessage("This user has no cars", "success")
+          }
+        });
+      }else{
+        this.props.snackbar.showMessage("Badly email!", "error")
+      }
     });
   };
 
@@ -143,7 +149,7 @@ export class AddFixesService extends Component {
 
 export const connectedAddFixesService = withFirebase(AddFixesService);
 
-export const StyledAddFixesService = styled(connectedAddFixesService)`
+export const StyledAddFixesService = withSnackbar()(styled(connectedAddFixesService)`
   display: "flex";
   flex-wrap: "wrap";
   justify-content: "space-around";
@@ -161,4 +167,4 @@ export const StyledAddFixesService = styled(connectedAddFixesService)`
       width: 500px;
     }
   }
-`;
+`);
