@@ -12,6 +12,11 @@ import { chooseTab, chooseCar } from "./../../actions/index";
 import Grid from "@material-ui/core/Grid";
 
 
+const StyledDiv = styled.div`
+    padding: 15px;
+    margin-right: 17px;
+`;
+
 const StyledField = styled(TextField)`
     &&{
         margin: 10px;
@@ -47,7 +52,7 @@ class SalesForm extends Component {
             this.props.firebase.userByEmail(this.state.newOwnerEmail).on("value", snapshot => {
                 if(snapshot.val()){
                     let uid = snapshot.val().uid;
-                    if(this.props.user.uid = uid){
+                    if(this.props.user.uid === uid){
                         this.props.snackbar.showMessage(
                             "Bez żartów :P", "error")
                     }else{
@@ -91,6 +96,7 @@ class SalesForm extends Component {
             <Dialog
             open={this.props.open}
             onClose={this.props.onClose}>
+            <StyledDiv>
             <Grid container direction="column" spacing={2} justify="center">
                 <Grid item>
                     <StyledField
@@ -104,12 +110,12 @@ class SalesForm extends Component {
                     ),
                     }}
                     onChange={this.handleChangeEmail}
-                    // fullWidth
+                    fullWidth
                     />
                     </Grid>
                 <Grid item>
                     <StyledButton variant="contained" 
-                        // fullWidth
+                        fullWidth
                         disabled={this.state.openInfoAfterAccept}
                         color="primary" 
                         onClick={this.handleOpenVerificationModal}
@@ -125,14 +131,14 @@ class SalesForm extends Component {
                             label="Code from your e-mail"
                             onChange={this.handleChangeVerCode}
                             handleChangeVerCode
-                            // fullWidth
+                            fullWidth
                         />
                     </Grid>
                     <Grid item>
                         <StyledButton variant="contained" 
                         color="primary" 
                         onClick={this.handleSellCar}
-                        // fullWidth
+                        fullWidth
                         >
                             Sell car
                         </StyledButton>
@@ -140,6 +146,7 @@ class SalesForm extends Component {
                     </Grid>}
                 </Grid>
                 </Grid>
+                </StyledDiv>
             </Dialog>
         );
     }

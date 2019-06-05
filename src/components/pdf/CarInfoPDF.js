@@ -25,11 +25,12 @@ export class CarInfoPDF extends Component {
       .then((canvas) => {
         // console.log(canvas.toDataURL('image/png'))
         tmp = canvas.toDataURL('image/png');
-        // this.setState({
-        //   tableInBase64: canvas.toDataURL('image/png')
-        // })
+        this.setState({
+          tableInBase64: canvas.toDataURL('image/png')
+        })
       }))
     await this.sleep(1500)
+    // console.log(tmp)
     this.setState({
       tableInBase64: tmp
     })
@@ -39,7 +40,7 @@ export class CarInfoPDF extends Component {
   async componentDidMount() {
     // tableImage = await this.getVehicleHistory();
     let tmp = ""
-    this.getVehicleHistory(tmp)
+    await this.getVehicleHistory(tmp)
   }
 
   render() {
@@ -96,6 +97,9 @@ export class CarInfoPDF extends Component {
           <Text style={styles.subtitle} break>
             Vehicle history:
           </Text>
+          
+          {/* {console.log("state" , this.state.tableInBase64)} */}
+
           {!this.state.tableInBase64 === "" &&
             <Image
               style={styles.image}

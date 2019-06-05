@@ -3,7 +3,8 @@ import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
-import Icon from '@material-ui/core/Icon';
+import MaterialIcon from 'material-icons-react';
+
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -30,12 +31,12 @@ export function ShareButton () {
     )
 }
 
-export function SellCarButton({handleClick}){
+export function SellCarButton({handleClickSaleCar}){
   const classes = useStyles()
   return (
-      <Button variant="contained" color="primary" className={classes.button} onClick={handleClick}>
+      <Button variant="contained" color="primary" className={classes.button} onClick={handleClickSaleCar}>
         Sell car
-        <Icon className={classes.rightIcon}>send</Icon>
+        <MaterialIcon  icon="attach_money" color={"white"} />
       </Button>
   )
 }
