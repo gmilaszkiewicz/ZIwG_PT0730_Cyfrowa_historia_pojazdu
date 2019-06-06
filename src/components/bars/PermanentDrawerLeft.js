@@ -12,7 +12,6 @@ import { Link } from "react-router-dom";
 import { routes } from "../../constans/tabs-routes";
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
-import { createAuthRoutes, authRoutes } from './../../constans/authRoutes'
 
 const drawerWidth = 190;
 
@@ -50,11 +49,6 @@ const styles = theme => ({
     padding: theme.spacing(2),
   },
   selectedListItem:{
-  },
-  list:{
-    '&$selected': { 
-      backgroundColor: theme.palette.action.selected, 
-    },
   },
   listItemIcon:{
     color: 'white',

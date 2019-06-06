@@ -4,9 +4,6 @@ import { withAuthorization, AuthUserContext } from "../session";
 import TopBar from "./../bars/TopBar";
 import PageContent from "./../content/PageContent";
 import styled from "styled-components";
-import {createAuthRoutes} from './../../constans/authRoutes'
-import { routes } from "./../../constans/tabs-routes";
-import ComponentX from './Component'
 
 const drawerWidth = 240;
 
@@ -18,10 +15,6 @@ const StyledDiv = styled.div`
 
 
 class HomePage extends Component {
-
-    // componentDidMount(){
-    //     createAuthRoutes(routes, this.props.authUser)
-    //}
 
   render() {
     return (

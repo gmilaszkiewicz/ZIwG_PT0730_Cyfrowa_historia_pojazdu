@@ -10,7 +10,6 @@ import FixesTable from './FixesTable'
 import TextField from '@material-ui/core/TextField'
 import  SalesForm  from './SalesForm';
 import {ControlButtons} from './ControlButtons'
-import { LoadingSpinner } from './../common/LoadingSpinner'
 import * as ROLES from "../../constans/roles";
 
 
@@ -188,13 +187,12 @@ class CarInfoForm extends Component {
           </Grid>
         </Grid>
       </Grid>
-      <FixesTable car={this.props.chosenCar} />
-
-      {this.props.user.role == ROLES.OWNER && 
+      {this.props.user.role === ROLES.OWNER && 
                         <ControlButtons 
                         car = {this.props.chosenCar} 
                         user={this.props.user} 
                         handleClickSaleCar={(event) => this.handleSellCar(event)} /> }
+      <FixesTable car={this.props.chosenCar} />
       {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
       {this.state.isOpenSalesForm && <SalesForm open={this.state.isOpenSalesForm} onClose={this.handleCloseSalesForm} car = {this.props.chosenCar} user={this.props.user}/>}
       </Paper>

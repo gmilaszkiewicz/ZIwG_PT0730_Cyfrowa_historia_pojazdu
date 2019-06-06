@@ -32,7 +32,7 @@ export const routes = [
     visible: true,
     sidebar: () => <AddFixesService />,
     main: (authUser, index) => <AddFixesService authUser={authUser} />,
-    icon: () => <MaterialIcon icon="history" color={"white"} />,
+    icon: () => <MaterialIcon icon="note_add" color={"white"} />,
     name: "Add fixes",
     access: ROLES.CAR_SERVICE
   },
@@ -41,7 +41,7 @@ export const routes = [
     visible: true,
     sidebar: () => <h2>Service</h2>,
     main: (authUser, index) => <FixesHistoryTable authUser={authUser} />,
-    icon: () => <MaterialIcon icon="note_add" color={"white"} />,
+    icon: () => <MaterialIcon icon="history" color={"white"} />,
     name: "Fixes History",
     access: ROLES.CAR_SERVICE
   },

@@ -39,7 +39,7 @@ const styles1 = theme => ({
     },
     iconVariant: {
       opacity: 0.9,
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
     },
     message: {
       display: 'flex',
@@ -117,7 +117,6 @@ export default class SnackbarProvider extends PureComponent {
       open,
       type
     } = this.state
-    const { classes } = this.props;
     const {
       ButtonProps = {},
       children,

@@ -229,6 +229,5 @@ export const StyledNewCarForm = withSnackbar()(styled(composedNewCarForm)`
     min-height: 0px;
     margin-bottom: 20px;
     margin-top: 10px;
-    /* height: 200px; */
   }
 `);

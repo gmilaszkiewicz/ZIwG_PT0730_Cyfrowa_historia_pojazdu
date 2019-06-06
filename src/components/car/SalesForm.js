@@ -48,7 +48,7 @@ class SalesForm extends Component {
     }
 
     handleSellCar = () => {
-        if(this.state.code == "CODE"){
+        if(this.state.code === "CODE"){
             this.props.firebase.userByEmail(this.state.newOwnerEmail).on("value", snapshot => {
                 if(snapshot.val()){
                     let uid = snapshot.val().uid;
