@@ -30,7 +30,8 @@ const styles = theme => ({
   },
   textField: {
     flexBasis: 300,
-    width: "268px"
+    width:'100%'
+
   },
   input: {
     color: "white",
@@ -40,21 +41,23 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(2),
-    width: "268px"
+    marginBottom: 0,
+    width:'100%'
   },
   selector: {
-    width: "400px"
+    width: '100%',
   },
   dense: {
-    width: "268px"
+    width:'100%'
   },
   picker: {
-    width: "268px"
+    width:'100%'
   },
   comp: {
     alignItems: "center"
   },
   pond: {
+    width:'100%',
     margin: theme.spacing(1),
     "& .react-fine-uploader-gallery-dropzone": {
       minHeight: 50
@@ -68,6 +71,11 @@ const styles = theme => ({
       top: "20%",
       right: "10%"
     }
+  },
+  form:{
+    paddingRight: 30,
+    paddingBottom: 10,
+    overflowX: 'hidden'
   }
 });
 
@@ -155,38 +163,42 @@ class AddFixForm extends Component {
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>
-          <Form onSubmit={e => this.addFixes(name, e)}>
-            <div className={classes.root}>
-              <Typography
-                className={classes.margin}
-                component="h3"
-                variant="body1"
-                gutterBottom
-                color="secondary"
-              >
-                {this.props.category} category:
-              </Typography>
-              <Select
-                value={this.state.fixCategory}
-                onChange={this.handleChange("fixCategory")}
-                className={classNames(classes.margin, classes.selector)}
-                input={<OutlinedInput labelWidth={0} />}
-              >
-                {this.props.category === "Fix"
-                  ? this.state.fixCategories.map(category => (
-                      <MenuItem key={category} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))
-                  : this.state.damageCategories.map(category => (
-                      <MenuItem key={category} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))}
-              </Select>
-            </div>
-            <Grid container direction="row">
-              <Grid item xs={6} className={classes.comp}>
+          <Form className={classes.form} onSubmit={e => this.addFixes(name, e)}>
+              <Grid className={classes.root} container direction="row" spacing={0}>
+                <Grid item>
+                <Typography
+                  className={classes.margin}
+                  component="h3"
+                  variant="body1"
+                  gutterBottom
+                  color="secondary"
+                >
+                  {this.props.category} category:
+                </Typography>
+                </Grid>
+                <Grid item style={{width: '70%'}}>
+                <Select
+                  value={this.state.fixCategory}
+                  onChange={this.handleChange("fixCategory")}
+                  className={classNames(classes.margin, classes.selector)}
+                  input={<OutlinedInput labelWidth={0}/>}
+                >
+                  {this.props.category === "Fix"
+                    ? this.state.fixCategories.map(category => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))
+                    : this.state.damageCategories.map(category => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))}
+                </Select>
+                </Grid>
+              </Grid>
+            <Grid container direction="row" spacing={2}>
+              <Grid item sm={6} xs={12} className={classes.comp}>
                 <TextField
                   required
                   label={this.props.category + " name"}
@@ -221,7 +233,7 @@ class AddFixForm extends Component {
                   />
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
                   required
                   id="outlined-adornment-weight"
