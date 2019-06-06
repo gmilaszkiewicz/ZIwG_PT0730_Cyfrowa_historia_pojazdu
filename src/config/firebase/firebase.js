@@ -55,6 +55,10 @@ class Firebase {
     return this.db.ref(`users/${uid}`);
   };
 
+  serviceCreatedFixes = uid => {
+    return this.db.ref(`users/${uid}/createdFixes`)
+  }
+
   services = () => {
     return this.db.ref(`services/`);
   };

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import MUIDataTable from "mui-datatables";
 import styled from 'styled-components'
-
-
+import { withFirebase } from "../../config/firebase/context";
 
 const columns = [
     {
@@ -87,9 +86,16 @@ const columns = [
 
 class FixesHistoryTable extends Component{
 
-    prepareDateFixesHistory = () => {
+    constructor(){
+        super()
+        this.state = {
+            tableData: []
+        }
+    }
+
+    prepareDateFixesHistory = (hashedData) => {
         let finalFixes = []
-        const fixes =  (this.props.authUser.createdFixes)?Object.values(this.props.authUser.createdFixes):undefined
+        const fixes =  (hashedData)?Object.values(hashedData):undefined
         fixes && 
         fixes.map(fix => (
             fix && (Object.values(fix)).length>0 && finalFixes.push(...Object.values(fix))
@@ -97,12 +103,28 @@ class FixesHistoryTable extends Component{
         return finalFixes
     }
 
+    componentDidMount() {
+        this.props.firebase
+          .serviceCreatedFixes(this.props.authUser.uid)
+          .on("value", snapshot => {
+              if(snapshot.val()){
+                let fixesData = this.prepareDateFixesHistory(snapshot.val())
+                this.setState({
+                    tableData: fixesData
+                })
+              }
+          });
+      }
+
+      componentWillUnmount() {
+        this.props.firebase.serviceCreatedFixes().off();
+      }
+
     render(){
-        const data = this.prepareDateFixesHistory();
         return(
         <StyledMUIDataTable
             title={"Created fixes"}
-            data={data}
+            data={this.state.tableData}
             columns={columns}
             options={options}
         />
@@ -110,6 +132,6 @@ class FixesHistoryTable extends Component{
     }
 }
 
-export default FixesHistoryTable;
+export default withFirebase(FixesHistoryTable);
 
 

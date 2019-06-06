@@ -209,7 +209,6 @@ export class NewCarForm extends Component {
                       </StyledErrorMsg>
                     </Grid>
                     <Grid item>
-                      {console.log(props.setFieldValues)}
                       <StyledDropZoneArea
                         filesLimit={3}
                         onChange={value =>
