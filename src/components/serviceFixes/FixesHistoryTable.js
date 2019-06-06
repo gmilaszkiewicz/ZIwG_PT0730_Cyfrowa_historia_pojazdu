@@ -90,6 +90,7 @@ class FixesHistoryTable extends Component{
     prepareDateFixesHistory = () => {
         let finalFixes = []
         const fixes =  (this.props.authUser.createdFixes)?Object.values(this.props.authUser.createdFixes):undefined
+        fixes && 
         fixes.map(fix => (
             fix && (Object.values(fix)).length>0 && finalFixes.push(...Object.values(fix))
         ))

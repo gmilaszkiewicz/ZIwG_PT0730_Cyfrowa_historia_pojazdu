@@ -4,10 +4,6 @@ import html2canvas from 'html2canvas';
 
 export class CarInfoPDF extends Component {
 
-  state = {
-    tableInBase64: ""
-  }
-
   sleep = ms => {
     return new Promise(resolve => setTimeout(resolve, ms)); //tymczasowe rozwiazanie xD
   };
@@ -37,13 +33,32 @@ export class CarInfoPDF extends Component {
     // return tmp
   }
 
-  async componentDidMount() {
-    // tableImage = await this.getVehicleHistory();
-    let tmp = ""
-    await this.getVehicleHistory(tmp)
-  }
+  prepareFixesAndDamages(){
+    const fixes = (this.props.car.fixes)?Object.values(this.props.car.fixes):undefined
+    const damages = (this.props.car.damages)?Object.values(this.props.car.damages):undefined
+    if(fixes !== undefined && damages !== undefined){
+        return fixes.concat(damages)
+    }
+    else if(fixes !== undefined){
+        return fixes
+    }
+    else if(damages !== undefined){
+        return damages
+    }
+    return []
+}
+
+  // async componentDidMount() {
+  //   // tableImage = await this.getVehicleHistory();
+  //   let tmp = ""
+  //   await this.getVehicleHistory(tmp)
+
+  // }
 
   render() {
+
+    const fixesData = this.prepareFixesAndDamages();
+
     const selectedCar = this.props.car;
     const user = this.props.user;
     return (
@@ -97,15 +112,18 @@ export class CarInfoPDF extends Component {
           <Text style={styles.subtitle} break>
             Vehicle history:
           </Text>
-          
-          {/* {console.log("state" , this.state.tableInBase64)} */}
 
-          {!this.state.tableInBase64 === "" &&
+          {fixesData.map(fix => (
+            <Text style={styles.text} break>
+                {fix.fixCategoryName + " -- " + fix.name + " -- Przebieg: " + fix.course + " -- Weryfikacja: " +  fix.verified + " -- Cena: " + fix.price + " -- " + fix.description + " -- " + fix.dateTime}
+            </Text>
+          ))}
+          {/* {!this.state.tableInBase64 === "" &&
             <Image
               style={styles.image}
               src={this.state.tableInBase64}
             />
-          }
+          } */}
 
           <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
             `${pageNumber} / ${totalPages}`
