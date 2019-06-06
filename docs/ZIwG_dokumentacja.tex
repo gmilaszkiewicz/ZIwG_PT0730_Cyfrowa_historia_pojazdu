@@ -632,6 +632,67 @@ Routing – aplikacja posiada różne strony i podstrony, dlatego konieczne był
 		\label{web7}
 	\end{figure}
 	
+\subsection{Testy aplikacji webowej}
+
+Test aplikacji zostały przeprowadzone w sposób manualny oraz automatyczny przy pomocy narzędzia Selenium. Testy zostały uporządkowane i opisany przy pomocy narzędzia jakim jest TestLink. Opisane w nim zostały scenariusze wraz z kolejnymi krokami, które były następnie uruchamiane przez testerów. Zostały zweryfikowane takie funkcjonalności aplikacji jak:
+\begin{itemize}
+  \item rejestracja użytkownika,
+  \item dodawanie nowego pojazdu,
+  \item dodawanie naprawy,
+  \item sprzedaż samochodu.
+\end{itemize}
+
+Na rysunku od \ref{test1} do \ref{test4} zostały przedstawione scenariusze poszczególnych testów.
+
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.61]{registerTest.png}
+		\caption{Scenariusz rejestracji użytkownika}
+		\label{test1}
+	\end{figure}
+	
+	
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.61]{addNewCarTest.png}
+		\caption{Scenariusz dodania nowego pojazdu}
+		\label{test2}
+	\end{figure}
+	
+	
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.61]{addFixByServiceTest.png}
+		\caption{Scenariusz dodania nowej naprawy}
+		\label{test3}
+	\end{figure}
+	
+	
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.61]{saleTestCar.png}
+		\caption{Scenariusz sprzedaży pojazdu}
+		\label{test4}
+	\end{figure}
+
+Test automatyczne zostały zrealizowane przy pomocy narzędzia SeleniumIDE. Testerzy według przygotowanych scenariuszy zaprogramowali odpowiednie sekwencje akcji. Przykładowy kod jednego z wykonywanych scenariuszy (dodawanie nowego samochodu) znajduje się na rysunku \ref{testCode1} oraz \ref{testCode2}.
+
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.70]{testCode1.png}
+		\caption{Fragment kodu wykonujący scenariusz dodawania nowego pojazdu cz. I}
+		\label{testCode1}
+	\end{figure}
+	
+	
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.70]{testCode2.png}
+		\caption{Fragment kodu wykonujący scenariusz dodawania nowego pojazdu cz. II}
+		\label{testCode2}
+	\end{figure}
+	
+	
 %---------------------------------------------------------
 %					Część siódma
 %---------------------------------------------------------
