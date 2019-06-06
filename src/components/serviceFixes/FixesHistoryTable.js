@@ -18,7 +18,7 @@ const columns = [
      label: "Category",
      options: {
       filter: true,
-      sort: false,
+      sort: true,
      }
     },
     {
@@ -26,7 +26,7 @@ const columns = [
      label: "Brand",
      options: {
       filter: true,
-      sort: false,
+      sort: true,
      }
     },
     {
@@ -34,7 +34,7 @@ const columns = [
      label: "Production Year",
      options: {
       filter: true,
-      sort: false,
+      sort: true,
      }
     },
     {
@@ -58,22 +58,30 @@ const columns = [
         label: "Date",
         options: {
          filter: true,
-         sort: false,
+         sort: true,
         }
     },
    ];
    
    const options = {
     filterType: 'dropdown',
-    // viewColumns: true,
-    // filter: true,
+    viewColumns: true,
+    filter: false,
     responsive: "scroll"
   };
 
    const StyledMUIDataTable = styled(MUIDataTable)`
    background-color: "white";
+   color:"white";
    .ToolbarSelect-root{
        background-color: "black";
+   }
+   .MuiToolbar-root{
+       color:white;
+   }
+   .MuiPaper-elevation1{
+       background-color:black;
+       color:white;
    }
 `;
 

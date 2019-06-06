@@ -71,6 +71,13 @@ const styles = theme => ({
     .ToolbarSelect-root{
         background-color: "black";
     }
+    .MUIDataTableToolbar-titleRoot-183{
+       color:white;
+   }
+   .MuiPaper-elevation1{
+       background-color:black;
+       color:white;
+   }
 `;
 
 class FixesTable extends Component{ 
