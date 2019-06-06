@@ -10,43 +10,57 @@
 
 
 
-
 \linespread{1.3}
 \begin{document}
+
 %---------------------------------------------------------
 %					Strona Tytułowa
 %---------------------------------------------------------
 \begin{titlepage}
 %-----------------------Tytuł-----------------------------
-\newcommand{\LINE}{\rule{\linewidth}{0.7mm}}
-\center
-\LINE \\[0.5cm]
-\Huge\textsc{Cyfrowa historia pojazdu}\\ [5mm]
-\normalsize\textsc{Zastosowanie Informatyki w Gospodarce}  \\[0.5cm]
-\LINE \\[3cm]
+
+ \newcommand{\LINE}{\rule{\linewidth}{0.1mm}}
+\begin{center}
+ \LARGE  POLITECHNIKA WROC\L{}AWSKA \\[0mm] %
+  WYDZIAŁ ELEKTRONIKI            %
+  \vspace{-6mm}%
+  
+  \LINE \\[0.1cm]
+\end{center}
+
+\textsc{Kierunek:}  \hspace{15mm} Informatyka (INF) \\[0.5cm]
+
+\begin{center}
+\large \textbf{ZASTOSOWANIA INFORMATYKI} \\
+\textbf{W GOSPODARCE} \\ [1cm]
+\end{center}
+
+\normalsize
+
 %----------------------Nazwiska---------------------------
-\begin{minipage}{0.5\textwidth}
-\begin{flushleft} \large
-\emph{Autorzy:}
-		\\Grzegorz Milaszkiewicz %226110
-		\\Mateusz Ożóg %226125
-		\\Igor Kurek
-		\\Piotr Wodzyński
-		\\Maciej Kucia 
-\end{flushleft}
-\end{minipage}
-~
-\begin{minipage}{0.45\textwidth}
-\begin{flushright} \large
-\emph{Prowadzący:} \\
-dr inż. Marek Woda
-\end{flushright}
-\end{minipage}\\[2cm]
+\begin{center}
+\hspace{55mm}Cyfrowa historia pojazdu\\[0.5cm]
+\hspace{55mm}Digital vehicle history \\[0.5cm]
+\hspace{55mm}\textsc{Autorzy:}  \\[0.1cm]
+\hspace{55mm}Grzegorz Milaszkiewicz \\
+\hspace{55mm}Mateusz Ożóg \\
+\hspace{55mm}Igor Kurek\\
+\hspace{55mm}Piotr Wodzyński\\
+\hspace{55mm}Maciej Kucia \\[2.0cm]
+
+\hspace{5mm}\textsc{Prowadzący:} \\
+\hspace{15mm}dr inż. Marek Woda \\[1.2cm]
+
+\hspace{6mm}\textsc{Ocena pracy:} \\[1.72cm]
+
+\end{center}
+
+
 %----------------------Stopka-----------------------------
-\vfill
+%\vfill
+\LINE
 \center Wrocław 2019
 \end{titlepage}
-
 %---------------------------------------------------------
 %					Spis treści
 %---------------------------------------------------------
@@ -393,26 +407,6 @@ Priorytet & Funkcjonalność podstawowa \\ \hline
 	Wynik &Wyświetlenie mapy serwisów\\ \hline
 	Źródło danych wejściowych &Użytkownik (Właściciel pojazdu)\\ \hline
 	Przeznaczenie & Właściciel pojazdu\\ \hline
-	Priorytet & Funkcjonalność rozszerzona \\ \hline
-	\end{tabular}
-\end{center}
-\end{table}
-%----------------------HISTORIA NAPRAW SERWISU------------------------------------
-\begin{table}[H]
-\begin{center}
-\captionof{table}{Karta wymagań dla funkcjonalności \textit{Historia napraw serwisu}} 
-	\begin{tabular}{|p{0.18\linewidth}|p{0.72\linewidth}|}%{|l|l|}
-	\hline
-	Id wymagania 	& 15				\\ \hline
-	Nazwa			& Historia napraw serwisu \\ \hline
-	Opis &Aplikacja powinna umożliwić wyświetlanie historii napraw jakie dokonał serwis
-\\ \hline
-	Przesłanka & Możliwość zobaczenia historii napraw  \\ \hline
-	Ograniczenia i~warunki & Serwis może zobaczyć tylko swoją historię napraw\\ \hline
-	Dane wejściowe & Brak \\ \hline
-	Wynik &Wyświetlenie historii wykonanych napraw serwisu\\ \hline
-	Źródło danych wejściowych &Użytkownik (Serwis samochodowy)\\ \hline
-	Przeznaczenie & Serwis samochodowy\\ \hline
 	Priorytet & Funkcjonalność rozszerzona \\ \hline
 	\end{tabular}
 \end{center}
