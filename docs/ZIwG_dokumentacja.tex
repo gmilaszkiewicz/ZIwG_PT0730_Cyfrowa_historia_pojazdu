@@ -567,7 +567,71 @@ Do uruchomienia serwera, na którym będzie znajdowała się nasza strona potrze
 		\label{app_webowa2}
 	\end{figure}
 
+React.js jest to biblioteka języka Java Script, która jest stosowana do tworzenia interfejsów graficznych aplikacji webowych. Główną cechą, która wyróżnia React.js jest tak zwany wirtualny DOM, czyli Document Object Model. React przechowuje DOM aplikacji w pamięci, następnie po zmianie stanu danego komponentu szuka różnic między widokami zachowanymi w pamięci a tymi na ekranie komputera i w razie potrzeby aktualizuje zmiany. Zakłada się, że Interfejs użytkownika składa się z komponentów. Komponenty w React mogą posiadać lub nie posiadać stanu. Stan jest to zdefiniowany obiekt o nazwie state. W czasie zmiany któregoś z atrybutu następuje ponowne renderowanie. Komponenty te zazwyczaj posiadają sekcję render. W tej sekcji zwracany jest kod JSX, który swoją składnią przypomina HTML, jedna różni się od niej. W komponentach tych mogę również być definiowane funkcję. React korzysta z zasady, że dane płyną w dół. Są one przekazywane poprzez propsy do dzieci. Fragment kodu przedstawia rysunek \ref{web1}.
+\begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{web1.png}
+		\caption{Fragment kodu \textit{React.js}}
+		\label{web1}
+	\end{figure}
+	
+Stylowanie komponentów polega na tworzeniu nowych komponentów, przypisując im klasy. Dzięki temu nie ma potrzeby stosowania unikatowych klas CSS-owych w obrębie projektu. Komponent CarCard jest argumentem funkcji styled, która zwraca komponent StyledCarCard z zaaplikowanymi stylami oraz unikalną klasą CSS-ową. Fragment stylizowania przedstawia rysunek \ref{web1}.
 
+ \begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{web2.png}
+		\caption{Fragment stylizowania}
+		\label{web2}
+	\end{figure}
+	
+W katalogu config definiuje się pliki odpowiedzialne za połączenie do bazy danych (rysunek \ref{web3}). W pliku firebase.js został napisany obiekt konfiguracyjny, który przyjmuję parametry potrzebne do dostępu aplikacji Firebase. Są udostępniane, gdy stworzy się odpowiedni projekt na platformie. 
+\begin{itemize}
+\item	apiKey
+\item	authDoboot
+\item	dataBaseURL
+\item	projectID
+\item	storageBucket
+\item	messagingSenderId
+\end{itemize}
+ \begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{web3.png}
+		\caption{Katalog config}
+		\label{web3}
+	\end{figure}
+	
+Plik firebase.js spełnia rolę serwisu http. Udostępnia on metody, odpowiedzialne za zapis do bazy danych, odczyt, edycja, tworzenie użytkowników, logowanie itp. Przykładowa metoda pochodząca z pliku firebase.js, służąca do dodawania nazw serwisów została przedstawiona na rysunku \ref{web4}.
+
+ \begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{web4.png}
+		\caption{Metoda z pliku firebase.js}
+		\label{web4}
+	\end{figure}
+	
+	Plik context.js jest odpowiedzialny za przygotowanie konsumera kontekstu aplikacji (rysunek \ref{web5} i \ref{web6}). Aby korzystać z funkcji dostępnych poprzez skonfigurowanie modułu firebase stworzono kontekst, poprzez osadzenia głównego komponentu aplikacji w tagi Providera. Od teraz każdy komponent, który stanie się konsumerem danego kontekstu będzie miał dostęp do wszystkich metod zdefiniowanych w pliku firebase.js. 
+	
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.8]{web5.png}
+		\caption{Fragment pliku context.js}
+		\label{web5}
+	\end{figure}
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.8]{web6.png}
+		\caption{Fragment pliku context.js}
+		\label{web6}
+	\end{figure}
+
+Routing – aplikacja posiada różne strony i podstrony, dlatego konieczne było zaimplementowanie routera (rysunek \ref{web7}). Mechanizm routingu został spełniony przez React Router. Ścieżki zdefiniowane są w pliku jako tablica obiektów, posiadających adresy, ikony, referencje do ścieżek, nazwy oraz rolę dostępu. Jako przykład można pokazać komponent, pokazujący listę samochodów. Dostęp do poszczególnych ścieżek zależny jest od roli użytkownika w~systemie.  
+	 \begin{figure}[H]
+		\centering
+		\includegraphics[scale=1]{web7.png}
+		\caption{Fragment implementacji routingu}
+		\label{web7}
+	\end{figure}
+	
 %---------------------------------------------------------
 %					Część siódma
 %---------------------------------------------------------
