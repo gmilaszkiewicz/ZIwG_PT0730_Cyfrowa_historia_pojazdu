@@ -27,6 +27,9 @@ const muiTheme = createMuiTheme({
           },
           text:{
               main: grey[50]
+          },
+          zIndex:{
+            snackbar: 1050
           }
     },
 
@@ -50,6 +53,9 @@ const muiTheme = createMuiTheme({
             color: "white",
           }
       },
+      MuiSnackbar:{
+        zIndex: 900
+      },
       MuiListItem: {
 
        root: {
@@ -69,19 +75,16 @@ const muiTheme = createMuiTheme({
             color: "white"
           }
         }
+      },
+      MuiFab: {
+          primary:{
+            backgroundColor:"red",
+            '&:hover': {
+              backgroundColor: "red",
+            }
+          }
       }
     },
-    // MuiOutlinedInput:{
-    //   root:{
-    //     borderColor: "black",
-    //     notchedOutline:{
-    //       borderColor: "black",
-    //     }
-    //   },
-    //   notchedOutline:{
-    //     borderColor: "black",
-    //   }
-    // }
 })
 
 ReactDOM.render(

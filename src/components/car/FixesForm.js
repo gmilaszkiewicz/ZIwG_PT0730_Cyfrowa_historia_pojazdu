@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Dialog, withStyles } from "@material-ui/core";
-import { Formik, Form } from "formik";
+import { Form } from "formik";
 import classNames from "classnames";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
@@ -15,7 +15,8 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { compose } from "recompose";
 import { withFirebase } from "../../config/firebase/context";
 import "filepond/dist/filepond.min.css";
-import { FilePond, File, registerPlugin } from "react-filepond";
+import { FilePond } from "react-filepond";
+import withSnackbar from "./../snackbar/withSnackbar";
 
 const styles = theme => ({
   root: {
@@ -29,7 +30,8 @@ const styles = theme => ({
   },
   textField: {
     flexBasis: 300,
-    width: "268px"
+    width:'100%'
+
   },
   input: {
     color: "white",
@@ -39,21 +41,23 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(2),
-    width: "268px"
+    marginBottom: 0,
+    width:'100%'
   },
   selector: {
-    width: "400px"
+    width: '100%',
   },
   dense: {
-    width: "268px"
+    width:'100%'
   },
   picker: {
-    width: "268px"
+    width:'100%'
   },
   comp: {
     alignItems: "center"
   },
   pond: {
+    width:'100%',
     margin: theme.spacing(1),
     "& .react-fine-uploader-gallery-dropzone": {
       minHeight: 50
@@ -67,6 +71,11 @@ const styles = theme => ({
       top: "20%",
       right: "10%"
     }
+  },
+  form:{
+    paddingRight: 30,
+    paddingBottom: 10,
+    overflowX: 'hidden'
   }
 });
 
@@ -85,7 +94,7 @@ class AddFixForm extends Component {
 
   addFixes = (name, e) => {
     e.preventDefault();
-    this.props.handleOnClose()
+    this.props.handleOnClose();
     const {
       fixName,
       price,
@@ -101,16 +110,19 @@ class AddFixForm extends Component {
       name: fixName,
       description,
       course,
-      DateTime: selectedDate,
+      dateTime: selectedDate,
       fixCategoryName: fixCategory,
       price
     };
     this.props.firebase.addFix(
       name,
       values,
-      this.props.firebase.auth.currentUser.uid,
-      this.props.category
+      this.props.ownerInfo,
+      this.props.category,
+      this.props.user,
+      this.props.car
     );
+    this.props.snackbar.showMessage("Successful added fix!", "success");
   };
   componentDidMount() {
     const categoryName = this.props.category.toLowerCase() + "Categories";
@@ -148,43 +160,47 @@ class AddFixForm extends Component {
 
   render() {
     const { classes, name } = this.props;
-    console.log(this.state);
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <Dialog open={this.props.isOpened} onClose={this.props.handleOnClose}>
-          <Form>
-            <div className={classes.root}>
-              <Typography
-                className={classes.margin}
-                component="h3"
-                variant="body1"
-                gutterBottom
-                color="secondary"
-              >
-                {this.props.category} category:
-              </Typography>
-              <Select
-                value={this.state.fixCategory}
-                onChange={this.handleChange("fixCategory")}
-                className={classNames(classes.margin, classes.selector)}
-                input={<OutlinedInput labelWidth={0} />}
-              >
-                {this.props.category === "Fix"
-                  ? this.state.fixCategories.map(category => (
-                      <MenuItem key={category} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))
-                  : this.state.damageCategories.map(category => (
-                      <MenuItem key={category} value={category}>
-                        {category}
-                      </MenuItem>
-                    ))}
-              </Select>
-            </div>
-            <Grid container direction="row">
-              <Grid item xs={6} className={classes.comp}>
+          <Form className={classes.form} onSubmit={e => this.addFixes(name, e)}>
+              <Grid className={classes.root} container direction="row" spacing={0}>
+                <Grid item>
+                <Typography
+                  className={classes.margin}
+                  component="h3"
+                  variant="body1"
+                  gutterBottom
+                  color="secondary"
+                >
+                  {this.props.category} category:
+                </Typography>
+                </Grid>
+                <Grid item style={{width: '70%'}}>
+                <Select
+                  value={this.state.fixCategory}
+                  onChange={this.handleChange("fixCategory")}
+                  className={classNames(classes.margin, classes.selector)}
+                  input={<OutlinedInput labelWidth={0}/>}
+                >
+                  {this.props.category === "Fix"
+                    ? this.state.fixCategories.map(category => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))
+                    : this.state.damageCategories.map(category => (
+                        <MenuItem key={category} value={category}>
+                          {category}
+                        </MenuItem>
+                      ))}
+                </Select>
+                </Grid>
+              </Grid>
+            <Grid container direction="row" spacing={2}>
+              <Grid item sm={6} xs={12} className={classes.comp}>
                 <TextField
+                  required
                   label={this.props.category + " name"}
                   className={classNames(classes.margin, classes.textField)}
                   margin="normal"
@@ -217,8 +233,9 @@ class AddFixForm extends Component {
                   />
                 </div>
               </Grid>
-              <Grid item xs={6}>
+              <Grid item sm={6} xs={12}>
                 <TextField
+                  required
                   id="outlined-adornment-weight"
                   className={classNames(classes.margin, classes.textField)}
                   variant="outlined"
@@ -270,7 +287,7 @@ class AddFixForm extends Component {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  onClick={e => this.addFixes(name, e)}
+                  type="submit"
                 >
                   Accept
                 </Button>
@@ -283,4 +300,6 @@ class AddFixForm extends Component {
   }
 }
 
-export default compose(withFirebase)(withStyles(styles)(AddFixForm));
+export default withSnackbar()(
+  compose(withFirebase)(withStyles(styles)(AddFixForm))
+);

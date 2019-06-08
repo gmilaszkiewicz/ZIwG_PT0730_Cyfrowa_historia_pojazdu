@@ -13,37 +13,55 @@ import { routes } from "../../constans/tabs-routes";
 import { connect } from "react-redux";
 import { chooseTab } from "./../../actions/index"
 
-const drawerWidth = 240;
+const drawerWidth = 190;
 
 const styles = theme => ({
   root: {
     display: "flex",
-    flexGrow: 1
+    flexGrow: 1,
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    minWidth: 50,
+    [theme.breakpoints.down('md')]: {
+      width: "7%",
+      overflowX: "hidden"
+    },
+    [theme.breakpoints.up('md')]: {
+      width: drawerWidth, 
+    },
   },
   drawerPaper: {
-    width: drawerWidth, 
-    background: '#424242'
-
+    background: '#333333',
+    minWidth: 50,
+    [theme.breakpoints.down('md')]: {
+      width: "7%",
+      overflowX: "hidden"
+    },
+    [theme.breakpoints.up('md')]: {
+      width: drawerWidth, 
+    },
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing(3)
+    padding: theme.spacing(2),
   },
   selectedListItem:{
   },
-  list:{
-    '&$selected': { 
-      backgroundColor: theme.palette.action.selected, 
-    },
-  },
   listItemIcon:{
     color: 'white',
+    minWidth: 40,
+  },
+  listItemText:{
+    color: 'white',
+    [theme.breakpoints.down('md')]: {
+      visibility: "hidden",
+    },
+    [theme.breakpoints.up('md')]: {
+      visibility: "visible",
+    },
   }
 });
 
@@ -61,12 +79,12 @@ const mapStateToProps = state => {
 
 class PermanentDrawerLeft extends Component {
 
+  
   render(){
 
     const { classes } = this.props;
 
     return (
-      // <div className={classes.root}>
         <Drawer
           className={classes.drawer}
           variant="permanent"
@@ -80,7 +98,7 @@ class PermanentDrawerLeft extends Component {
           <Divider />
           <List className={classes.list}>
             {routes.map((route, index) => (
-                route.visible && 
+                route.visible && route.access.includes(this.props.authUser.role) &&
                 <ListItem 
                 component={Link} 
                 key={route.name} 
@@ -91,12 +109,11 @@ class PermanentDrawerLeft extends Component {
                   <ListItemIcon className={classes.listItemIcon}>
                     {route.icon()}
                   </ListItemIcon>
-                  <ListItemText primary={<Typography type="body1" style={{ color: 'white' }}>{route.name}</Typography>} />
+                  <ListItemText primary={<Typography type="body1" className={classes.listItemText}>{route.name}</Typography>} />
                 </ListItem>
             ))}
           </List>
         </Drawer>
-      // </div>
     );}
 }
 

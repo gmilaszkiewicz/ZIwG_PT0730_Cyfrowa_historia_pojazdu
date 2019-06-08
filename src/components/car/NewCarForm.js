@@ -1,57 +1,18 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
-import { Grid, Button, TextField, InputLabel } from "@material-ui/core";
+import { Grid, Button, TextField } from "@material-ui/core";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { compose } from "recompose";
 import { withFirebase } from "./../../config/firebase/context";
 import { DropzoneArea } from "material-ui-dropzone";
-import DropzoneComponent from "react-dropzone-component";
 import "react-dropzone-component/styles/filepicker.css";
 import { Dialog } from "@material-ui/core";
 import "dropzone/dist/min/dropzone.min.css";
-// import ReactDOMServer from 'react-dom
-// var ReactDOMServer = require('react-dom/server');
-
-// var componentConfig = {
-//   postUrl: 'no-url',
-//  };
-// var djsConfig = {
-//   addRemoveLinks: true,
-//   autoProcessQueue: false,
-//   maxFiles: 2,
-//   maxThumnails: 2,
-//  }
-
-// var myDropzone;
-
-// function removeFile (file) {
-//   if (myDropzone) {
-//       myDropzone.removeFile(file);
-//   }
-// }
-
-// function initCallback (dropzone) {
-//     myDropzone = dropzone;
-//     // myDropzone.on("complete", function(file) {
-//     //   myDropzone.processQueue(file);
-//     // });
-//     console.log(myDropzone)
-// }
-
-// function thumbnailGenerate(file){
-//   var progressElement = file.previewElement.querySelector('[data-dz-uploadprogress]')
-//       progressElement.style.width = '100%'
-//       // progressElement.style.display = 'none'
-// }
-
-// var eventHandlers = {
-//   init: (dropzone) => initCallback(dropzone),
-//   addedfile: (file) => file.upload.progress = 100,
-//   maxfilesexceeded: (file) => removeFile(file),
-//   thumbnail: (file) =>thumbnailGenerate(file)
-//  }
+import * as yup from "yup";
+import { StyledErrorMsg } from "./../login/LoginForm";
+import withSnackbar from "./../snackbar/withSnackbar";
 
 const StyledTextField = styled(TextField)`
   width: 450px;
@@ -59,6 +20,7 @@ const StyledTextField = styled(TextField)`
 
 const StyledButton = styled(Button)`
   width: 450px;
+  margin-bottom: 10px;
 `;
 
 const StyledDatePicker = styled(DatePicker)`
@@ -67,17 +29,36 @@ const StyledDatePicker = styled(DatePicker)`
 
 const StyledDropZoneArea = styled(DropzoneArea)``;
 
+const newCarSchema = yup.object().shape({
+  name: yup.string().required("Required field"),
+  VIN: yup
+    .string()
+    .required("Nr VIN is required")
+    .min(17, "VIN must conatins 17 characters")
+    .max(17, "VIN must conatins 17 characters"),
+  registerNumber: yup.string().required("Required field")
+  // registerTime: yup.date()
+  // .max(new Date(), "Wrong date")
+});
+
 export class NewCarForm extends Component {
   state = {
     images: [],
-    imagesInBase64: ""
+    imagesInBase64: "",
+    registerNumber: new Date()
   };
 
-  saveCar = values => {
+  handleDateChange = (date, setFieldValue) => {
+    this.setState({ registerNumber: date });
+    setFieldValue("registerTime", date);
+  };
+
+  saveCar = (values, data) => {
     this.props.firebase.addCar(
       values.name,
       values,
-      this.props.firebase.auth.currentUser.uid
+      this.props.firebase.auth.currentUser.uid,
+      data
     );
   };
 
@@ -103,112 +84,166 @@ export class NewCarForm extends Component {
     });
     await this.sleep(400); //no niestety :(
     this.setState({ imagesInBase64: imagesInBase64.join() });
-    setFieldValue("photos", imagesInBase64.join());
+    setFieldValue("photos", imagesInBase64.join(""));
   };
-  render() {
-    console.log(this.props);
-    const { classes } = this.props;
-    return (
-      <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
-        <div className={this.props.className}>
-          <Formik
-            enableReinitialize={false}
-            initialValues={{
-              name: "",
-              VIN: "",
-              registerNumber: "",
-              photos: "",
-              registerTime: new Date()
-            }}
-            onSubmit={values => {
-              setTimeout(() => {
-                this.props.handleOnClose()
-                this.saveCar(values);
-              }, 1000);
-            }}
-            render={props => (
-              <Form>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container spacing={8}>
-                    {/* <Grid item xs> */}
-                    <Field
-                      name="name"
-                      component={StyledTextField}
-                      id="name"
-                      label="Car Name"
-                      margin="normal"
-                      variant="outlined"
-                      onChange={props.handleChange}
-                    />
-                    {/* </Grid> */}
-                    <Field
-                      name="VIN"
-                      component={StyledTextField}
-                      id="VIN"
-                      label="VIN"
-                      margin="normal"
-                      variant="outlined"
-                      onChange={props.handleChange}
-                    />
-                    <Field
-                      name="registerNumber"
-                      component={StyledTextField}
-                      id="registerNumber"
-                      label="Register Number"
-                      margin="normal"
-                      variant="outlined"
-                      onChange={props.handleChange}
-                    />
-                    <Field
-                      name="registerTime"
-                      component={StyledDatePicker}
-                      id="registerTime"
-                      label="Register Time"
-                      margin="normal"
-                      value={props.values.registerTime}
-                      variant="outlined"
-                      onChange={props.handleChange}
-                    />
 
-                    {/* </Grid> */}
-                    {/* <Grid item xs> */}
-                    <StyledDropZoneArea
-                      filesLimit={3}
-                      onChange={value =>
-                        this.handleDropZoneChange(value, props.setFieldValue)
-                      }
-                      showPreviews={false}
-                      showPreviewsInDropzone={true}
-                      dropzoneText="Browse files"
-                      dropZoneClass="dropzone"
-                    />
-                    {/* <DropzoneComponent config={componentConfig}
-                       eventHandlers={eventHandlers}
-                       djsConfig={djsConfig}
-                        /> */}
-                    {/* </Grid> */}
-                    <StyledButton
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                    >
-                      Save
-                    </StyledButton>
+  getCarDataFromAPI = carData => {
+    return fetch(
+      `https://5cd467e9b231210014e3d8e7.mockapi.io/api/cars?search=${
+        carData.VIN
+      }`
+    )
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        return data;
+      });
+  };
+
+  render() {
+    return (
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <Dialog onClose={this.props.handleOnClose} open={this.props.isOpened}>
+          <div className={this.props.className}>
+            <Formik
+              enableReinitialize={false}
+              initialValues={{
+                name: "",
+                VIN: "",
+                registerNumber: "",
+                photos: "",
+                registerTime: new Date()
+              }}
+              validationSchema={newCarSchema}
+              onSubmit={values => {
+                setTimeout(async () => {
+                  const data = await this.getCarDataFromAPI(values);
+                  if (data[0] !== undefined) {
+                    this.props.handleOnClose();
+                    this.saveCar(values, data[0]);
+                    this.props.snackbar.showMessage(
+                      "Successful added new car!",
+                      "success"
+                    );
+                  } else {
+                    this.props.snackbar.showMessage(
+                      "Car with this data isn't exist!",
+                      "error"
+                    );
+                  }
+                }, 1000);
+              }}
+              render={props => (
+                <Form>
+                  <Grid container spacing={0}>
+                    <Grid item>
+                      <Field
+                        name="name"
+                        component={StyledTextField}
+                        id="name"
+                        label="Car Name"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={props.handleChange}
+                      />
+                      <StyledErrorMsg error id="component-error-text">
+                        {props.errors.name}
+                      </StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
+                      <Field
+                        name="VIN"
+                        component={StyledTextField}
+                        id="VIN"
+                        label="VIN"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={props.handleChange}
+                      />
+                      <StyledErrorMsg error id="component-error-text">
+                        {props.errors.VIN}
+                      </StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
+                      <Field
+                        name="registerNumber"
+                        component={StyledTextField}
+                        id="registerNumber"
+                        label="Register Number"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={props.handleChange}
+                      />
+                      <StyledErrorMsg error id="component-error-text">
+                        {props.errors.registerNumber}
+                      </StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
+                      <StyledDatePicker
+                        value={this.state.registerNumber}
+                        onChange={data =>
+                          this.handleDateChange(data, props.setFieldValue)
+                        }
+                        variant="outlined"
+                      />
+                      {/* <Field
+                        name="registerTime"
+                        component={StyledDatePicker}
+                        id="registerTime"
+                        label="Register Time"
+                        margin="normal"
+                        value={props.values.registerTime}
+                        variant="outlined"
+                        onChange={props.handleChange}
+                      /> */}
+                      {/* <DatePicker
+                      margin="normal"
+                      label="Fix data:"
+                      className={classNames(classes.margin, classes.picker)}
+                      value={props.values.registerTime}
+                      onChange={props.handleChange}
+                    /> */}
+                      <StyledErrorMsg error id="component-error-text">
+                        {props.errors.registerTime}
+                      </StyledErrorMsg>
+                    </Grid>
+                    <Grid item>
+                      <StyledDropZoneArea
+                        filesLimit={3}
+                        onChange={value =>
+                          this.handleDropZoneChange(value, props.setFieldValue)
+                        }
+                        showPreviews={false}
+                        showPreviewsInDropzone={true}
+                        dropzoneText="Browse files"
+                        dropZoneClass="dropzone"
+                      />
+                    </Grid>
+                    <Grid item>
+                      <StyledButton
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                      >
+                        Save
+                      </StyledButton>
+                    </Grid>
                   </Grid>
-                </MuiPickersUtilsProvider>
-              </Form>
-            )}
-          />
-        </div>
-      </Dialog>
+                </Form>
+              )}
+            />
+          </div>
+        </Dialog>
+      </MuiPickersUtilsProvider>
     );
   }
 }
 
 export const composedNewCarForm = compose(withFirebase)(NewCarForm);
-export const StyledNewCarForm = styled(composedNewCarForm)`
+export const StyledNewCarForm = withSnackbar()(styled(composedNewCarForm)`
   padding-left: 10%;
-  padding-top: 30px;
+  padding-top: 10px;
   padding-right: 10%;
   height: 550px;
   .MuiGrid-root {
@@ -219,7 +254,6 @@ export const StyledNewCarForm = styled(composedNewCarForm)`
     width: 450px;
     min-height: 0px;
     margin-bottom: 20px;
-    margin-top: 20px;
-    /* height: 200px; */
+    margin-top: 10px;
   }
-`;
+`);

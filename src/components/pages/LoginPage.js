@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SignInForm } from '../login/LoginForm'
+import { snackSignInForm as SignInForm } from '../login/LoginForm'
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -11,7 +11,7 @@ const StyledDiv = styled.div`
     background-size: cover;
 `
 
-export default class LoginPage extends Component{
+class LoginPage extends Component{
 
     render(){
         return(
@@ -21,3 +21,5 @@ export default class LoginPage extends Component{
         );
     }
 }
+
+export default LoginPage

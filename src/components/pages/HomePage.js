@@ -15,7 +15,7 @@ const StyledDiv = styled.div`
 
 
 class HomePage extends Component {
-    
+
   render() {
     return (
       <AuthUserContext.Consumer>
@@ -23,8 +23,8 @@ class HomePage extends Component {
           <StyledDiv>
             <TopBar drawerWidth={drawerWidth} authUser={authUser} />
             <PermanentDrawerLeft
-              authUser={authUser}
-              drawerWidth={drawerWidth}
+            authUser={authUser}
+            drawerWidth={drawerWidth}
             />
             <PageContent authUser={authUser} />
           </StyledDiv>

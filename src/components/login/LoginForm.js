@@ -15,6 +15,10 @@ import { compose } from "recompose";
 import { withFirebase } from "../../config/firebase/context";
 import { withRouter } from "react-router-dom";
 import * as ROUTES from "./../../constans/routes";
+import * as yup from 'yup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import withSnackbar from './../snackbar/withSnackbar'
+
 
 const StyledPaper = styled(Paper)`
   position: fixed;
@@ -43,17 +47,35 @@ const StyledToggleButton = styled(ToggleButton)`
   width: 50%;
 `;
 
+export const StyledErrorMsg = styled(FormHelperText)`
+ &&{
+   margin-left: 3px;
+   margin-top: -3px;
+ }
+`
+
+const signInSchema = yup.object().shape({
+  email: yup.string()
+          .email("Invalid email")
+          .required("Email is required"),
+  password: yup.string()
+          .required("Password is required")
+          .min(8, "Password is too short")
+})
+
 class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
       registerFormIsOpened: false,
-      role: "owner"
+      role: "owner",
+      areDisabledButtons: false,
+      isOpenedSnack: false,
+      variantOpenedSnackbar: "success"
     };
   }
 
   handleCloseRegisterForm = event => {
-    event.preventDefault();
     this.setState(prevState => ({
       ...prevState,
       registerFormIsOpened: false
@@ -61,7 +83,6 @@ class LoginForm extends Component {
   };
 
   handleOpenRegisterForm = event => {
-    event.preventDefault();
     this.setState(prevState => ({
       ...prevState,
       registerFormIsOpened: true
@@ -69,10 +90,19 @@ class LoginForm extends Component {
   };
 
   handleRole = (event, role) => {
-    this.setState({
-      role: role
-    });
+    if(role!==null){
+      this.setState({
+        role: role
+      });
+    }
   };
+
+  changeButtonsState = btnState => {
+    this.setState(prevState => ({
+      ...prevState,
+      areDisabledButtons: btnState
+    }))  
+  }
 
   ToggleButtons = () => (
     <StyledToggleButtonGroup
@@ -83,25 +113,37 @@ class LoginForm extends Component {
       <StyledToggleButton value="owner" id="owner">
         Owner
       </StyledToggleButton>
-      <StyledToggleButton value="service">Car Service</StyledToggleButton>
+      <StyledToggleButton value="service" id="service">
+        Car Service
+      </StyledToggleButton>
     </StyledToggleButtonGroup>
   );
-
-  onSubmit = (email, password) => {
-    this.props.firebase
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.props.history.push(ROUTES.HOME);
-      });
-  };
 
   render() {
     return (
       <StyledPaper elevation={1}>
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={() => {}}
-          render={props => (
+          validationSchema={signInSchema}
+          onSubmit={(values, { setSubmitting, setValues, setStatus } , errors) => {
+            this.changeButtonsState(true)
+            setTimeout(() => {
+              this.props.firebase
+                .doSignInWithEmailAndPassword(values.email, values.password)
+                .then(() => {
+                  this.props.snackbar.showMessage(
+                    "Successful sign in", "success")
+                  this.props.history.push(ROUTES.HOME);
+                  setSubmitting(true)
+                })
+                .catch(error => {
+                  this.props.snackbar.showMessage(
+                    error.message, "error")
+                }) 
+            }, 1000);
+              this.changeButtonsState(false)
+            }}
+          render={({values, errors, handleChange}) => (
             <Form>
               <Field component={this.ToggleButtons} name="roles" />
               <Grid container direction="column" spacing={2} justify="center">
@@ -115,12 +157,11 @@ class LoginForm extends Component {
                     autoComplete="email"
                     margin="normal"
                     variant="outlined"
-                    onChange={props.handleChange}
-                    value={props.values.email}
+                    onChange={handleChange}
+                    value={values.email}
                     readOnly
                   />
-                </Grid>
-                <Grid item>
+                  <StyledErrorMsg error id="component-error-text">{errors.email}</StyledErrorMsg>
                   <Field
                     name="password"
                     component={StyledTextField}
@@ -130,18 +171,17 @@ class LoginForm extends Component {
                     autoComplete="current-password"
                     margin="normal"
                     variant="outlined"
-                    onChange={props.handleChange}
+                    onChange={handleChange}
                     readOnly
                   />
+                  <StyledErrorMsg error id="component-error-text">{errors.password}</StyledErrorMsg>
                 </Grid>
                 <Grid item>
                   <StyledButton
+                    disabled={this.state.areDisabledButtons}
                     type="submit"
                     variant="contained"
                     color="primary"
-                    onClick={() =>
-                      this.onSubmit(props.values.email, props.values.password)
-                    }
                   >
                     Log In
                   </StyledButton>
@@ -156,6 +196,7 @@ class LoginForm extends Component {
                 </Grid>
                 <Grid item>
                   <StyledButton
+                    disabled={this.state.areDisabledButtons}
                     variant="contained"
                     color="primary"
                     onClick={this.handleOpenRegisterForm}
@@ -181,7 +222,9 @@ class LoginForm extends Component {
 
 const SignInForm = compose(
   withRouter,
-  withFirebase
+  withFirebase,
 )(LoginForm);
 
-export { SignInForm };
+const snackSignInForm = withSnackbar()(SignInForm)
+
+export { snackSignInForm };

@@ -10,6 +10,9 @@ import FixesForm from "./FixesForm";
 import { CardMedia } from "@material-ui/core";
 import { connect } from "react-redux";
 import { chooseTab, chooseCar } from "./../../actions/index";
+import ShareIcon from "@material-ui/icons/Share";
+import IconButton from "@material-ui/core/IconButton";
+import classNames from "classnames";
 
 const carInfoIndex = 5;
 
@@ -17,9 +20,10 @@ const StyledCardAction = styled(CardActions)`
   justify-content: space-around;
 `;
 
-
 const StyledCardMedia = styled(CardMedia)`
-  border-radius: 20px;
+  && {
+    border-radius: 20px;
+  }
 `;
 
 function mapDispatchToProps(dispatch) {
@@ -30,11 +34,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 export class CarCard extends Component {
+  componentDidMount() {
+    this.setState({ user: this.props.authUser });
+  }
   constructor() {
     super();
     this.state = {
       addFixIsOpened: false,
-      addUpgradeIsOpend: false
+      addUpgradeIsOpend: false,
+      user: ""
     };
   }
 
@@ -73,15 +81,22 @@ export class CarCard extends Component {
     this.props.chooseCar(this.props.car);
   };
 
+  handleSharePDF = event => {
+    this.handleClick();
+  };
+
   render() {
-    const { images, name, vin, className } = this.props;
+    const { images, name, vin, className, loggedUserUid, car } = this.props;
 
     return (
-      <Card className={className}>
-      {console.log(this.props.className)}
+      <Card
+        id="card"
+        className={classNames(className, "card")}
+        style={{ borderRadius: "15px", backgroundColor: "#333333" }}
+      >
         <CardActionArea>
           <CardContent onClick={this.handleClick}>
-            {(images !== undefined && images.length > 0) && (
+            {images !== undefined && images.length > 0 && (
               <StyledCardMedia
                 className="media"
                 image={images[0]}
@@ -106,6 +121,8 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenFixForm}
+            fullWidth
+            style={{ height: "50px" }}
           >
             Add Fix
           </Button>
@@ -113,9 +130,14 @@ export class CarCard extends Component {
             size="small"
             color="secondary"
             onClick={this.handleOpenUpgradeForm}
+            fullWidth
+            style={{ height: "50px" }}
           >
             Add Modification
           </Button>
+          <IconButton aria-label="Share" onClick={this.handleSharePDF}>
+            <ShareIcon />
+          </IconButton>
         </StyledCardAction>
         {this.state.addFixIsOpened && (
           <FixesForm
@@ -123,6 +145,9 @@ export class CarCard extends Component {
             isOpened={this.state.addFixIsOpened}
             handleOnClose={this.handleCloseAddFixForm}
             name={name}
+            user={this.state.user}
+            car={car}
+            ownerInfo={this.props.ownerInfo}
           />
         )}
         {this.state.addUpgradeIsOpend && (
@@ -131,6 +156,9 @@ export class CarCard extends Component {
             isOpened={this.state.addUpgradeIsOpend}
             handleOnClose={this.handleCloseAddUpgradeForm}
             name={name}
+            user={this.state.user}
+            car={car}
+            ownerInfo={this.props.ownerInfo}
           />
         )}
       </Card>
@@ -138,13 +166,27 @@ export class CarCard extends Component {
   }
 }
 
-const connectedComponent = connect(null, mapDispatchToProps)(CarCard)
+const connectedComponent = connect(
+  null,
+  mapDispatchToProps
+)(CarCard);
 
 export const StyledCarCard = styled(connectedComponent)`
+  .MuiPaper-root {
+    border-radius: 40px;
+  }
+  .card {
+    border-radius: 30px;
+  }
   .media {
-    height: 200px;
+    height: 190px;
   }
   .image {
     width: 100px;
+  }
+  && {
+    #card {
+      border-radius: 40px;
+    }
   }
 `;

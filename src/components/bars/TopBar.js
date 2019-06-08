@@ -48,22 +48,22 @@ function mapDispatchToProps(dispatch) {
 class TopBar extends Component{
 
     state = {
-        anchorEl: null,
-      };
-    
-      handleMenu = event => {
-        this.setState({ anchorEl: event.currentTarget });
-      };
-    
-      handleClose = (event) => {
-        event.target.outerText==='Profile' && this.props.chooseTab(profileTabIndex)
-        this.setState({ anchorEl: null });
-      };
-    
-      handlelogOut = ({ firebase }) => {
-        firebase.doSignOut();
-        this.handleClose();
-      }
+      anchorEl: null,
+    };
+  
+    handleMenu = event => {
+      this.setState({ anchorEl: event.currentTarget });
+    };
+  
+    handleClose = (event) => {
+      event.target.outerText==='Profile' && this.props.chooseTab(profileTabIndex)
+      this.setState({ anchorEl: null });
+    };
+  
+    handlelogOut = ({ firebase }) => {
+      firebase.doSignOut();
+      this.handleClose();
+    }
 
     render(){
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -9,18 +8,22 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CarPhotoViewer from './CarPhotosViewer';
 import FixesTable from './FixesTable'
 import TextField from '@material-ui/core/TextField'
+import  SalesForm  from './SalesForm';
+import {ControlButtons} from './ControlButtons'
+import * as ROLES from "../../constans/roles";
+
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#333333',
     borderRadius: '30px',
-    padding: theme.spacing.unit*3,
+    padding: theme.spacing(3),
     color:"white"
 
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
@@ -43,31 +46,31 @@ const styles = theme => ({
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
   rootOutlinedInput: {
-    width: 580,
-    color:"black",
+    width: '100%',
+    color:"white",
     "&$cssDisabled $notchedOutline": {   //add this nested selector
-      borderColor: "black",
+      borderColor: "white",
    },
    "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
-    borderColor: "black"
+    borderColor: "white"
     }
   },
   notchedOutline: {
-    borderColor: "black",
+    borderColor: "white",
   },
   label:{
-    color: "black",
+    color: "white",
     '&$cssFocused': {
-      color: "black",
+      color: "white",
     },
     '&$cssDisabled': {
-      color: "black",
+      color: "white",
     }
   },
   cssFocused: {},
   cssDisabled:{
-    borderColor: "black",
-    color: "black"
+    borderColor: "white",
+    color: "white"
   },
 });
 
@@ -109,7 +112,9 @@ class CarInfoForm extends Component {
   constructor(){
     super()
     this.state={
-      isOpenPhotosViewer: false
+      isOpenPhotosViewer: false,
+      isOpenSalesForm: false,
+      loading: true
     }
   }
 
@@ -125,33 +130,75 @@ class CarInfoForm extends Component {
     })
   }
 
-    render(){
-      const {classes} = this.props;
-      const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
+  handleSetLoading = isLoading =>{
+    this.setState({
+      loading: isLoading
+    })
+  }
+
+  handleCloseSalesForm = () => {
+    this.setState({
+      isOpenSalesForm: false
+    })
+  }
+
+  handleSellCar = (event) => {
+    event.preventDefault()
+    this.setState({
+      isOpenSalesForm: true
+    })
+  }
+
+  render(){
+    const {classes} = this.props;
+    const mainPhoto = this.props.chosenCar.photos !== undefined ? this.props.chosenCar.photos[0] : undefined
+    const selectedCar = this.props.chosenCar;
     return (
-        <Paper className={classes.root}>
-        <Grid container spacing={24}>
-          <Grid item xs={6}>
-            <CardMedia
-                  className={classes.media}
-                  image={mainPhoto}
-                  title="My car"
-                  component={Button}
-                  onClick={this.showPhotosViewer}
-                />
+    <div>
+      {/* {(this.state.loading)? */}
+      {/* <LoadingSpinner loading={this.state.loading}/>: */}
+      <Paper id="carInfo" className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={6}>
+          <CardMedia
+                className={classes.media}
+                image={mainPhoto}
+                title="My car"
+                component={Button}
+                onClick={this.showPhotosViewer}
+              />
+          </Grid>
+        <Grid item xs={6} >
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              {DisabledTextField("Brand", selectedCar.data.brand + " " + selectedCar.data.model, classes)}
+              {DisabledTextField("Car type", selectedCar.data.carType, classes)}
+              {DisabledTextField("Production year", selectedCar.data.productionYear, classes)}
+              {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
+              {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
             </Grid>
-          <Grid item xs={6}>
-                {DisabledTextField("Name", this.props.chosenCar.name, classes)}
-                {DisabledTextField("VIN", this.props.chosenCar.VIN,classes)}
-                {DisabledTextField("Register number", this.props.chosenCar.registerNumber,classes)}
-                {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
+            <Grid item xs={6}>
+              {DisabledTextField("Name", this.props.chosenCar.name,classes)}
+              {DisabledTextField("First registration", this.props.chosenCar.firstRegistrationDate,classes)}
+              {DisabledTextField("Engine capacity", selectedCar.data.engineCapacity + " cm3",classes)}
+              {DisabledTextField("Engine power", selectedCar.data.enginePower + " kW",classes)}
+              {DisabledTextField("Fuel type", selectedCar.data.fuelType,classes)}
+            </Grid>
           </Grid>
         </Grid>
-        <FixesTable car={this.props.chosenCar} />
-        {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
-        </Paper>
-    );
-    }
+      </Grid>
+      {this.props.user.role === ROLES.OWNER && 
+                        <ControlButtons 
+                        car = {this.props.chosenCar} 
+                        user={this.props.user} 
+                        handleClickSaleCar={(event) => this.handleSellCar(event)} /> }
+      <FixesTable car={this.props.chosenCar} />
+      {this.state.isOpenPhotosViewer && <CarPhotoViewer isOpened={this.state.isOpenPhotosViewer} handleOnClose={this.handleClosePhotosViewer} car={this.props.chosenCar} /> }
+      {this.state.isOpenSalesForm && <SalesForm open={this.state.isOpenSalesForm} onClose={this.handleCloseSalesForm} car = {this.props.chosenCar} user={this.props.user}/>}
+      </Paper>
+    </div>
+  );
+  }
 }
 
 // CenteredGrid.propTypes = {

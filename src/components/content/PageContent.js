@@ -10,17 +10,21 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
     position: "relative",
-    overflowY: "auto"
+    overflowY: "auto",
+    backgroundColor: "#323232",
+    backgroundImage: `url("http://www.kinyu-z.net/data/wallpapers/180/1334867.jpg")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   toolbar: theme.mixins.toolbar
 });
 
 const mapStateToProps = state => {
   return {
-    chosenTab: state.chosenTab
+    chosenTab: state.chosenTab,
+    snackBarStatus: state.snackBarStatus
   };
 };
 
@@ -33,7 +37,7 @@ class PageContent extends Component {
         <div className={classes.toolbar} />
         {routes.map(
           (route, index) =>
-            this.props.chosenTab === index &&
+            this.props.chosenTab === index && route.access.includes(this.props.authUser.role) &&
             route.main(this.props.authUser, index)
         )}
       </main>
